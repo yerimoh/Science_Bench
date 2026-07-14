@@ -1,0 +1,984 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Attention — mold pages</title><style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#111210;color:#e8e6df}
+header{padding:16px 24px;border-bottom:1px solid #2c2c28;background:#1a1a19;position:sticky;top:0;z-index:5}
+header h1{margin:2px 0 4px;font-size:18px}
+header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
+.back{color:#3987e5;font-size:12px;text-decoration:none}
+.wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
+.side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
+.card{background:#1e1e1c;border:1px solid #2c2c28;border-radius:10px;padding:11px;margin-bottom:10px}
+.chead{display:flex;align-items:center;gap:7px;font-size:12.5px;flex-wrap:wrap}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.abbr{margin-left:auto;font-size:10.5px;border:1px solid;border-radius:5px;padding:0 5px;font-weight:700}
+.pos{margin:8px 0 5px}
+.pos.none{color:#8a887d;font-size:11px}
+.track{position:relative;height:14px;background:linear-gradient(90deg,#20262e,#2e2020);border-radius:4px}
+.track .hu,.track .ai{position:absolute;top:0;font-size:9px;line-height:14px;color:#8a887d}
+.track .hu{left:4px}.track .ai{right:4px}
+.track .fill{position:absolute;top:-2px;width:4px;height:18px;border-radius:2px}
+.posv{font-size:10.5px;color:#c3c2b7;margin-left:6px}
+.fb{font-size:11.5px;color:#c3c2b7;line-height:1.45;margin-top:4px}
+.ct{font-size:10.5px;color:#8a887d;margin-top:5px}
+main{padding:16px 20px;overflow:auto}
+.sheet{background:#171816;border:1px solid #2c2c28;border-radius:12px;padding:22px 26px;margin:0 auto 18px;max-width:900px;
+ box-shadow:0 2px 10px #0006}
+.sheet h2{margin:0 0 10px;font-size:15px;color:#fff;border-bottom:1px solid #2c2c28;padding-bottom:6px}
+pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Roman',serif;
+ font-size:13.5px;line-height:1.7;margin:0;color:#d9d7cd}
+.hl{border-radius:3px;padding:0 1px;cursor:pointer}
+.moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
+ border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
+ color:#e8e6df;display:none;pointer-events:none}
+.moldtip.show{display:block}
+.moldtip .tsec{border-bottom:1px solid #33342e;padding:8px 0}
+.moldtip .tsec:last-of-type{border-bottom:none}
+.moldtip .thead{display:flex;align-items:center;gap:7px;font-size:12.5px;margin-bottom:3px;flex-wrap:wrap}
+.moldtip .tbadge{margin-left:auto;font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700}
+.moldtip .tbadge.ai{background:#e6676733;color:#ff9d9d}
+.moldtip .tbadge.hu{background:#3987e533;color:#8fbcf5}
+.moldtip .twhy{color:#fff;margin:2px 0 4px}
+.moldtip .tscore{color:#c3c2b7;font-size:11px}
+.moldtip .tfb{color:#8a887d;font-size:10.5px;margin-top:3px}
+.moldtip .tclose{color:#6f6e65;font-size:9.5px;margin-top:6px;text-align:right}
+.card.summary{border-color:#3d3d38;background:#22231f}
+.vrow{display:flex;align-items:center;gap:7px;font-size:11.5px;margin-top:6px;color:#c3c2b7}
+.vname{flex:1}
+.vbadge{font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700;flex:none}
+.vbadge.ai{background:#e6676733;color:#e66767}
+.vbadge.hu{background:#3987e533;color:#7db2ee}
+.vbadge.mid{background:#8a887d33;color:#a9a79c}
+.vbadge.na{background:#8a887d22;color:#8a887d}
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:2px 0 12px}
+.chiplab{font-size:10.5px;color:#8a887d;margin-right:2px;width:100%}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#242522;color:#c3c2b7;
+ border:1px solid #2c2c28;border-radius:12px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+.chip.active{border-color:#e8e6df;color:#fff;background:#2e2f2b}
+.chip .sw{width:9px;height:9px}
+.hl-CRN.pol-trigger{background:#3987e555;box-shadow:inset 0 -2px 0 #3987e5}.hl-CRN.pol-counter{background:#3987e522;box-shadow:inset 0 -1px 0 #3987e588}
+.hl-CP.pol-trigger{background:#199e7055;box-shadow:inset 0 -2px 0 #199e70}.hl-CP.pol-counter{background:#199e7022;box-shadow:inset 0 -1px 0 #199e7088}
+.hl-ENG.pol-trigger{background:#c9850055;box-shadow:inset 0 -2px 0 #c98500}.hl-ENG.pol-counter{background:#c9850022;box-shadow:inset 0 -1px 0 #c9850088}
+.hl-MR.pol-trigger{background:#9085e955;box-shadow:inset 0 -2px 0 #9085e9}.hl-MR.pol-counter{background:#9085e922;box-shadow:inset 0 -1px 0 #9085e988}
+.hl-STY.pol-trigger{background:#d5518155;box-shadow:inset 0 -2px 0 #d55181}.hl-STY.pol-counter{background:#d5518122;box-shadow:inset 0 -1px 0 #d5518188}
+.hl-ESA.pol-trigger{background:#d9592655;box-shadow:inset 0 -2px 0 #d95926}.hl-ESA.pol-counter{background:#d9592622;box-shadow:inset 0 -1px 0 #d9592688}
+.hl-PB.pol-trigger{background:#e6676755;box-shadow:inset 0 -2px 0 #e66767}.hl-PB.pol-counter{background:#e6676722;box-shadow:inset 0 -1px 0 #e6676788}
+.wrap[data-view="CRN"] .hl:not(.hl-CRN){background:none!important;box-shadow:none!important}.wrap[data-view="CRN"] .card[data-mold]:not([data-mold="CRN"]){opacity:.35}
+.wrap[data-view="CP"] .hl:not(.hl-CP){background:none!important;box-shadow:none!important}.wrap[data-view="CP"] .card[data-mold]:not([data-mold="CP"]){opacity:.35}
+.wrap[data-view="ENG"] .hl:not(.hl-ENG){background:none!important;box-shadow:none!important}.wrap[data-view="ENG"] .card[data-mold]:not([data-mold="ENG"]){opacity:.35}
+.wrap[data-view="MR"] .hl:not(.hl-MR){background:none!important;box-shadow:none!important}.wrap[data-view="MR"] .card[data-mold]:not([data-mold="MR"]){opacity:.35}
+.wrap[data-view="STY"] .hl:not(.hl-STY){background:none!important;box-shadow:none!important}.wrap[data-view="STY"] .card[data-mold]:not([data-mold="STY"]){opacity:.35}
+.wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
+.wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}</style></head><body>
+<header><a class="back" href="../index.html">← 데모 목록</a>
+ <h1>Attention <span class="sub">2017 · 사람이 쓴 유명 논문</span></h1>
+ <div class="sub">논문 원문 위에 몰드(AI 지문 패턴)의 증거를 색으로 표시했습니다.
+ <b>진하게 밑줄 = AI스러운 패턴의 증거</b> · <b>옅은 하이라이트 = 사람다운 패턴의 증거</b>.
+ 마우스를 올리면 왜 잡혔는지 설명이 뜹니다. 모든 하이라이트는 이 논문의 실제 LaTeX 원문 조각이며 조작이 없습니다.</div>
+</header>
+<div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
+ <div class="chead"><b>한눈 요약 — 이 논문은 어느 쪽인가</b></div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:31%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">0.31</span></div>
+ <div class="fb">종합(5개 몰드 평균): <span class="vbadge hu">사람쪽</span>
+  &nbsp;위치 0.31 (0=사람 논문 중앙값, 1=AI 논문 중앙값)</div>
+ <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">참조망 — 섹션을 서로 엮는가</span><span class="vbadge hu">사람쪽</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">거시 반복 — 같은 말을 또 하는가</span><span class="vbadge hu">사람쪽</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">수치 근거 — 숫자를 선행연구에 붙이는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">비교 배치 — 선행연구끼리 엮는가</span><span class="vbadge mid">중간</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">문체 — LLM 특유 어휘</span><span class="vbadge hu">사람쪽</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">평가 규모 — 모델×데이터셋</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">문제 차용 — 문제를 선행 1편에서 빌렸는가</span><span class="vbadge hu">사람쪽</span></div>
+ <div class="ct">축마다 보는 게 다릅니다 — 아래 칩으로 몰드를 하나씩 켜서 본문에서 확인하세요.</div></div><div class="chips"><span class="chiplab">하이라이트 필터</span><button class="chip active" data-v="ALL">전체</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button></div><div class="card" data-mold="CRN">
+ <div class="chead"><span class="sw" style="background:#3987e5"></span><b>참조망 — 섹션을 서로 엮는가</b>
+   <span class="abbr" style="border-color:#3987e5;color:#3987e5">CRN</span></div>
+ <div class="ct">Cross-Reference_Network</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:26%;background:#3987e5"></div><div class="ai">AI</div></div><span class="posv">0.26</span></div>
+ <div class="fb">다른 섹션을 가리키는 참조 비율 0.381 (다른 섹션 10 / 같은 섹션 16 / 깨짐 2). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.</div>
+ <div class="ct">하이라이트 28개 · AI 증거 18 / 사람 증거 10</div></div><div class="card" data-mold="MR">
+ <div class="chead"><span class="sw" style="background:#9085e9"></span><b>거시 반복 — 같은 말을 또 하는가</b>
+   <span class="abbr" style="border-color:#9085e9;color:#9085e9">MR</span></div>
+ <div class="ct">Macro_Redundancy</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#9085e9"></div><div class="ai">AI</div></div><span class="posv">-0.13</span></div>
+ <div class="fb">섹션 간 표현 겹침 0.0093 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.</div>
+ <div class="ct">하이라이트 17개 · AI 증거 17 / 사람 증거 0</div></div><div class="card" data-mold="ENG">
+ <div class="chead"><span class="sw" style="background:#c98500"></span><b>수치 근거 — 숫자를 선행연구에 붙이는가</b>
+   <span class="abbr" style="border-color:#c98500;color:#c98500">ENG</span></div>
+ <div class="ct">External_Number_Grounding</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#c98500"></div><div class="ai">AI</div></div><span class="posv">14.36</span></div>
+ <div class="fb">소수점 수치 183개 중 38개만 인용 옆에 붙음 (비율 0.0714). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.</div>
+ <div class="ct">하이라이트 183개 · AI 증거 145 / 사람 증거 38</div></div><div class="card" data-mold="CP">
+ <div class="chead"><span class="sw" style="background:#199e70"></span><b>비교 배치 — 선행연구끼리 엮는가</b>
+   <span class="abbr" style="border-color:#199e70;color:#199e70">CP</span></div>
+ <div class="ct">Comparative_Positioning</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:39%;background:#199e70"></div><div class="ai">AI</div></div><span class="posv">0.39</span></div>
+ <div class="fb">선행연구끼리 엮인 밀도 1.2857 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).</div>
+ <div class="ct">하이라이트 24개 · AI 증거 10 / 사람 증거 14</div></div><div class="card" data-mold="STY">
+ <div class="chead"><span class="sw" style="background:#d55181"></span><b>문체 — LLM 특유 어휘</b>
+   <span class="abbr" style="border-color:#d55181;color:#d55181">STY</span></div>
+ <div class="ct">Stylistic (excess vocab)</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:6%;background:#d55181"></div><div class="ai">AI</div></div><span class="posv">0.06</span></div>
+ <div class="fb">LLM 과잉 어휘 밀도 75.835 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.</div>
+ <div class="ct">하이라이트 116개 · AI 증거 116 / 사람 증거 0</div></div><div class="card" data-mold="ESA">
+ <div class="chead"><span class="sw" style="background:#d95926"></span><b>평가 규모 — 모델×데이터셋</b>
+   <span class="abbr" style="border-color:#d95926;color:#d95926">ESA</span></div>
+ <div class="ct">Evaluation_Surface_Area</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:94%;background:#d95926"></div><div class="ai">AI</div></div><span class="posv">0.94</span></div>
+ <div class="fb">평가 규모 = 모델 2개 × 데이터셋 2개 = 4칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.</div>
+ <div class="ct">하이라이트 0개 · AI 증거 0 / 사람 증거 0</div></div><div class="card" data-mold="PB">
+ <div class="chead"><span class="sw" style="background:#e66767"></span><b>문제 차용 — 문제를 선행 1편에서 빌렸는가</b>
+   <span class="abbr" style="border-color:#e66767;color:#e66767">PB</span></div>
+ <div class="ct">Problem_Borrowing</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#e66767"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
+ <div class="fb">스스로 발견한 문제 (사람다움). 특정 선행연구에 기대지 않음. — “Recurrent neural networks are inherently sequential, preventing parallelization during training and limiting batching due to memory constraints. While”</div>
+ <div class="ct">하이라이트 0개 · AI 증거 0 / 사람 증거 0</div></div></div>
+<main><section class="sheet"><pre>
+ 
+ \color{red}
+ \large Provided proper attribution is provided, Google hereby grants permission to reproduce the tables and figures in <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> paper solely for use in journalistic or scholarly works.
+ 
+
+ 
+The dominant sequence transduction models are <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> on <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;complex&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">complex</span> recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> an attention mechanism. We propose a new simple network architecture, the Transformer, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">these</span> models to be superior in quality <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">while</span> being more parallelizable and requiring significantly less time to train. Our model achieves <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">28.4</span> BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;including&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">including</span> ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">41.8</span> after training for <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.5</span> days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> with large and limited training data.
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">their</span> model and have the attention as an after thought almost, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> gives us a good opportunity to differentiate ourselves from <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">their</span> paper.
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;need&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">need</span> for such careful initializations and %normalization.
+ 
+
+</pre></section><section class="sheet"><h2>Introduction</h2><pre>
+§ Introduction
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 5편을 서로 엮어 비교 (사람다운 종합)&quot;]]">Recurrent neural networks, long short-term memory \citep{hochreiter1997} and gated recurrent \citep{gruEval14} neural networks in particular, have been firmly established as state of the art approaches in sequence modeling and transduction problems such as language modeling and machine translation \citep{sutskever14, bahdanau2014neural, cho2014learning}.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> Numerous efforts have since continued to push the boundaries of recurrent language models and encoder-decoder architectures \citep{wu2016google,luong2015effective,jozefowicz2016exploring}.</span>
+
+Recurrent models <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;typically&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">typically</span> factor computation along the symbol positions of the input and output sequences. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Aligning&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Aligning</span> the positions to steps in computation time, they generate a sequence of hidden states $h_t$, as a function of the previous hidden state $h_{t-1}$ and the input for position $t$. This inherently sequential nature precludes parallelization <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> training examples, which becomes critical at longer sequence lengths, as memory constraints limit batching <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> examples.
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]">Recent work has achieved significant improvements in computational efficiency </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">through</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> factorization tricks \citep{Kuchaiev2017Factorization} and conditional computation \citep{shazeer2017outrageously}, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">while</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> also improving model performance in case of the latter.</span> The fundamental constraint of sequential computation, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;however&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">however</span>, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;remains&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">remains</span>.
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]">Attention mechanisms have become an integral part of </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;compelling&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">compelling</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> sequence modeling and transduction models in </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;various&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">various</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> tasks, allowing modeling of dependencies without regard to </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">their</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> distance in the input or output sequences \citep{bahdanau2014neural, structuredAttentionNetworks}.</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> In all but a few cases \citep{decomposableAttnModel}, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;however&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">however</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">, such attention mechanisms are used in conjunction with a recurrent network.</span>
+
+In this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">between</span> input and output. The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs. 
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> early.}
+
+<span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)">%After the seminal papers of \citep{sutskever14}, \citep{bahdanau2014neural}, and \citep{cho2014learning}, recurrent models have become the dominant solution for </span><span class="hl hl-MR hl-CP hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)">both</span><span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)"> sequence modeling and sequence-to-sequence transduction. Many efforts such as \citep{wu2016google,luong2015effective,jozefowicz2016exploring} have pushed the boundaries of machine translation and language modeling with recurrent sequence models.</span><span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)"> Recent effort \citep{shazeer2017outrageously} has combined the power of conditional computation with sequence models to train very large models for machine translation, pushing SOTA at lower computational cost.</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> Recurrent models compute a vector of hidden states $h_t$, for each time step $t$ of computation. $h_t$ is a function of </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">both</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> the input at time $t$ and the previous hidden state $h_t$.</span> This dependence on the previous hidden state encumbers recurrnet models to process multiple inputs at once, and <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">their</span> time complexity is a linear function of the length of the input and output, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> training and inference. [What I want to say here is that although this is fine <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> decoding, at training time, we are given both input and output and this linear nature does not allow the RNN to process all inputs and outputs simultaneously and haven't been used on datasets that are the of the scale of the web. What's the largest dataset we have ? . Talk about Nividia and possibly other's effors to speed up things, and possibly other efforts that alleviate this, but are still limited by it's comptuational nature]. Rest of the intro: What if you could construct the state <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> on the actual inputs and outputs, then you could construct them all at once. This has been the foundation of many <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;promising&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">promising</span> recent efforts, bytenet,facenet (Also talk about quasi rnn here). Now we talk about attention!!<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> Along with cell architectures such as long short-term meory (LSTM) \citep{hochreiter1997}, and gated recurrent units (GRUs) \citep{cho2014learning}, attention has </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;emerged&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">emerged</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> as an essential ingredient in successful sequence models, in particular for machine translation.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> In recent years, many, if not all, state-of-the-art (SOTA) results in machine translation have been achieved with attention-</span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">based</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> sequence models \citep{wu2016google,luong2015effective,jozefowicz2016exploring}.</span> Talk about the neon work on how it played with attention to do self attention! Then talk about what we do.
+
+</pre></section><section class="sheet"><h2>Background</h2><pre>
+§ Background
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]">The goal of reducing sequential computation also forms the foundation of the Extended Neural GPU \citep{extendedngpu}, ByteNet \citep{NalBytenet2017} and ConvS2S \citep{JonasFaceNet2017}, all of which use convolutional neural networks as basic building block, computing hidden representations in parallel for all input and output positions.</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> In </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">these</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> models, the number of operations required to relate signals from two arbitrary input or output positions grows in the distance </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">between</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> positions, linearly for ConvS2S and logarithmically for ByteNet.</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> This makes it more difficult to learn dependencies </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">between</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> distant positions \citep{hochreiter2001gradient}.</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> In the Transformer this is reduced to a constant number of operations, albeit at the cost of reduced effective resolution due to averaging attention-weighted positions, an effect we counteract with Multi-Head Attention as described in section~</span><span class="hl hl-CRN hl-MR pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;], [&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]" style="background:repeating-linear-gradient(45deg,#3987e540,#3987e540 6px,#9085e940 6px,#9085e940 12px)">\ref{sec:attention}</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">.</span> 
+
+Self-attention, sometimes called intra-attention is an attention mechanism relating different positions of a single sequence in order to compute a representation of the sequence.<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 4편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> Self-attention has been used successfully in a variety of tasks </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 4편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;including&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">including</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 4편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> reading comprehension, abstractive summarization, textual entailment and learning task-independent sentence representations \citep{cheng2016long, decomposableAttnModel, paulus2017deep, lin2017structured}.</span>
+
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">End-to-end memory networks are based on a recurrent attention mechanism instead of sequence-aligned recurrence and have been shown to perform well on simple-language question answering and language modeling tasks \citep{sukhbaatar2015}.</span>
+
+To the best of our knowledge, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;however&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">however</span>, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> sequence-aligned RNNs or convolution.
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]">In the following sections, we will describe the Transformer, motivate self-attention and discuss its advantages over models such as \citep{neural_gpu, NalBytenet2017} and \citep{JonasFaceNet2017}.</span>
+
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">%\citep{JonasFaceNet2017} report new SOTA on machine translation for English-to-German (EnDe), Enlish-to-French (EnFr) and English-to-Romanian language pairs.</span> 
+
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> An attention layer \citep{bahdanau2014neural} can connect a very large number of positions at low computation cost, making it an essential ingredient in competitive recurrent models for machine translation.</span>
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;need&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">need</span> to say that the complexity table summarizes <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">these</span> statements} Such a model would be blessed with the computational efficiency of attention and the power of cross-positional communication. In this work, show that pure attention models work remarkably well for MT, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;achieving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">achieving</span> new SOTA results on EnDe and EnFr, and can be trained in under $2$ days on xyz architecture. 
+
+<span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)">%After the seminal models introduced in \citep{sutskever14, bahdanau2014neural, cho2014learning}, recurrent models have become the dominant solution for both sequence modeling and sequence-to-sequence transduction. Many efforts such as \citep{wu2016google,luong2015effective,jozefowicz2016exploring} have pushed the boundaries of machine translation (MT) and language modeling with recurrent endoder-decoder and recurrent language models.</span><span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)"> Recent effort \citep{shazeer2017outrageously} has successfully combined the power of conditional computation with sequence models to train very large models for MT, pushing SOTA at lower computational cost.</span>
+
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Introduction&#x27; ↔ &#x27;Background&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">%Recurrent models compute a vector of hidden states $h_t$, for each time step $t$ of computation. $h_t$ is a function of both the input at time $t$ and the previous hidden state $h_t$.</span> This dependence on the previous hidden state precludes processing all timesteps at once, instead requiring long sequences of sequential operations. In practice, this results in greatly reduced computational efficiency, as on modern computing hardware, a single operation on a large batch is much faster than a large number of operations on small batches. The problem gets worse at longer sequence lengths. Although sequential computation is not a severe bottleneck at inference time, as autoregressively generating each output requires all previous outputs, the inability to compute scores at all output positions at once hinders us from rapidly training our models over large datasets.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> Although </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;impressive&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">impressive</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> work such as \citep{Kuchaiev2017Factorization} is able to significantly accelerate the training of LSTMs with factorization tricks, we are still bound by the linear dependence on sequence length.</span>
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> training.<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> This line of thought is the foundation of recent efforts such as the Markovian neural GPU \citep{neural_gpu}, ByteNet \citep{NalBytenet2017} and ConvS2S \citep{JonasFaceNet2017}, all of which use convolutional neural networks as a building block to compute hidden representations simultaneously for all timesteps, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;resulting&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">resulting</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> in $O(1)$ sequential time complexity.</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> \citep{JonasFaceNet2017} report new SOTA on machine translation for English-to-German (EnDe), Enlish-to-French (EnFr) and English-to-Romanian language pairs.</span> 
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;crucial&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">crucial</span> component for accurate sequence prediction is modeling cross-positional communication. For example, in MT, we must draw information from both input and previous output words to translate an output word accurately.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> An attention layer \citep{bahdanau2014neural} can connect a very large number of positions at a low computation cost, also $O(1)$ sequential time complexity, making it an essential ingredient in recurrent encoder-decoder architectures for MT.</span> A natural question to ask then is, "Could we replace recurrence with attention?". \marginpar{Don't know if it's the most natural question to ask given the previous statements. Also, need to say that the complexity table summarizes <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">these</span> statements} Such a model would be blessed with the computational efficiency of attention and the power of cross-positional communication. In this work, show that pure attention models work remarkably well for MT, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;achieving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">achieving</span> new SOTA results on EnDe and EnFr, and can be trained in under $2$ days on xyz architecture. 
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;promising&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">promising</span>, since it requires a logarithmnic number of layers (does bytenet have SOTA results)? 
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> inference. It would be great if we could infer with no long sequences. We could just say later on that, while our training graph is constant-depth, our model still requires sequential operations in the decoder part during inference due to the autoregressive nature of the model. 
+
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Why Self-Attention&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">%\caption{Attention models are quite efficient for cross-positional communications when sequence length is smaller than channel depth.</span> $n$ represents the sequence length and $d$ represents the channel depth.}
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.75</span>}{
+
+</pre></section><section class="sheet"><h2>Model Architecture</h2><pre>
+§ Model Architecture
+
+┌─ [float] 
+ 
+ \includegraphics[scale=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.6</span>]{Figures/ModalNet-21}
+ Caption: {The Transformer - model architecture.}
+ 
+ ─┘
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;primary&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">primary</span> workhorse of our model is attention, 
+<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:model-arch}</span>). The following sections describe the gross architecture and these particular components in detail.
+
+Most competitive neural sequence transduction models have an encoder-decoder structure \citep{cho2014learning,bahdanau2014neural,sutskever14}. Here, the encoder maps an input sequence of symbol representations $(x_1, ..., x_n)$ to a sequence of continuous representations $z = (z_1, ..., z_n)$. Given $z$, the decoder then generates an output sequence $(y_1,...,y_m)$ of symbols one element at a time. At each step the model is auto-regressive \citep{graves2013generating}, consuming the previously generated symbols as additional input when generating the next.
+
+The Transformer follows this overall architecture using stacked self-attention and point-wise, fully connected layers for both the encoder and decoder, shown in the left and right halves of Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:model-arch}</span>, respectively.
+
+§ Encoder and Decoder Stacks
+
+\paragraph{Encoder:}The encoder is composed of a stack of $N=6$ identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-wise fully connected feed-forward network. We employ a residual connection \citep{he2016deep} around each of the two sub-layers, followed by layer normalization \cite{layernorm2016}. That is, the output of each sub-layer is $\mathrm{LayerNorm}(x + \mathrm{Sublayer}(x))$, where $\mathrm{Sublayer}(x)$ is the function implemented by the sub-layer itself. To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $\dmodel=512$.
+
+\paragraph{Decoder:}The decoder is also composed of a stack of $N=6$ identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. Similar to the encoder, we employ residual connections around each of the sub-layers, followed by layer normalization. We also modify the self-attention sub-layer in the decoder stack to prevent positions from attending to subsequent positions. This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position $i$ can depend only on the known outputs at positions less than $i$.
+
+<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:model-arch}</span>), the encoder and decoder are composed of stacks of alternating self-attention layers (for cross-positional communication) and position-wise feed-forward layers (for in-place computation). In addition, the decoder stack contains encoder-decoder attention layers. Since attention is agnostic to the distances between words, our model requires a "positional encoding" to be added to the encoder and decoder input. The following sections describe all of these components in detail.
+
+§ Attention
+ 
+An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
+
+§ Scaled Dot-Product Attention
+ 
+
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.6</span>]{Figures/ModalNet-19}
+
+We call our particular attention "Scaled Dot-Product Attention" (Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:multi-head-att}</span>). The input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. We compute the dot products of the query with all keys, divide each by $\sqrt{d_k}$, and apply a softmax function to obtain the weights on the values.
+
+In practice, we compute the attention function on a set of queries simultaneously, packed together <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">into</span> a matrix $Q$. The keys and values are also packed together <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">into</span> matrices $K$ and $V$. We compute the matrix of outputs as:
+
+ 
+ \mathrm{Attention}(Q, K, V) = \mathrm{softmax}(\frac{QK^T}{\sqrt{d_k}})V
+ 
+
+The two most commonly used attention functions are additive attention \citep{bahdanau2014neural}, and dot-product (multiplicative) attention. Dot-product attention is identical to our algorithm, except for the scaling factor of $\frac{1}{\sqrt{d_k}}$. Additive attention computes the compatibility function using a feed-forward network with a single hidden layer. While the two are similar in theoretical complexity, dot-product attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code. 
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;particularly&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">particularly</span> important to us, as we employ many attention layers in our model.
+
+While for small values of $d_k$ the two mechanisms perform similarly, additive attention outperforms dot product attention without scaling for larger values of $d_k$ \citep{DBLP:journals/corr/BritzGLL17}. We suspect that for large values of $d_k$, the dot products grow large in magnitude, pushing the softmax function <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">into</span> regions where it has extremely small gradients \footnote{To illustrate why the dot products get large, assume that the components of $q$ and $k$ are independent random variables with mean $0$ and variance $1$. Then their dot product, $q \cdot k = \sum_{i=1}^{d_k} q_ik_i$, has mean $0$ and variance $d_k$.}. To counteract this effect, we scale the dot products by $\frac{1}{\sqrt{d_k}}$.
+
+§ Multi-Head Attention
+ 
+
+┌─ [float] 
+ {<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.5</span>\textwidth}
+ 
+ Scaled Dot-Product Attention \\
+ \vspace{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.5</span>cm}
+ \includegraphics[scale=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.6</span>]{Figures/ModalNet-19}
+ 
+ {<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.5</span>\textwidth}
+ 
+ Multi-Head Attention \\
+ \vspace{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.1</span>cm}
+ \includegraphics[scale=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.6</span>]{Figures/ModalNet-20} 
+ 
+
+ Caption: {(left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel.}
+ 
+ ─┘
+
+Instead of performing a single attention function with $\dmodel$-dimensional keys, values and queries, we found it beneficial to linearly project the queries, keys and values $h$ times with different, learned linear projections to $d_k$, $d_k$ and $d_v$ dimensions, respectively.
+On each of these projected versions of queries, keys and values we then perform the attention function in parallel, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;yielding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">yielding</span> $d_v$-dimensional output values. These are concatenated and once again projected, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;resulting&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">resulting</span> in the final values, as depicted in Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:multi-head-att}</span>.
+
+Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this.
+
+\begin{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;align&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">align</span>*}
+ \mathrm{MultiHead}(Q, K, V) &amp;= \mathrm{Concat}(\mathrm{head_1}, ..., \mathrm{head_h})W^O\\
+ \text{where}~\mathrm{head_i} &amp;= \mathrm{Attention}(QW^Q_i, KW^K_i, VW^V_i)\\
+\end{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;align&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">align</span>*}
+
+Where the projections are parameter matrices $W^Q_i \in \mathbb{R}^{\dmodel \times d_k}$, $W^K_i \in \mathbb{R}^{\dmodel \times d_k}$, $W^V_i \in \mathbb{R}^{\dmodel \times d_v}$ and $W^O \in \mathbb{R}^{hd_v \times \dmodel}$.
+
+<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:multi-head-att}</span>). The keys, values, and queries for each of these parallel attention layers are computed by learned linear transformations of the inputs to the multi-head attention. We use different linear transformations <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> different parallel attention layers. The output of the parallel attention layers are concatenated, and then passed <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> a final learned linear transformation. 
+
+In this work we employ $h=8$ parallel attention layers, or heads. For each of these we use $d_k=d_v=\dmodel/h=64$.
+Due to the reduced dimension of each head, the total computational cost is similar to that of single-head attention with full dimensionality.
+
+§ Applications of Attention in our Model
+
+The Transformer uses multi-head attention in three different ways: 
+ 
+ \item In "encoder-decoder attention" layers, the queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence. This mimics the typical encoder-decoder attention mechanisms in sequence-to-sequence models such as \citep{wu2016google, bahdanau2014neural,JonasFaceNet2017}.
+
+ \item The encoder contains self-attention layers. In a self-attention layer all of the keys, values and queries come from the same place, in this case, the output of the previous layer in the encoder. Each position in the encoder can attend to all positions in the previous layer of the encoder.
+
+ \item Similarly, self-attention layers in the decoder allow each position in the decoder to attend to all positions in the decoder up to and <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;including&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">including</span> that position. We need to prevent leftward information flow in the decoder to preserve the auto-regressive property. We implement this inside of scaled dot-product attention by masking out (setting to $-\infty$) all values in the input of the softmax which correspond to illegal connections. See Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:multi-head-att}</span>.
+
+ 
+
+§ Position-wise Feed-Forward Networks
+
+In addition to attention sub-layers, each of the layers in our encoder and decoder contains a fully connected feed-forward network, which is applied to each position separately and identically. This consists of two linear transformations with a ReLU activation in between.
+
+ 
+ \mathrm{FFN}(x)=\max(0, xW_1 + b_1) W_2 + b_2
+ 
+
+While the linear transformations are the same <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> different positions, they use different parameters from layer to layer. Another way of describing this is as two convolutions with kernel size 1. The dimensionality of input and output is $\dmodel=512$, and the inner-layer has dimensionality $d_{ff}=2048$.
+
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Model Architecture&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">%from Jakob: The number of operations required for the model to relate signals from two arbitrary input or output positions grows in the distance between positions in input or output, linearly for ConvS2S and logarithmically for ByteNet, making it harder to learn dependencies between these positions \citep{hochreiter2001gradient}. In the transformer this is reduced to a constant number of operations, albeit at the cost of effective resolution caused by averaging attention-weighted positions, an effect we aim to counteract with multi-headed attention.</span>
+
+<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;깨진 참조 — 가리키는 \\label이 없음&quot;]]">\ref{fig:simple-att}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;presents&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">presents</span> a simple attention function, $A$, with a single head, that forms the basis of our multi-head attention. $A$ takes a query key vector $\kq$, matrices of memory keys $\km$ and memory values $\vm$ ,and produces a query value vector $\vq$ as 
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;maintaining&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">maintaining</span> multiple attention heads at each query position that attend to all memory positions in parallel, with a different set of parameters per attention head $h$. 
+
+§ Embeddings and Softmax
+
+Similarly to other sequence transduction models, we use learned embeddings to convert the input tokens and output tokens to vectors of dimension $\dmodel$. We also use the usual learned linear transformation and softmax function to convert the decoder output to predicted next-token probabilities. In our model, we share the same weight matrix between the two embedding layers and the pre-softmax linear transformation, similar to \citep{press2016using}. In the embedding layers, we multiply those weights by $\sqrt{\dmodel}$.
+
+§ Positional Encoding
+
+Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add "positional encodings" to the input embeddings at the bottoms of the encoder and decoder stacks. The positional encodings have the same dimension $\dmodel$ as the embeddings, so that the two can be summed. There are many choices of positional encodings, learned and fixed \citep{JonasFaceNet2017}.
+
+In this work, we use sine and cosine functions of different frequencies:
+
+\begin{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;align&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">align</span>*}
+ PE_{(pos,2i)} = sin(pos / 10000^{2i/\dmodel}) \\
+ PE_{(pos,2i+1)} = cos(pos / 10000^{2i/\dmodel})
+\end{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;align&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">align</span>*}
+
+where $pos$ is the position and $i$ is the dimension. That is, each dimension of the positional encoding corresponds to a sinusoid. The wavelengths form a geometric progression from $2\pi$ to $10000 \cdot 2\pi$. We chose this function because we hypothesized it would allow the model to easily learn to attend by relative positions, since for any fixed offset $k$, $PE_{pos+k}$ can be represented as a linear function of $PE_{pos}$.
+
+We also experimented with using learned positional embeddings \citep{JonasFaceNet2017} instead, and found that the two versions produced nearly identical results (see Table~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{tab:variations}</span> row (E)). We chose the sinusoidal version because it may allow the model to extrapolate to sequence lengths longer than the ones encountered during training.
+
+ 
+</pre></section><section class="sheet"><h2>Why Self-Attention</h2><pre>
+§ Why Self-Attention
+
+In this section we compare <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;various&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">various</span> aspects of self-attention layers to the recurrent and convolutional layers commonly used for mapping one variable-length sequence of symbol representations $(x_1, ..., x_n)$ to another sequence of equal length $(z_1, ..., z_n)$, with $x_i, z_i \in \mathbb{R}^d$, such as a hidden layer in a typical sequence transduction encoder or decoder. Motivating our use of self-attention we consider three desiderata.
+
+One is the total computational complexity per layer.
+Another is the amount of computation that can be parallelized, as measured by the minimum number of sequential operations required.
+
+The third is the path length between long-range dependencies in the network. Learning long-range dependencies is a key <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;challenge&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">challenge</span> in many sequence transduction tasks. One key factor affecting the ability to learn such dependencies is the length of the paths forward and backward signals have to traverse in the network. The shorter these paths between any combination of positions in the input and output sequences, the easier it is to learn long-range dependencies \citep{hochreiter2001gradient}. Hence we also compare the maximum path length between any two input and output positions in networks composed of the different layer types.
+
+┌─ [float] 
+Caption: {
+ Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. $n$ is the sequence length, $d$ is the representation dimension, $k$ is the kernel size of convolutions and $r$ the size of the neighborhood in restricted self-attention.}
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Why Self-Attention&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">  %Attention models are quite efficient for cross-positional communications when sequence length is smaller than channel depth.</span>
+
+ 
+ 
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.75</span>}{
+
+ 
+ 
+Layer Type &amp; Complexity per Layer &amp; Sequential &amp; Maximum Path Length \\
+ &amp; &amp; Operations &amp; \\
+ 
+\rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}Self-Attention &amp; $O(n^2 \cdot d)$ &amp; $O(1)$ &amp; $O(1)$ \\
+Recurrent &amp; $O(n \cdot d^2)$ &amp; $O(n)$ &amp; $O(n)$ \\
+
+Convolutional &amp; $O(k \cdot n \cdot d^2)$ &amp; $O(1)$ &amp; $O(log_k(n))$ \\
+Self-Attention (restricted)&amp; $O(r \cdot n \cdot d)$ &amp; $O(1)$ &amp; $O(n/r)$ \\
+
+ 
+ 
+ 
+ ─┘
+
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Background&#x27; ↔ &#x27;Why Self-Attention&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">  %Attention models are quite efficient for cross-positional communications when sequence length is smaller than channel depth.</span>
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.75</span>}{
+
+As noted in Table <span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{tab:op_complexities}</span>, a self-attention layer connects all positions with a constant number of sequentially executed operations, whereas a recurrent layer requires $O(n)$ sequential operations.
+In terms of computational complexity, self-attention layers are faster than recurrent layers when the sequence length $n$ is smaller than the representation dimensionality $d$, which is most often the case with sentence representations used by state-of-the-art models in machine translations, such as word-piece \citep{wu2016google} and byte-pair \citep{sennrich2015neural} representations.
+To improve computational performance for tasks <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;involving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">involving</span> very long sequences, self-attention could be restricted to considering only a neighborhood of size $r$ in the input sequence centered around the respective output position. This would increase the maximum path length to $O(n/r)$. We plan to investigate this <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> further in future work.
+
+A single convolutional layer with kernel width $k &lt; n$ does not connect all pairs of input and output positions. Doing so requires a stack of $O(n/k)$ convolutional layers in the case of contiguous kernels, or $O(log_k(n))$ in the case of dilated convolutions \citep{NalBytenet2017}, increasing the length of the longest paths between any two positions in the network.
+Convolutional layers are generally more expensive than recurrent layers, by a factor of $k$. Separable convolutions \citep{xception2016}, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;however&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">however</span>, decrease the complexity considerably, to $O(k \cdot n \cdot d + n \cdot d^2)$. Even with $k=n$, however, the complexity of a separable convolution is equal to the combination of a self-attention layer and a point-wise feed-forward layer, the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> we take in our model.
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">into</span> a single, fixed-length vector. ...
+
+As side benefit, self-attention could yield more interpretable models. We inspect attention distributions from our models and present and discuss examples in the appendix. Not only do individual attention heads clearly learn to perform different tasks, many appear to <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exhibit&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exhibit</span> behavior related to the syntactic and semantic structure of the sentences.
+
+</pre></section><section class="sheet"><h2>Training</h2><pre>
+§ Training
+
+This section describes the training regime for our models. 
+
+<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{sec:results}</span>.
+
+§ Training Data and Batching
+
+We trained on the standard WMT 2014 English-German dataset consisting of about <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.5</span> million sentence pairs. Sentences <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;were&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">were</span> encoded using byte-pair encoding \citep{DBLP:journals/corr/BritzGLL17}, which has a shared source-target vocabulary of about 37000 tokens. For English-French, we used the significantly larger WMT 2014 English-French dataset consisting of 36M sentences and split tokens into a 32000 word-piece vocabulary \citep{wu2016google}. Sentence pairs <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;were&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">were</span> batched together by approximate sequence length. Each training batch contained a set of sentence pairs containing approximately 25000 source tokens and 25000 target tokens. 
+
+§ Hardware and Schedule
+
+We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using the hyperparameters described throughout the paper, each training step took about <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.4</span> seconds. We trained the base models for a total of 100,000 steps or 12 hours. For our big models,(described on the bottom line of table <span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{tab:variations}</span>), step time was <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.0</span> seconds. The big models <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;were&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">were</span> trained for 300,000 steps (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.5</span> days).
+
+§ Optimizer
+ We used the Adam optimizer~\citep{kingma2014adam} with $\beta_1=<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">0.9</span>$, $\beta_2=<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">0.98</span>$ and $\epsilon=10^{-9}$. We varied the learning rate over the course of training, according to the formula:
+
+ 
+lrate = \dmodel^{-<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.5</span>} \cdot
+ \min({step\_num}^{-<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.5</span>},
+ {step\_num} \cdot {warmup\_steps}^{-<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.5</span>})
+ 
+
+This corresponds to increasing the learning rate linearly for the first $warmup\_steps$ training steps, and decreasing it thereafter proportionally to the inverse square root of the step number. We used $warmup\_steps=4000$.
+
+§ Regularization
+ 
+
+We employ three types of regularization during training: 
+\paragraph{Residual Dropout} We apply dropout \citep{srivastava2014dropout} to the output of each sub-layer, before it is added to the sub-layer input and normalized. In addition, we apply dropout to the sums of the embeddings and the positional encodings in both the encoder and decoder stacks. For the base model, we use a rate of $P_{drop}=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.1</span>$.
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;yielding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">yielding</span> attention weights can then be seen as the analogue of hidden layer activations. A natural possibility is to extend dropout \citep{srivastava2014dropout} to attention. We implement attention dropout by dropping out attention weights as,
+
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.1</span>$. Note that this applies only to the auto-regressive use of the target ids - not their use in the cross-entropy loss. 
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;yielding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">yielding</span> attention weights can then be seen as the analogue of hidden layer activations. A natural possibility is to extend dropout \citep{srivastava2014dropout} to attentions. We implement attention dropout by dropping out attention weights as,
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.2</span>, and <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.3</span>, and found it to work favorably for English-to-German translation.
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.2</span>$.
+
+\paragraph{Label Smoothing} During training, we <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;employed&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">employed</span> label smoothing of value $\epsilon_{ls}=<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">0.1</span>$ \citep{DBLP:journals/corr/SzegedyVISW15}. This hurts perplexity, as the model learns to be more unsure, but improves accuracy and BLEU score.
+
+ 
+</pre></section><section class="sheet"><h2>Results</h2><pre>
+§ Results
+ 
+
+§ Machine Translation
+
+┌─ [float] 
+ 
+Caption: {The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost. }
+
+ 
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.0</span>}{
+ 
+ 
+\multirow{2}{*}{ Model} &amp; \multicolumn{2}{c}{BLEU} &amp; &amp; \multicolumn{2}{c}{Training Cost (FLOPs)} \\
+\cmidrule{2-3} \cmidrule{5-6} 
+&amp; EN-DE &amp; EN-FR &amp; &amp; EN-DE &amp; EN-FR \\ 
+ 
+ByteNet \citep{NalBytenet2017} &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">23.75</span> &amp; &amp; &amp; &amp;\\
+Deep-Att + PosUnk \citep{DBLP:journals/corr/ZhouCWLX16} &amp; &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">39.2</span> &amp; &amp; &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">1.0</span>\cdot10^{20}$ \\
+GNMT + RL \citep{wu2016google} &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">24.6</span> &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">39.92</span> &amp; &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">2.3</span>\cdot10^{19}$ &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">1.4</span>\cdot10^{20}$\\
+ConvS2S \citep{JonasFaceNet2017} &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">25.16</span> &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">40.46</span> &amp; &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">9.6</span>\cdot10^{18}$ &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">1.5</span>\cdot10^{20}$\\
+MoE \citep{shazeer2017outrageously} &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">26.03</span> &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">40.56</span> &amp; &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">2.0</span>\cdot10^{19}$ &amp; $<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.2</span>\cdot10^{20}$ \\
+ 
+\rule{0pt}{<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">2.0</span>ex}Deep-Att + PosUnk Ensemble \citep{DBLP:journals/corr/ZhouCWLX16} &amp; &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">40.4</span> &amp; &amp; &amp;
+ $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">8.0</span>\cdot10^{20}$ \\
+GNMT + RL Ensemble \citep{wu2016google} &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">26.30</span> &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">41.16</span> &amp; &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">1.8</span>\cdot10^{20}$ &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">1.1</span>\cdot10^{21}$\\
+ConvS2S Ensemble \citep{JonasFaceNet2017} &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">26.36</span> &amp; \textbf{<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">41.29</span>} &amp; &amp; $<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">7.7</span>\cdot10^{19}$ &amp; $<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.2</span>\cdot10^{21}$\\
+\specialrule{1pt}{-1pt}{0pt}
+\rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.2</span>ex}Transformer (base model) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">27.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">38.1</span> &amp; &amp; \multicolumn{2}{c}{\boldmath$<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.3</span>\cdot10^{18}$}\\
+Transformer (big) &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">28.4</span>} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">41.8</span>} &amp; &amp; \multicolumn{2}{c}{$<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>\cdot10^{19}$} \\
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+ 
+ 
+ 
+ ─┘
+
+On the WMT 2014 English-to-German translation task, the big transformer model (Transformer (big) in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:wmt-results}</span>) outperforms the best previously reported models (<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;including&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">including</span> ensembles) by more than $<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>$ BLEU, establishing a new state-of-the-art BLEU score of $<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">28.4</span>$. The configuration of this model is listed in the bottom line of Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:variations}</span>. Training took $<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.5</span>$ days on $8$ P100 GPUs. Even our base model <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;surpasses&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">surpasses</span> all previously published models and ensembles, at a fraction of the training cost of any of the competitive models.
+
+On the WMT 2014 English-to-French translation task, our big model achieves a BLEU score of $<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">41.0</span>$, outperforming all of the previously published single models, at less than $1/4$ the training cost of the previous state-of-the-art model. The Transformer (big) model trained for English-to-French used dropout rate $P_{drop}=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.1</span>$, instead of $<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.3</span>$.
+
+For the base models, we used a single model obtained by averaging the last 5 checkpoints, which <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;were&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">were</span> written at 10-minute intervals. For the big models, we averaged the last 20 checkpoints. We used beam search with a beam size of $4$ and length penalty $\alpha=<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">0.6</span>$ \citep{wu2016google}. These hyperparameters were chosen after experimentation on the development set. We set the maximum output length during inference to input length + $50$, but terminate early when possible \citep{wu2016google}.
+
+Table <span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:wmt-results}</span> summarizes our results and compares our translation quality and training costs to other model architectures from the literature. We estimate the number of floating point operations used to train a model by multiplying the training time, the number of GPUs used, and an estimate of the sustained single-precision floating-point capacity of each GPU \footnote{We used values of <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.8</span>, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.7</span>, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">6.0</span> and <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">9.5</span> TFLOPS for K80, K40, M40 and P100, respectively.}.
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;leading&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">leading</span> machine translation results in the literature. Even our smaller model, with number of parameters comparable to ConvS2S, outperforms all existing single models, and achieves results close to the best ensemble model.
+
+§ Model Variations
+
+┌─ [float] 
+Caption: {Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.}
+
+ 
+ 
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.0</span>}{
+ 
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+ &amp; \multirow{2}{*}{$N$} &amp; \multirow{2}{*}{$\dmodel$} &amp;
+\multirow{2}{*}{$\dff$} &amp; \multirow{2}{*}{$h$} &amp; 
+\multirow{2}{*}{$d_k$} &amp; \multirow{2}{*}{$d_v$} &amp; 
+\multirow{2}{*}{$P_{drop}$} &amp; \multirow{2}{*}{$\epsilon_{ls}$} &amp;
+train &amp; PPL &amp; BLEU &amp; params \\
+ &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; steps &amp; (dev) &amp; (dev) &amp; $\times10^6$ \\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+base &amp; 6 &amp; 512 &amp; 2048 &amp; 8 &amp; 64 &amp; 64 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.1</span> &amp; 100K &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.92</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.8</span> &amp; 65 \\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+\multirow{4}{*}{(A)}
+&amp; &amp; &amp; &amp; 1 &amp; 512 &amp; 512 &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.29</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.9</span> &amp; \\
+&amp; &amp; &amp; &amp; 4 &amp; 128 &amp; 128 &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.00</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.5</span> &amp; \\
+&amp; &amp; &amp; &amp; 16 &amp; 32 &amp; 32 &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.91</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.8</span> &amp; \\
+&amp; &amp; &amp; &amp; 32 &amp; 16 &amp; 16 &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.01</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.4</span> &amp; \\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+\multirow{2}{*}{(B)}
+&amp; &amp; &amp; &amp; &amp; 16 &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.16</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.1</span> &amp; 58 \\
+&amp; &amp; &amp; &amp; &amp; 32 &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.01</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.4</span> &amp; 60 \\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+\multirow{7}{*}{(C)}
+&amp; 2 &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">6.11</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">23.7</span> &amp; 36 \\
+&amp; 4 &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.19</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.3</span> &amp; 50 \\
+&amp; 8 &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.88</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.5</span> &amp; 80 \\
+&amp; &amp; 256 &amp; &amp; &amp; 32 &amp; 32 &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.75</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.5</span> &amp; 28 \\
+&amp; &amp; 1024 &amp; &amp; &amp; 128 &amp; 128 &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.66</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">26.0</span> &amp; 168 \\
+&amp; &amp; &amp; 1024 &amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.12</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.4</span> &amp; 53 \\
+&amp; &amp; &amp; 4096 &amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.75</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">26.2</span> &amp; 90 \\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+\multirow{4}{*}{(D)}
+&amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.0</span> &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.77</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.6</span> &amp; \\
+&amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.2</span> &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.95</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.5</span> &amp; \\
+&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.0</span> &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.67</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.3</span> &amp; \\
+&amp; &amp; &amp; &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.2</span> &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.47</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.7</span> &amp; \\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+(E) &amp; &amp; \multicolumn{7}{c}{positional embedding instead of sinusoids} &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.92</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.7</span> &amp; \\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+big &amp; 6 &amp; 1024 &amp; 4096 &amp; 16 &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.3</span> &amp; &amp; 300K &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.33</span>} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">26.4</span>} &amp; 213 \\
+ 
+ 
+ 
+ ─┘
+
+<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;깨진 참조 — 가리키는 \\label이 없음&quot;]]">\ref{tab:ende-results}</span>. Our base model for this task uses 6 attention layers, 512 hidden dim, 2048 filter dim, 8 attention heads with both attention and symbol dropout of <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.2</span> and <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.1</span> respectively. Increasing the filter size of our feed forward component to 8192 increases the BLEU score on En $\to$ De by $?$. For both the models, we use beam search decoding of size $?$ and length penalty with an alpha of $?$ \cite? \todo{Update results}
+
+To evaluate the importance of different components of the Transformer, we varied our base model in different ways, measuring the change in performance on English-to-German translation on the development set, newstest2013. We used beam search as described in the previous section, but no checkpoint averaging. We present these results in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:variations}</span>. 
+
+In Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:variations}</span> rows (A), we vary the number of attention heads and the attention key and value dimensions, keeping the amount of computation constant, as described in Section <span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{sec:multihead}</span>. While single-head attention is <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.9</span> BLEU worse than the best setting, quality also drops off with too many heads.
+
+In Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:variations}</span> rows (B), we observe that reducing the attention key size $d_k$ hurts model quality. This suggests that determining compatibility is not easy and that a more sophisticated compatibility function than dot product may be beneficial. We further observe in rows (C) and (D) that, as expected, bigger models are better, and dropout is very helpful in avoiding over-fitting. In row (E) we replace our sinusoidal positional encoding with learned positional embeddings \citep{JonasFaceNet2017}, and observe nearly identical results to the base model.
+
+<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:variations}</span> show that the number of attention layers and attention heads is the most important architecture hyperparamter However, the we do not see performance gains beyond 6 layers, suggesting that we either don't have enough data to train a large model or we need to turn up regularization. We leave this <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exploration&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exploration</span> for future work. Among our regularizers, attention dropout has the most significant <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;impact&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">impact</span> on performance.
+
+§ English Constituency Parsing
+
+┌─ [float] 
+ 
+Caption: {The Transformer generalizes well to English constituency parsing (Results are on Section 23 of WSJ)}
+
+ 
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.0</span>}{
+ 
+ 
+{\bf Parser} &amp; {\bf Training} &amp; {\bf WSJ 23 F1} \\ 
+Vinyals \&amp; Kaiser el al. (2014) \cite{KVparse15}
+ &amp; WSJ only, discriminative &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">88.3</span> \\
+Petrov et al. (2006) \cite{petrov-EtAl:2006:ACL}
+ &amp; WSJ only, discriminative &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">90.4</span> \\
+Zhu et al. (2013) \cite{zhu-EtAl:2013:ACL}
+ &amp; WSJ only, discriminative &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">90.4</span> \\
+Dyer et al. (2016) \cite{dyer-rnng:16}
+ &amp; WSJ only, discriminative &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">91.7</span> \\
+\specialrule{1pt}{-1pt}{0pt}
+Transformer (4 layers) &amp; WSJ only, discriminative &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">91.3</span> \\
+\specialrule{1pt}{-1pt}{0pt} 
+Zhu et al. (2013) \cite{zhu-EtAl:2013:ACL}
+ &amp; semi-supervised &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">91.3</span> \\
+Huang \&amp; Harper (2009) \cite{huang-harper:2009:EMNLP}
+ &amp; semi-supervised &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">91.3</span> \\
+McClosky et al. (2006) \cite{mcclosky-etAl:2006:NAACL}
+ &amp; semi-supervised &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">92.1</span> \\
+Vinyals \&amp; Kaiser el al. (2014) \cite{KVparse15}
+ &amp; semi-supervised &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">92.1</span> \\
+\specialrule{1pt}{-1pt}{0pt}
+Transformer (4 layers) &amp; semi-supervised &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">92.7</span> \\
+\specialrule{1pt}{-1pt}{0pt} 
+Luong et al. (2015) \cite{multiseq2seq}
+ &amp; multi-task &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">93.0</span> \\
+Dyer et al. (2016) \cite{dyer-rnng:16}
+ &amp; generative &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">93.3</span> \\
+ 
+ 
+ 
+ ─┘
+
+To evaluate if the Transformer can generalize to other tasks we performed experiments on English constituency parsing. This task <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;presents&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">presents</span> specific <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;challenges&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">challenges</span>: the output is subject to strong structural constraints and is significantly longer than the input.
+Furthermore, RNN sequence-to-sequence models have not been able to attain state-of-the-art results in small-data regimes \cite{KVparse15}.
+
+We trained a 4-layer transformer with $d_{model} = 1024$ on the Wall Street Journal (WSJ) portion of the Penn Treebank \citep{marcus1993building}, about 40K training sentences. We also trained it in a semi-supervised setting, using the larger high-confidence and BerkleyParser corpora from with approximately 17M sentences \citep{KVparse15}. We used a vocabulary of 16K tokens for the WSJ only setting and a vocabulary of 32K tokens for the semi-supervised setting.
+
+We performed only a small number of experiments to select the dropout, both attention and residual (section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{sec:reg}</span>), learning rates and beam size on the Section 22 development set, all other parameters remained unchanged from the English-to-German base translation model. During inference, we increased the maximum output length to input length + $300$. We used a beam size of $21$ and $\alpha=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.3</span>$ for both WSJ only and the semi-supervised setting.
+
+Our results in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:parsing-results}</span> show that <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;despite&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">despite</span> the lack of task-specific tuning our model performs surprisingly well, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;yielding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">yielding</span> better results than all previously reported models with the exception of the Recurrent Neural Network Grammar \cite{dyer-rnng:16}.
+
+In contrast to RNN sequence-to-sequence models \citep{KVparse15}, the Transformer outperforms the BerkeleyParser \cite{petrov-EtAl:2006:ACL} even when training only on the WSJ training set of 40K sentences.
+
+</pre></section><section class="sheet"><h2>Conclusion</h2><pre>
+§ Conclusion
+
+In this work, we presented the Transformer, the first sequence transduction model based entirely on attention, replacing the recurrent layers most commonly used in encoder-decoder architectures with multi-headed self-attention.
+
+For translation tasks, the Transformer can be trained significantly faster than architectures based on recurrent or convolutional layers. On both WMT 2014 English-to-German and WMT 2014 English-to-French translation tasks, we achieve a new state of the art. In the former task our best model outperforms even all previously reported ensembles. %We also provide an indication of the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;broader&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">broader</span> applicability of our models <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> experiments on English constituency parsing.
+
+We are excited about the future of attention-based models and plan to apply them to other tasks. We plan to extend the Transformer to problems <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;involving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">involving</span> input and output modalities other than text and to investigate local, restricted attention mechanisms to efficiently handle large inputs and outputs such as images, audio and video.
+Making generation less sequential is another research goals of ours.
+
+The code we used to train and evaluate our models is available at \url{https://github.com/tensorflow/tensor2tensor}.
+
+\paragraph{Acknowledgements} We are grateful to Nal Kalchbrenner and Stephan Gouws for
+their fruitful comments, corrections and inspiration.
+
+\bibliographystyle{plain}
+ 
+
+\bibitem{layernorm2016}
+Jimmy~Lei Ba, Jamie~Ryan Kiros, and Geoffrey~E Hinton.
+\newblock Layer normalization.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1607.06450</span>}, 2016.
+
+\bibitem{bahdanau2014neural}
+Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio.
+\newblock Neural machine translation by jointly learning to align and
+ translate.
+\newblock {\em CoRR}, abs/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1409.0473</span>, 2014.
+
+\bibitem{DBLP:journals/corr/BritzGLL17}
+Denny Britz, Anna Goldie, Minh{-}Thang Luong, and Quoc~V. Le.
+\newblock Massive <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exploration&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exploration</span> of neural machine translation architectures.
+\newblock {\em CoRR}, abs/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1703.03906</span>, 2017.
+
+\bibitem{cheng2016long}
+Jianpeng Cheng, Li~Dong, and Mirella Lapata.
+\newblock Long short-term memory-networks for machine reading.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1601.06733</span>}, 2016.
+
+\bibitem{cho2014learning}
+Kyunghyun Cho, Bart van Merrienboer, Caglar Gulcehre, Fethi Bougares, Holger
+ Schwenk, and Yoshua Bengio.
+\newblock Learning phrase representations using rnn encoder-decoder for
+ statistical machine translation.
+\newblock {\em CoRR}, abs/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1406.1078</span>, 2014.
+
+\bibitem{xception2016}
+Francois Chollet.
+\newblock Xception: Deep learning with depthwise separable convolutions.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1610.02357</span>}, 2016.
+
+\bibitem{gruEval14}
+Junyoung Chung, {\c{C}}aglar G{\"{u}}l{\c{c}}ehre, Kyunghyun Cho, and Yoshua
+ Bengio.
+\newblock Empirical evaluation of gated recurrent neural networks on sequence
+ modeling.
+\newblock {\em CoRR}, abs/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1412.3555</span>, 2014.
+
+\bibitem{dyer-rnng:16}
+Chris Dyer, Adhiguna Kuncoro, Miguel Ballesteros, and Noah~A. Smith.
+\newblock Recurrent neural network grammars.
+\newblock In {\em Proc. of NAACL}, 2016.
+
+\bibitem{JonasFaceNet2017}
+Jonas Gehring, Michael Auli, David Grangier, Denis Yarats, and Yann~N. Dauphin.
+\newblock Convolutional sequence to sequence learning.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1705.03122</span>v2}, 2017.
+
+\bibitem{graves2013generating}
+Alex Graves.
+\newblock Generating sequences with recurrent neural networks.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1308.0850</span>}, 2013.
+
+\bibitem{he2016deep}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+ Pattern Recognition}, pages 770--778, 2016.
+
+\bibitem{hochreiter2001gradient}
+Sepp Hochreiter, Yoshua Bengio, Paolo Frasconi, and J{\"u}rgen Schmidhuber.
+\newblock Gradient flow in recurrent nets: the difficulty of learning long-term
+ dependencies, 2001.
+
+\bibitem{hochreiter1997}
+Sepp Hochreiter and J{\"u}rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural computation}, 9(8):1735--1780, 1997.
+
+\bibitem{huang-harper:2009:EMNLP}
+Zhongqiang Huang and Mary Harper.
+\newblock Self-training {PCFG} grammars with latent annotations across
+ languages.
+\newblock In {\em Proceedings of the 2009 Conference on Empirical Methods in
+ Natural Language Processing}, pages 832--841. ACL, August 2009.
+
+\bibitem{jozefowicz2016exploring}
+Rafal Jozefowicz, Oriol Vinyals, Mike Schuster, Noam Shazeer, and Yonghui Wu.
+\newblock Exploring the limits of language modeling.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1602.02410</span>}, 2016.
+
+\bibitem{extendedngpu}
+{\L}ukasz Kaiser and Samy Bengio.
+\newblock Can active memory replace attention?
+\newblock In {\em Advances in Neural Information Processing Systems, ({NIPS})},
+ 2016.
+
+\bibitem{neural_gpu}
+\L{}ukasz Kaiser and Ilya Sutskever.
+\newblock Neural {GPU}s learn algorithms.
+\newblock In {\em International Conference on Learning Representations
+ ({ICLR})}, 2016.
+
+\bibitem{NalBytenet2017}
+Nal Kalchbrenner, Lasse Espeholt, Karen Simonyan, Aaron van~den Oord, Alex
+ Graves, and Koray Kavukcuoglu.
+\newblock Neural machine translation in linear time.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1610.10099</span>v2}, 2017.
+
+\bibitem{structuredAttentionNetworks}
+Yoon Kim, Carl Denton, Luong Hoang, and Alexander~M. Rush.
+\newblock Structured attention networks.
+\newblock In {\em International Conference on Learning Representations}, 2017.
+
+\bibitem{kingma2014adam}
+Diederik Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock In {\em ICLR}, 2015.
+
+\bibitem{Kuchaiev2017Factorization}
+Oleksii Kuchaiev and Boris Ginsburg.
+\newblock Factorization tricks for {LSTM} networks.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1703.10722</span>}, 2017.
+
+\bibitem{lin2017structured}
+Zhouhan Lin, Minwei Feng, Cicero Nogueira~dos Santos, Mo~Yu, Bing Xiang, Bowen
+ Zhou, and Yoshua Bengio.
+\newblock A structured self-attentive sentence embedding.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1703.03130</span>}, 2017.
+
+\bibitem{multiseq2seq}
+Minh-Thang Luong, Quoc~V. Le, Ilya Sutskever, Oriol Vinyals, and Lukasz Kaiser.
+\newblock Multi-task sequence to sequence learning.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1511.06114</span>}, 2015.
+
+\bibitem{luong2015effective}
+Minh-Thang Luong, Hieu Pham, and Christopher~D Manning.
+\newblock Effective approaches to attention-based neural machine translation.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1508.04025</span>}, 2015.
+
+\bibitem{marcus1993building}
+Mitchell~P Marcus, Mary~Ann Marcinkiewicz, and Beatrice Santorini.
+\newblock Building a large annotated corpus of english: The penn treebank.
+\newblock {\em Computational linguistics}, 19(2):313--330, 1993.
+
+\bibitem{mcclosky-etAl:2006:NAACL}
+David McClosky, Eugene Charniak, and Mark Johnson.
+\newblock Effective self-training for parsing.
+\newblock In {\em Proceedings of the Human Language Technology Conference of
+ the NAACL, Main Conference}, pages 152--159. ACL, June 2006.
+
+\bibitem{decomposableAttnModel}
+Ankur Parikh, Oscar Täckström, Dipanjan Das, and Jakob Uszkoreit.
+\newblock A decomposable attention model.
+\newblock In {\em Empirical Methods in Natural Language Processing}, 2016.
+
+\bibitem{paulus2017deep}
+Romain Paulus, Caiming Xiong, and Richard Socher.
+\newblock A deep reinforced model for abstractive summarization.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1705.04304</span>}, 2017.
+
+\bibitem{petrov-EtAl:2006:ACL}
+Slav Petrov, Leon Barrett, Romain Thibaux, and Dan Klein.
+\newblock Learning accurate, compact, and interpretable tree annotation.
+\newblock In {\em Proceedings of the 21st International Conference on
+ Computational Linguistics and 44th Annual Meeting of the ACL}, pages
+ 433--440. ACL, July 2006.
+
+\bibitem{press2016using}
+Ofir Press and Lior Wolf.
+\newblock Using the output embedding to improve language models.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1608.05859</span>}, 2016.
+
+\bibitem{sennrich2015neural}
+Rico Sennrich, Barry Haddow, and Alexandra Birch.
+\newblock Neural machine translation of rare words with subword units.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1508.07909</span>}, 2015.
+
+\bibitem{shazeer2017outrageously}
+Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc Le,
+ Geoffrey Hinton, and Jeff Dean.
+\newblock Outrageously large neural networks: The sparsely-gated
+ mixture-of-experts layer.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1701.06538</span>}, 2017.
+
+\bibitem{srivastava2014dropout}
+Nitish Srivastava, Geoffrey~E Hinton, Alex Krizhevsky, Ilya Sutskever, and
+ Ruslan Salakhutdinov.
+\newblock Dropout: a simple way to prevent neural networks from overfitting.
+\newblock {\em Journal of Machine Learning Research}, 15(1):1929--1958, 2014.
+
+\bibitem{sukhbaatar2015}
+Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, and Rob Fergus.
+\newblock End-to-end memory networks.
+\newblock In C.~Cortes, N.~D. Lawrence, D.~D. Lee, M.~Sugiyama, and R.~Garnett,
+ editors, {\em Advances in Neural Information Processing Systems 28}, pages
+ 2440--2448. Curran Associates, Inc., 2015.
+
+\bibitem{sutskever14}
+Ilya Sutskever, Oriol Vinyals, and Quoc~VV Le.
+\newblock Sequence to sequence learning with neural networks.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+ 3104--3112, 2014.
+
+\bibitem{DBLP:journals/corr/SzegedyVISW15}
+Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and
+ Zbigniew Wojna.
+\newblock Rethinking the inception architecture for computer vision.
+\newblock {\em CoRR}, abs/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1512.00567</span>, 2015.
+
+\bibitem{KVparse15}
+{Vinyals {\&amp;} Kaiser}, Koo, Petrov, Sutskever, and Hinton.
+\newblock Grammar as a foreign language.
+\newblock In {\em Advances in Neural Information Processing Systems}, 2015.
+
+\bibitem{wu2016google}
+Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc~V Le, Mohammad Norouzi, Wolfgang
+ Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, et~al.
+\newblock Google's neural machine translation system: Bridging the gap between
+ human and machine translation.
+\newblock {\em arXiv preprint arXiv:<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1609.08144</span>}, 2016.
+
+\bibitem{DBLP:journals/corr/ZhouCWLX16}
+Jie Zhou, Ying Cao, Xuguang Wang, Peng Li, and Wei Xu.
+\newblock Deep recurrent models with fast-forward connections for neural
+ machine translation.
+\newblock {\em CoRR}, abs/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1606.04199</span>, 2016.
+
+\bibitem{zhu-EtAl:2013:ACL}
+Muhua Zhu, Yue Zhang, Wenliang Chen, Min Zhang, and Jingbo Zhu.
+\newblock Fast and accurate shift-reduce constituent parsing.
+\newblock In {\em Proceedings of the 51st Annual Meeting of the ACL (Volume 1:
+ Long Papers)}, pages 434--443. ACL, August 2013.
+
+ 
+
+\pagebreak
+</pre></section><section class="sheet"><h2>Attention Visualizations</h2><pre>
+§ Attention Visualizations
+
+┌─ [float] 
+{[figure: ./vis/making_more_difficult5_new.pdf]}
+Caption: {An example of the attention mechanism following long-distance dependencies in the encoder self-attention in layer 5 of 6. Many of the attention heads attend to a distant dependency of the verb `making', completing the phrase `making...more difficult'. Attentions here shown only for the word `making'. Different colors represent different heads. Best viewed in color.}
+ ─┘
+
+┌─ [float] 
+{[figure: ./vis/anaphora_resolution_new.pdf]}
+{[figure: ./vis/anaphora_resolution2_new.pdf]}
+Caption: {Two attention heads, also in layer 5 of 6, apparently involved in anaphora resolution. Top: Full attentions for head 5. Bottom: Isolated attentions from just the word `its' for attention heads 5 and 6. Note that the attentions are very sharp for this word.}
+ ─┘
+
+┌─ [float] 
+{[figure: ./vis/attending_to_head_new.pdf]}
+{[figure: ./vis/attending_to_head2_new.pdf]}
+Caption: {Many of the attention heads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exhibit&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exhibit</span> behaviour that seems related to the structure of the sentence. We give two such examples above, from two different heads from the encoder self-attention at layer 5 of 6. The heads clearly learned to perform different tasks.}
+ ─┘
+
+ 
+
+\pagebreak
+</pre></section><section class="sheet"><h2>Two Feed-Forward Layers = Attention over Parameters</h2><pre>
+§ Two Feed-Forward Layers = Attention over Parameters
+
+In addition to attention layers, our model contains position-wise feed-forward networks (Section <span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{sec:ffn}</span>), which consist of two linear transformations with a ReLU activation in between. In fact, these networks too can be seen as a form of attention. Compare the formula for such a network with the formula for a simple dot-product attention layer (biases and scaling factors omitted):
+
+ 
+ FFN(x, W_1, W_2) = ReLU(xW_1)W_2 \\
+ A(q, K, V) = Softmax(qK^T)V
+ 
+
+Based on the similarity of these formulae, the two-layer feed-forward network can be seen as a kind of attention, where the keys and values are the rows of the trainable parameter matrices $W_1$ and $W_2$, and where we use ReLU instead of Softmax in the compatibility function.
+
+Given this similarity, we experimented with replacing the position-wise feed-forward networks with attention layers similar to the ones we use everywhere else our model. The multi-head-attention-over-parameters sublayer is identical to the multi-head attention described in <span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{sec:multihead}</span>, except that the "keys" and "values" inputs to each attention head are trainable model parameters, as opposed to being linear projections of a previous layer. These parameters are scaled up by a factor of $\sqrt{d_{model}}$ in order to be more similar to activations.
+
+In our first experiment, we replaced each position-wise feed-forward network with a multi-head-attention-over-parameters sublayer with $h_p=8$ heads, key-dimensionality $d_{pk}=64$, and value-dimensionality $d_{pv}=64$, using $n_p=1536$ key-value pairs for each attention head. The sublayer has a total of $2097152$ parameters, including the parameters in the query projection and the output projection. This matches the number of parameters in the position-wise feed-forward network that we replaced. While the theoretical amount of computation is also the same, in practice, the attention version caused the step times to be about 30\% longer.
+
+In our second experiment, we used $h_p=8$ heads, and $n_p=512$ key-value pairs for each attention head, again matching the total number of parameters in the base model.
+
+Results for the first experiment were slightly worse than for the base model, and results for the second experiment were slightly better, see Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:parameter_attention}</span>.
+
+┌─ [float] 
+Caption: {Replacing the position-wise feed-forward networks with multihead-attention-over-parameters produces similar results to the base model. All metrics are on the English-to-German translation development set, newstest2013.}
+
+ 
+ 
+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.0</span>}{
+ 
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+ &amp; \multirow{2}{*}{$\dmodel$} &amp; \multirow{2}{*}{$\dff$} &amp;
+\multirow{2}{*}{$h_p$} &amp; \multirow{2}{*}{$d_{pk}$} &amp; \multirow{2}{*}{$d_{pv}$} &amp;
+ \multirow{2}{*}{$n_p$} &amp;
+ PPL &amp; BLEU &amp; params &amp; training\\
+ &amp; &amp; &amp; &amp; &amp; &amp; &amp; (dev) &amp; (dev) &amp; $\times10^6$ &amp; time \\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+base &amp; 512 &amp; 2048 &amp; &amp; &amp; &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.92</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.8</span> &amp; 65 &amp; 12 hours\\
+ \rule{0pt}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.0</span>ex}
+AOP$_1$ &amp; 512 &amp; &amp; 8 &amp; 64 &amp; 64 &amp; 1536 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.92</span>&amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.5</span> &amp; 65 &amp; 16 hours\\
+AOP$_2$ &amp; 512 &amp; &amp; 16 &amp; 64 &amp; 64 &amp; 512 &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">4.86</span>} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.9</span>} &amp; 65 &amp; 16 hours \\
+ 
+ 
+ 
+ ─┘
+
+</pre></section><section class="sheet"><h2>Justfication of the Scaling Factor in Dot-product Attention</h2><pre>
+§ Justfication of the Scaling Factor in Dot-product Attention
+
+In Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{sec:scaled-dot-prod}</span>, we introduced Scaled dot-product attention, where we scale down the dot products by $\sqrt{d_k}$. In this section, we will give a rough justification of this scaling factor. If we assume that $q$ and $k$ are $d_k$-dimensional vectors whose components are independent random variables with mean $0$ and variance $1$, then their dot product, $q \cdot k = \sum_{i=1}^{d_k} u_iv_i$, has mean $0$ and variance $d_k$. Since we would prefer these values to have variance $1$, we divide by $\sqrt{d_k}$. 
+
+\iffalse
+
+In this section, we will give a rough justification of this scaling factor, that is, we will show that for any two vectors, $\vec{u}$ and $\vec{v}$, whose variance and mean are $1$ and $0$ respectively, the variance and the mean of the dot product are $d_k$ and $0$ respectively. Therefore, dividing by $\sqrt{d_k}$ ensures that each component of the attention logits are normalized. The repeated layer norms at each transformer layer encourage $\vec{u}$ and $\vec{v}$ to be normalized. 
+
+ 
+ E[&lt;\vec{u},\vec{v}&gt;] &amp; = \sum_k E[u_i v_i] &amp;\text{By linearity of expectation} \\
+ &amp; =\sum_k E[u_i]E[v_i] &amp; \text{Assuming independence} \\
+ &amp; = 0
+ 
+
+ 
+ E[(&lt;\vec{u},\vec{v}&gt;-E[&lt;\vec{u},\vec{v}&gt;])^2] &amp; = E[(&lt;\vec{u},\vec{v}&gt;)^2] - E[&lt;\vec{u},\vec{v}&gt;]^2 \\
+ &amp; = E[(&lt;\vec{u},\vec{v}&gt;)^2] \\
+ &amp; = \sum_k E[{u_i}^2] E[{v_i}^2] &amp;\text{By linearity of expectation and indepedence} \\
+ &amp; = d_k
+ 
+
+\fi</pre></section></main>
+<script>
+(function(){
+  var WRAP = document.currentScript.closest('.wrap');
+  var META = {"CRN": {"kr": "참조망 — 섹션을 서로 엮는가", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "다른 섹션을 가리키는 참조 비율 0.381 (다른 섹션 10 / 같은 섹션 16 / 깨짐 2). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.", "verdict": "사람쪽", "pos": 0.26}, "MR": {"kr": "거시 반복 — 같은 말을 또 하는가", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "섹션 간 표현 겹침 0.0093 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.", "verdict": "사람쪽", "pos": -0.13}, "ENG": {"kr": "수치 근거 — 숫자를 선행연구에 붙이는가", "full": "External_Number_Grounding", "color": "#c98500", "fb": "소수점 수치 183개 중 38개만 인용 옆에 붙음 (비율 0.0714). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.", "verdict": "AI쪽", "pos": 14.36}, "CP": {"kr": "비교 배치 — 선행연구끼리 엮는가", "full": "Comparative_Positioning", "color": "#199e70", "fb": "선행연구끼리 엮인 밀도 1.2857 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).", "verdict": "중간", "pos": 0.39}, "STY": {"kr": "문체 — LLM 특유 어휘", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM 과잉 어휘 밀도 75.835 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.", "verdict": "사람쪽", "pos": 0.06}, "ESA": {"kr": "평가 규모 — 모델×데이터셋", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "평가 규모 = 모델 2개 × 데이터셋 2개 = 4칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.", "verdict": "AI쪽", "pos": 0.94}, "PB": {"kr": "문제 차용 — 문제를 선행 1편에서 빌렸는가", "full": "Problem_Borrowing", "color": "#e66767", "fb": "스스로 발견한 문제 (사람다움). 특정 선행연구에 기대지 않음. — “Recurrent neural networks are inherently sequential, preventing parallelization during training and limiting batching due to memory constraints. While”", "verdict": "사람쪽", "pos": 0.0}};
+  // --- chip filter (scoped to this paper's wrap) ---
+  WRAP.addEventListener('click', function(e){
+    var c = e.target.closest ? e.target.closest('.chip') : null;
+    if(!c) return;
+    WRAP.setAttribute('data-view', c.getAttribute('data-v'));
+    WRAP.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('active', b===c);});
+  });
+  // --- rich tooltip: hover shows, click pins ---
+  var tip = document.createElement('div');
+  tip.className = 'moldtip';
+  document.body.appendChild(tip);
+  var pinned = false;
+  function render(el){
+    var data;
+    try { data = JSON.parse(el.getAttribute('data-tip')); } catch(err) { return false; }
+    var view = WRAP.getAttribute('data-view');
+    var h = '';
+    data.forEach(function(t){
+      var ab = t[0], pol = t[1], why = t[2];
+      if (view !== 'ALL' && ab !== view) return;
+      var m = META[ab] || {};
+      var badge = pol === 'trigger'
+        ? '<span class="tbadge ai">AI스러움의 증거</span>'
+        : '<span class="tbadge hu">사람다움의 증거</span>';
+      h += '<div class="tsec">'
+        + '<div class="thead"><span class="sw" style="background:' + m.color + '"></span>'
+        + '<b>' + m.kr + '</b>' + badge + '</div>'
+        + '<div class="twhy">' + why + '</div>'
+        + '<div class="tscore">이 논문의 ' + ab + ' 판정: <b>' + m.verdict + '</b>'
+        + (m.pos !== null ? ' (위치 ' + m.pos + ' · 0=사람, 1=AI)' : '') + '</div>'
+        + '<div class="tfb">' + m.fb + '</div></div>';
+    });
+    if(!h) return false;
+    tip.innerHTML = h + '<div class="tclose">클릭=고정 · 다시 클릭/ESC=닫기</div>';
+    return true;
+  }
+  function place(e){
+    var W = window.innerWidth, H = window.innerHeight;
+    var x = Math.min(e.clientX + 14, W - 380), y = e.clientY + 16;
+    tip.style.left = Math.max(8, x) + 'px';
+    var th = tip.offsetHeight;
+    if (y + th > H - 10) y = Math.max(8, e.clientY - th - 12);
+    tip.style.top = y + 'px';
+  }
+  WRAP.addEventListener('mouseover', function(e){
+    if (pinned) return;
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { tip.classList.remove('show'); return; }
+    if (render(el)) { tip.classList.add('show'); place(e); }
+  });
+  WRAP.addEventListener('mousemove', function(e){
+    if (pinned || !tip.classList.contains('show')) return;
+    place(e);
+  });
+  WRAP.addEventListener('mouseleave', function(){ if(!pinned) tip.classList.remove('show'); });
+  WRAP.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { pinned = false; tip.classList.remove('show'); return; }
+    if (pinned) { pinned = false; tip.classList.remove('show'); return; }
+    if (render(el)) { pinned = true; tip.classList.add('show'); place(e); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { pinned = false; tip.classList.remove('show'); }
+  });
+})();
+</script></div></body></html>

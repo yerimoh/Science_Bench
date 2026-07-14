@@ -1,0 +1,386 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FA0044 — mold pages</title><style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#111210;color:#e8e6df}
+header{padding:16px 24px;border-bottom:1px solid #2c2c28;background:#1a1a19;position:sticky;top:0;z-index:5}
+header h1{margin:2px 0 4px;font-size:18px}
+header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
+.back{color:#3987e5;font-size:12px;text-decoration:none}
+.wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
+.side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
+.card{background:#1e1e1c;border:1px solid #2c2c28;border-radius:10px;padding:11px;margin-bottom:10px}
+.chead{display:flex;align-items:center;gap:7px;font-size:12.5px;flex-wrap:wrap}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.abbr{margin-left:auto;font-size:10.5px;border:1px solid;border-radius:5px;padding:0 5px;font-weight:700}
+.pos{margin:8px 0 5px}
+.pos.none{color:#8a887d;font-size:11px}
+.track{position:relative;height:14px;background:linear-gradient(90deg,#20262e,#2e2020);border-radius:4px}
+.track .hu,.track .ai{position:absolute;top:0;font-size:9px;line-height:14px;color:#8a887d}
+.track .hu{left:4px}.track .ai{right:4px}
+.track .fill{position:absolute;top:-2px;width:4px;height:18px;border-radius:2px}
+.posv{font-size:10.5px;color:#c3c2b7;margin-left:6px}
+.fb{font-size:11.5px;color:#c3c2b7;line-height:1.45;margin-top:4px}
+.ct{font-size:10.5px;color:#8a887d;margin-top:5px}
+main{padding:16px 20px;overflow:auto}
+.sheet{background:#171816;border:1px solid #2c2c28;border-radius:12px;padding:22px 26px;margin:0 auto 18px;max-width:900px;
+ box-shadow:0 2px 10px #0006}
+.sheet h2{margin:0 0 10px;font-size:15px;color:#fff;border-bottom:1px solid #2c2c28;padding-bottom:6px}
+pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Roman',serif;
+ font-size:13.5px;line-height:1.7;margin:0;color:#d9d7cd}
+.hl{border-radius:3px;padding:0 1px;cursor:pointer}
+.moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
+ border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
+ color:#e8e6df;display:none;pointer-events:none}
+.moldtip.show{display:block}
+.moldtip .tsec{border-bottom:1px solid #33342e;padding:8px 0}
+.moldtip .tsec:last-of-type{border-bottom:none}
+.moldtip .thead{display:flex;align-items:center;gap:7px;font-size:12.5px;margin-bottom:3px;flex-wrap:wrap}
+.moldtip .tbadge{margin-left:auto;font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700}
+.moldtip .tbadge.ai{background:#e6676733;color:#ff9d9d}
+.moldtip .tbadge.hu{background:#3987e533;color:#8fbcf5}
+.moldtip .twhy{color:#fff;margin:2px 0 4px}
+.moldtip .tscore{color:#c3c2b7;font-size:11px}
+.moldtip .tfb{color:#8a887d;font-size:10.5px;margin-top:3px}
+.moldtip .tclose{color:#6f6e65;font-size:9.5px;margin-top:6px;text-align:right}
+.card.summary{border-color:#3d3d38;background:#22231f}
+.vrow{display:flex;align-items:center;gap:7px;font-size:11.5px;margin-top:6px;color:#c3c2b7}
+.vname{flex:1}
+.vbadge{font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700;flex:none}
+.vbadge.ai{background:#e6676733;color:#e66767}
+.vbadge.hu{background:#3987e533;color:#7db2ee}
+.vbadge.mid{background:#8a887d33;color:#a9a79c}
+.vbadge.na{background:#8a887d22;color:#8a887d}
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:2px 0 12px}
+.chiplab{font-size:10.5px;color:#8a887d;margin-right:2px;width:100%}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#242522;color:#c3c2b7;
+ border:1px solid #2c2c28;border-radius:12px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+.chip.active{border-color:#e8e6df;color:#fff;background:#2e2f2b}
+.chip .sw{width:9px;height:9px}
+.hl-CRN.pol-trigger{background:#3987e555;box-shadow:inset 0 -2px 0 #3987e5}.hl-CRN.pol-counter{background:#3987e522;box-shadow:inset 0 -1px 0 #3987e588}
+.hl-CP.pol-trigger{background:#199e7055;box-shadow:inset 0 -2px 0 #199e70}.hl-CP.pol-counter{background:#199e7022;box-shadow:inset 0 -1px 0 #199e7088}
+.hl-ENG.pol-trigger{background:#c9850055;box-shadow:inset 0 -2px 0 #c98500}.hl-ENG.pol-counter{background:#c9850022;box-shadow:inset 0 -1px 0 #c9850088}
+.hl-MR.pol-trigger{background:#9085e955;box-shadow:inset 0 -2px 0 #9085e9}.hl-MR.pol-counter{background:#9085e922;box-shadow:inset 0 -1px 0 #9085e988}
+.hl-STY.pol-trigger{background:#d5518155;box-shadow:inset 0 -2px 0 #d55181}.hl-STY.pol-counter{background:#d5518122;box-shadow:inset 0 -1px 0 #d5518188}
+.hl-ESA.pol-trigger{background:#d9592655;box-shadow:inset 0 -2px 0 #d95926}.hl-ESA.pol-counter{background:#d9592622;box-shadow:inset 0 -1px 0 #d9592688}
+.hl-PB.pol-trigger{background:#e6676755;box-shadow:inset 0 -2px 0 #e66767}.hl-PB.pol-counter{background:#e6676722;box-shadow:inset 0 -1px 0 #e6676788}
+.wrap[data-view="CRN"] .hl:not(.hl-CRN){background:none!important;box-shadow:none!important}.wrap[data-view="CRN"] .card[data-mold]:not([data-mold="CRN"]){opacity:.35}
+.wrap[data-view="CP"] .hl:not(.hl-CP){background:none!important;box-shadow:none!important}.wrap[data-view="CP"] .card[data-mold]:not([data-mold="CP"]){opacity:.35}
+.wrap[data-view="ENG"] .hl:not(.hl-ENG){background:none!important;box-shadow:none!important}.wrap[data-view="ENG"] .card[data-mold]:not([data-mold="ENG"]){opacity:.35}
+.wrap[data-view="MR"] .hl:not(.hl-MR){background:none!important;box-shadow:none!important}.wrap[data-view="MR"] .card[data-mold]:not([data-mold="MR"]){opacity:.35}
+.wrap[data-view="STY"] .hl:not(.hl-STY){background:none!important;box-shadow:none!important}.wrap[data-view="STY"] .card[data-mold]:not([data-mold="STY"]){opacity:.35}
+.wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
+.wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}</style></head><body>
+<header><a class="back" href="../index.html">← 데모 목록</a>
+ <h1>FA0044 <span class="sub">2025 · AI가 쓴 논문 (FARS)</span></h1>
+ <div class="sub">논문 원문 위에 몰드(AI 지문 패턴)의 증거를 색으로 표시했습니다.
+ <b>진하게 밑줄 = AI스러운 패턴의 증거</b> · <b>옅은 하이라이트 = 사람다운 패턴의 증거</b>.
+ 마우스를 올리면 왜 잡혔는지 설명이 뜹니다. 모든 하이라이트는 이 논문의 실제 LaTeX 원문 조각이며 조작이 없습니다.</div>
+</header>
+<div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
+ <div class="chead"><b>한눈 요약 — 이 논문은 어느 쪽인가</b></div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:91%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">0.91</span></div>
+ <div class="fb">종합(5개 몰드 평균): <span class="vbadge ai">AI쪽</span>
+  &nbsp;위치 0.91 (0=사람 논문 중앙값, 1=AI 논문 중앙값)</div>
+ <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">참조망 — 섹션을 서로 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">거시 반복 — 같은 말을 또 하는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">수치 근거 — 숫자를 선행연구에 붙이는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">비교 배치 — 선행연구끼리 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">문체 — LLM 특유 어휘</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">평가 규모 — 모델×데이터셋</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">문제 차용 — 문제를 선행 1편에서 빌렸는가</span><span class="vbadge ai">AI쪽</span></div>
+ <div class="ct">축마다 보는 게 다릅니다 — 아래 칩으로 몰드를 하나씩 켜서 본문에서 확인하세요.</div></div><div class="chips"><span class="chiplab">하이라이트 필터</span><button class="chip active" data-v="ALL">전체</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button></div><div class="card" data-mold="CRN">
+ <div class="chead"><span class="sw" style="background:#3987e5"></span><b>참조망 — 섹션을 서로 엮는가</b>
+   <span class="abbr" style="border-color:#3987e5;color:#3987e5">CRN</span></div>
+ <div class="ct">Cross-Reference_Network</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:68%;background:#3987e5"></div><div class="ai">AI</div></div><span class="posv">0.68</span></div>
+ <div class="fb">다른 섹션을 가리키는 참조 비율 0.167 (다른 섹션 1 / 같은 섹션 5 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.</div>
+ <div class="ct">하이라이트 6개 · AI 증거 5 / 사람 증거 1</div></div><div class="card" data-mold="MR">
+ <div class="chead"><span class="sw" style="background:#9085e9"></span><b>거시 반복 — 같은 말을 또 하는가</b>
+   <span class="abbr" style="border-color:#9085e9;color:#9085e9">MR</span></div>
+ <div class="ct">Macro_Redundancy</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:78%;background:#9085e9"></div><div class="ai">AI</div></div><span class="posv">0.78</span></div>
+ <div class="fb">섹션 간 표현 겹침 0.0469 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.</div>
+ <div class="ct">하이라이트 2개 · AI 증거 2 / 사람 증거 0</div></div><div class="card" data-mold="ENG">
+ <div class="chead"><span class="sw" style="background:#c98500"></span><b>수치 근거 — 숫자를 선행연구에 붙이는가</b>
+   <span class="abbr" style="border-color:#c98500;color:#c98500">ENG</span></div>
+ <div class="ct">External_Number_Grounding</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#c98500"></div><div class="ai">AI</div></div><span class="posv">2.08</span></div>
+ <div class="fb">소수점 수치 70개 중 1개만 인용 옆에 붙음 (비율 0.0143). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.</div>
+ <div class="ct">하이라이트 70개 · AI 증거 69 / 사람 증거 1</div></div><div class="card" data-mold="CP">
+ <div class="chead"><span class="sw" style="background:#199e70"></span><b>비교 배치 — 선행연구끼리 엮는가</b>
+   <span class="abbr" style="border-color:#199e70;color:#199e70">CP</span></div>
+ <div class="ct">Comparative_Positioning</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:93%;background:#199e70"></div><div class="ai">AI</div></div><span class="posv">0.93</span></div>
+ <div class="fb">선행연구끼리 엮인 밀도 0.4667 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).</div>
+ <div class="ct">하이라이트 13개 · AI 증거 8 / 사람 증거 5</div></div><div class="card" data-mold="STY">
+ <div class="chead"><span class="sw" style="background:#d55181"></span><b>문체 — LLM 특유 어휘</b>
+   <span class="abbr" style="border-color:#d55181;color:#d55181">STY</span></div>
+ <div class="ct">Stylistic (excess vocab)</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#d55181"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">LLM 과잉 어휘 밀도 230.769 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.</div>
+ <div class="ct">하이라이트 98개 · AI 증거 98 / 사람 증거 0</div></div><div class="card" data-mold="ESA">
+ <div class="chead"><span class="sw" style="background:#d95926"></span><b>평가 규모 — 모델×데이터셋</b>
+   <span class="abbr" style="border-color:#d95926;color:#d95926">ESA</span></div>
+ <div class="ct">Evaluation_Surface_Area</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#d95926"></div><div class="ai">AI</div></div><span class="posv">1.14</span></div>
+ <div class="fb">평가 규모 = 모델 1개 × 데이터셋 1개 = 1칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.</div>
+ <div class="ct">하이라이트 7개 · AI 증거 0 / 사람 증거 7</div></div><div class="card" data-mold="PB">
+ <div class="chead"><span class="sw" style="background:#e66767"></span><b>문제 차용 — 문제를 선행 1편에서 빌렸는가</b>
+   <span class="abbr" style="border-color:#e66767;color:#e66767">PB</span></div>
+ <div class="ct">Problem_Borrowing</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#e66767"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">선행 1편의 한계를 그대로 이어받음 (AI형). 빌린 출처: Lin2025DoBY — “When LLM judges use self-reference (their own answer as a guide) to evaluate candidate responses, incorrect self-answers propagate errors into judgmen”</div>
+ <div class="ct">하이라이트 2개 · AI 증거 2 / 사람 증거 0</div></div></div>
+<main><section class="sheet"><pre>
+
+ 
+Self-reference, where an LLM judge first solves a task before evaluating candidate responses, has been shown to improve judgment accuracy.<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;However&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">However</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">, when the judge's self-generated answer is incorrect, </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">using</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> it as reference can propagate errors </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">into</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> the final judgment.</span> We identify <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> error propagation problem and observe that self-consistency among multiple sampled solutions <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;serves&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">serves</span> as a reliable proxy for answer correctness: unanimous agreement <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> five samples yields <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">78.66</span>\% correctness compared to only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">35.51</span>\% for three-of-five agreement. Building on <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> insight, we propose Selective Self-Reference (SSR-Judge), which uses an agreement gate to conditionally enable self-reference only when the model <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exhibits&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exhibits</span> high confidence. On <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MMLU-Pro — 모델×데이터셋 조합이 평가 규모&quot;]]">MMLU-Pro</span> pairwise preference judgment, SSR-Judge achieves <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.93</span>\% accuracy, outperforming <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> no-reference (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">52.07</span>\%) and always self-reference (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.21</span>\%) baselines by avoiding error propagation on uncertain items <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">while</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;preserving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">preserving</span> self-reference benefits when confidence is high.
+
+\textit{WARNING: <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;This&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">This</span> paper was generated by an automated <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;research&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">research</span> system. The code is publicly available.}\footnote{\url{https://gitlab.com/fars-a/selective-self-reference-judge}}
+ 
+
+\input{sections/introduction}
+
+\input{sections/related_work}
+
+\input{sections/method}
+
+\input{sections/experiments}
+
+\input{sections/conclusion}
+
+\bibliography{analemma}
+\bibliographystyle{analemma}
+
+ 
+
+</pre></section><section class="sheet"><h2>Conclusion</h2><pre>
+§ Conclusion
+
+We presented SSR-Judge, a selective self-reference method for LLM-as-a-Judge that uses self-consistency to gate the use of self-generated answers as reference. By generating multiple independent solutions and applying an agreement threshold, SSR-Judge identifies cases where self-reference is likely to help versus harm judgment quality. Our experiments on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MMLU-Pro — 모델×데이터셋 조합이 평가 규모&quot;]]">MMLU-Pro</span> demonstrate that SSR-Judge achieves <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.93</span>\% preference accuracy, outperforming <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> no-reference (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">52.07</span>\%) and always self-reference (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.21</span>\%) baselines. The method successfully avoids error propagation on uncertain items <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">while</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;preserving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">preserving</span> the benefits of self-reference when the model is confident.
+
+Our <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> has <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;limitations&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">limitations</span>. The requirement for multiple samples increases computational cost, though <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> can be mitigated <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> parallel inference. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Additionally&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Additionally</span>, the optimal agreement threshold may vary <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> domains, suggesting that domain-specific calibration could further improve performance. Future work could explore adaptive thresholding <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;strategies&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">strategies</span> and extend the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> to other evaluation settings beyond pairwise preference judgment.
+
+</pre></section><section class="sheet"><h2>Experiments</h2><pre>
+§ Experiments
+
+We evaluate SSR-Judge on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MMLU-Pro — 모델×데이터셋 조합이 평가 규모&quot;]]">MMLU-Pro</span>, a challenging multi-domain benchmark, comparing it against two baselines: no-reference judging and always-self-reference judging.
+
+§ Experimental Setup
+
+Dataset. We use <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MMLU-Pro — 모델×데이터셋 조합이 평가 규모&quot;]]">MMLU-Pro</span>~\citep{Wang2024MMLUProAM}, a more challenging extension of MMLU~\citep{Hendrycks2020MeasuringMM} with 10 answer options per question (vs. 4 in MMLU). We sample 100 items from each of 14 categories, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;yielding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">yielding</span> $N=1{,}400$ evaluation instances. For each item, we construct two candidate responses <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> a separate generator model: one concluding with the correct answer and one with a randomly sampled incorrect answer.
+
+Model. We use <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 model: Qwen2.5-72B-Instruct — 모델×데이터셋 조합이 평가 규모&quot;]]">Qwen</span><span class="hl hl-ENG hl-ESA pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 model: Qwen2.5-72B-Instruct — 모델×데이터셋 조합이 평가 규모&quot;]]" style="background:repeating-linear-gradient(45deg,#c9850040,#c9850040 6px,#d9592640 6px,#d9592640 12px)">2.5</span><span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 model: Qwen2.5-72B-Instruct — 모델×데이터셋 조합이 평가 규모&quot;]]">-72B-Instruct</span>~\citep{Yang2024Qwen25TR} as the judge model $M_J$ for all <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span>. Self-solve samples are generated with temperature $T=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.7</span>$.
+
+Hyperparameters. We use $k=5$ self-solve samples and an agreement threshold of $\tau = 4/5$ (at least 4 out of 5 samples must agree for the gate to fire).
+
+Baselines. We compare three <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span>, all <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> the same $k=5$ self-solve samples to ensure compute-matched comparison. No-Reference (A) discards self-solves and has the judge evaluate candidates directly. Always Self-Reference (B) always uses the majority self-answer as reference. SSR-Judge (C, Ours) uses self-reference only when agreement $\geq 4/5$.
+
+Metrics. We report PreferenceAcc (overall accuracy), SliceAcc for gate-on and gate-off subsets, Gate-On Rate (fraction of items where gate fires), and Gate Precision (fraction of gate-on items with correct majority answer).
+
+§ Main Results
+
+Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:main_results}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;presents&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">presents</span> the main results. SSR-Judge achieves <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.93</span>\% PreferenceAcc, outperforming <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> No-Reference (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">52.07</span>\%, +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">6.86</span>pp) and Always Self-Reference (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.21</span>\%, +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.72</span>pp). The improvement over No-Reference <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">demonstrates</span> the value of self-reference when applied selectively, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">while</span> the improvement over Always Self-Reference shows the benefit of avoiding error propagation on low-confidence items.
+
+┌─ [float] 
+ 
+Caption: {Main results on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MMLU-Pro — 모델×데이터셋 조합이 평가 규모&quot;]]">MMLU-Pro</span> ($N=1{,}400$). SSR-Judge achieves the highest overall accuracy <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">while</span> selectively applying self-reference <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> on self-solve agreement. Gate metrics computed using $\geq 4/5$ agreement threshold. Best results in bold.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Method &amp; PreferenceAcc (\%) &amp; SliceAcc Gate-On (\%) &amp; SliceAcc Gate-Off (\%) &amp; Gate-On Rate (\%) &amp; Gate Precision (\%) \\
+ 
+No-Reference (A) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">52.07</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">59.87</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">45.73</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">44.86</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">78.66</span> \\
+Always Self-Ref (B) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.21</span> &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">72.77</span>} &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">46.37</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">44.86</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">78.66</span> \\
+SSR-Judge (C, Ours) &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.93</span>} (+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">6.86</span>) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">68.76</span> &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">41.62</span>} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">63.79</span>} &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">72.45</span> \\
+ 
+ 
+}
+ ─┘
+
+The gate characteristics reveal the precision-coverage tradeoff. SSR-Judge's $\geq 4/5$ threshold yields a higher Gate-On Rate (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">63.79</span>\% vs. <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">44.86</span>\% for strict unanimity) at the cost of slightly lower Gate Precision (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">72.45</span>\% vs. <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">78.66</span>\%). This tradeoff is favorable: the increased coverage allows more items to benefit from self-reference while <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;maintaining&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">maintaining</span> sufficient precision to avoid excessive error propagation.
+
+\subsection{Error Propagation <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Analysis</span>}
+
+To understand why SSR-Judge outperforms <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> baselines, we partition items <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">into</span> four slices <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> on agreement level (unanimous vs. non-unanimous) and majority answer correctness (correct vs. wrong). Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:error_propagation}</span> and Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:error_slices}</span> present the results.
+
+┌─ [float] 
+ 
+[figure: error_propagation_slices.png]
+Caption: {Preference accuracy <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> four slices defined by self-solve agreement (unanimous vs. non-unanimous) and majority correctness (correct vs. wrong). SSR-Judge (green) matches Always Self-Reference (orange) on unanimous slices where self-reference is beneficial, while matching No-Reference (blue) on non-unanimous slices where self-reference would cause error propagation. Sample sizes shown in parentheses.}
+
+ ─┘
+
+┌─ [float] 
+ 
+Caption: {Error propagation <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">analysis</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> four slices. SSR-Judge matches Always Self-Ref on unanimous slices (<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;preserving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">preserving</span> benefit) and matches No-Reference on non-unanimous slices (avoiding error propagation). Best per slice in bold.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Slice &amp; No-Ref (A) &amp; Always Self-Ref (B) &amp; SSR-Judge (C) &amp; C matches \\
+ 
+Unanimous + Correct ($n=647$, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">46.2</span>\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">62.75</span> &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">85.32</span>} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">85.32</span>} &amp; B $\checkmark$ \\
+Unanimous + Wrong ($n=246$, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">17.6</span>\%) &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">45.53</span>} &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.20</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.20</span> &amp; B $\checkmark$ \\
+Non-unan. + Correct ($n=160$, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">11.4</span>\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">50.00</span> &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">72.50</span>} &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">50.00</span> &amp; A $\checkmark$ \\
+Non-unan. + Wrong ($n=347$, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.8</span>\%) &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">37.75</span>} &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.50</span> &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">37.75</span>} &amp; A $\checkmark$ \\
+ 
+ 
+}
+ ─┘
+
+The results validate SSR-Judge's selective mechanism. On unanimous slices, SSR-Judge matches Always Self-Reference, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;preserving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">preserving</span> the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;substantial&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">substantial</span> benefit of self-reference when the majority answer is correct (+<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">22.57</span>pp on Unanimous+Correct). On non-unanimous slices, SSR-Judge matches No-Reference, avoiding the error propagation that causes Always Self-Reference to drop <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">13.25</span>pp below No-Reference on the Non-unanimous+Wrong slice (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.50</span>\% vs. <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">37.75</span>\%). The ``Unanimous + Wrong'' slice represents irreducible error: even with correct gate behavior, anchoring to a wrong reference hurts performance. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;However&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">However</span>, this slice is relatively small (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">17.6</span>\%) and the gate correctly identifies <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">these</span> items as high-confidence, where self-reference is the intended behavior.
+
+\subsection{Calibration <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Analysis</span>}
+
+The success of SSR-Judge depends on self-consistency being a reliable confidence signal. Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:calibration}</span> shows the relationship <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">between</span> agreement level and majority answer correctness. We observe a strong monotonic relationship: items with 3/5 agreement have only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">35.5</span>\% majority correctness, items with 4/5 agreement have <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">57.7</span>\% correctness, and items with 5/5 (unanimous) agreement have <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">78.7</span>\% correctness. This calibration justifies using agreement as a gate for self-reference---higher agreement reliably indicates higher probability that the self-answer is correct and can safely be used as a reference.
+
+┌─ [float] 
+ 
+\includegraphics[width=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.7</span>\textwidth]{agreement_calibration.png}
+Caption: {Calibration of self-solve agreement as a correctness proxy. Higher agreement levels correspond to higher probability that the majority answer is correct: <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">35.5</span>\% at 3/5 agreement, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">57.7</span>\% at 4/5, and <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">78.7</span>\% at 5/5 (unanimous). The dashed line marks the gate threshold ($\geq 4/5$ agreement). Shaded region shows 95\% confidence interval.}
+
+ ─┘
+
+\subsection{Per-Category <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Analysis</span>}
+
+SSR-Judge improves over No-Reference on 13 of 14 categories, with the largest gains in math (+22pp), business (+16pp), and chemistry (+15pp)---domains where self-reference provides <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;substantial&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">substantial</span> benefit. Compared to Always Self-Reference, SSR-Judge outperforms on 10 of 14 categories. The categories where Always Self-Reference wins (math, chemistry) tend to have high gate precision, meaning the self-answer is usually correct even when non-unanimous. Gate precision varies substantially across domains: STEM categories (physics 89\%, math 86\%) have high precision, while humanities categories (law 48\%, philosophy 58\%) have lower precision, suggesting that domain-specific threshold tuning could further improve performance.
+
+</pre></section><section class="sheet"><h2>Introduction</h2><pre>
+§ Introduction
+
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">Large language models (LLMs) have </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;emerged&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">emerged</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> as powerful evaluators for </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;assessing&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">assessing</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> the quality of text generation, a paradigm known as LLM-as-a-Judge~\citep{Zheng2023JudgingLW}. This </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">approach</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> has been widely adopted in evaluation benchmarks such as MT-Bench and Chatbot Arena~\citep{Chiang2024ChatbotAA}, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;enabling&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">enabling</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> scalable assessment of model outputs without expensive human annotation. Recent work has </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrated&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">demonstrated</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> that </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;providing&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">providing</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> the judge model with its own solution to the task before evaluation, termed self-reference, can substantially improve judgment accuracy~</span><span class="hl hl-CP hl-PB pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;연구 문제를 빌려온 선행연구: Lin2025DoBY (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#e6676740 6px,#e6676740 12px)">\citep{Lin2025DoBY}</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">.</span> By first solving the problem independently, the judge gains deeper <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;understanding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">understanding</span> of the task requirements and can make more informed comparisons <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">between</span> candidate responses.
+
+<span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;However&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">However</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">, self-reference </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;introduces&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">introduces</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> a critical vulnerability: when the judge's self-generated answer is incorrect, using it as a reference can propagate errors </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">into</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> the final judgment.</span> Our analysis <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;reveals&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">reveals</span> that on items where the model's self-answers <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exhibit&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exhibit</span> low agreement across multiple samples, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;indicating&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">indicating</span> uncertainty, the always-reference <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> achieves only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.50</span>\% accuracy compared to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">37.75</span>\% for no-reference judging. This error propagation effect undermines the benefits of self-reference precisely when the judge is least confident in its own solution.
+
+We observe that self-consistency among multiple sampled solutions <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;serves&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">serves</span> as a reliable proxy for answer correctness. When all five sampled answers agree unanimously, the correctness rate reaches <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">78.66</span>\%, compared to only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">35.51</span>\% when only three of five samples agree. This calibration property suggests that agreement level can <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;effectively&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">effectively</span> identify cases where self-reference is likely to help versus harm judgment quality.
+
+Building on this insight, we propose Selective Self-Reference (SSR-Judge), a method that uses self-consistency to gate the use of self-reference in LLM-as-a-Judge evaluation. SSR-Judge first generates multiple independent solutions <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> temperature sampling, then applies an agreement threshold to decide whether to provide the self-answer as reference. When agreement is high, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;indicating&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">indicating</span> confident and likely correct self-answers, the method uses self-reference; otherwise, it falls back to no-reference judging to avoid error propagation.
+
+This work makes three contributions. First, we identify the error propagation problem in self-reference judging, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrating&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">demonstrating</span> that incorrect self-answers significantly degrade judgment accuracy on uncertain items. Second, we propose SSR-Judge, a selective self-reference method that uses self-consistency as a confidence gate to conditionally enable self-reference. Third, we demonstrate that SSR-Judge achieves <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.93</span>\% preference accuracy on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MMLU-Pro — 모델×데이터셋 조합이 평가 규모&quot;]]">MMLU-Pro</span>, outperforming both no-reference (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">52.07</span>\%) and always self-reference (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.21</span>\%) baselines.
+
+</pre></section><section class="sheet"><h2>Method</h2><pre>
+§ Method
+
+We present SSR-Judge (Selective Self-Reference), a method that uses self-consistency to selectively enable self-reference in LLM-as-a-Judge evaluation. The core insight is that agreement among multiple self-solve samples <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;serves&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">serves</span> as a reliable confidence signal: when the judge model consistently produces the same answer, that answer is more likely to be correct and can safely be used as a reference for evaluation.
+
+§ Problem Formulation
+
+We consider the pairwise preference judgment task, where a judge model $M_J$ must determine which of two candidate responses better answers a given question. Formally, given a question $Q$ with answer options and two candidate responses $(R_1, R_2)$, the judge outputs a preference $p \in \{1, 2\}$ <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;indicating&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">indicating</span> which response is superior.
+
+In the self-reference paradigm~\citep{Lin2025DoBY}, the judge first solves the question independently to obtain a reference answer $\hat{A}$, then <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;evaluates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">evaluates</span> the candidates with this reference as additional context. This approach can improve judgment accuracy when $\hat{A}$ is correct, as the judge has an explicit anchor for comparison. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;However&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">However</span>, when $\hat{A}$ is incorrect, the judge may anchor to this wrong reference and penalize correct candidates that disagree with it---a phenomenon we term error propagation.
+
+§ Self-Solve Sampling
+
+To estimate the reliability of the judge's self-answer, we generate $k$ independent self-solve samples using temperature sampling. Given question $Q$, we sample $k$ responses $\{r_1, r_2, \ldots, r_k\}$ from the judge model $M_J$ with temperature $T &gt; 0$, and extract the final answer from each response. This sampling strategy follows the self-consistency principle~\citep{Wang2022SelfConsistencyIC}, which <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">demonstrates</span> that agreement among <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;diverse&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">diverse</span> reasoning paths correlates with answer correctness.
+
+We compute the agreement level as the fraction of samples that share the most common answer:
+ 
+\text{Agreement}(r_1, \ldots, r_k) = \frac{\max_a |\{i : \text{answer}(r_i) = a\}|}{k}
+ 
+where $\text{answer}(r_i)$ extracts the final answer from sample $r_i$. Higher agreement indicates greater model confidence in its answer, which prior work has shown to be a well-calibrated proxy for correctness~\citep{Kadavath2022LanguageM}.
+
+§ Agreement Gate
+
+We define a binary gate function $g$ that determines whether to use self-reference <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> on the agreement level:
+ 
+g(r_1, \ldots, r_k) = 1[\text{Agreement}(r_1, \ldots, r_k) \geq \tau]
+ 
+where $\tau$ is a threshold parameter. When $g = 1$ (gate fires), we consider the self-answer reliable and use it as a reference. When $g = 0$ (gate does not fire), we abstain from self-reference to avoid <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;potential&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">potential</span> error propagation.
+
+The threshold $\tau$ controls a precision-coverage tradeoff. A higher threshold (e.g., requiring unanimous agreement) yields higher precision---items passing the gate are more likely to have correct self-answers---but lower coverage, as fewer items pass the gate. We analyze this tradeoff empirically in Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;다른 섹션을 참조 — 논문 전체를 엮는 사람다운 패턴&quot;]]">\ref{sec:main_results}</span>.
+
+§ Conditional Judging
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Based</span> on the gate output, SSR-Judge follows one of two judging paths (Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:framework}</span>):
+
+Self-reference path ($g = 1$): When the gate fires, we compute the majority answer $\hat{A}_{\text{maj}}$ from the $k$ samples and provide it as a reference to the judge. The judge <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;evaluates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">evaluates</span> the candidates with the prompt: ``Given question $Q$, the correct answer is $\hat{A}_{\text{maj}}$. Which response is better: $R_1$ or $R_2$?''
+
+No-reference path ($g = 0$): When the gate does not fire, we discard the self-solve samples and prompt the judge without any reference: ``Given question $Q$, which response is better: $R_1$ or $R_2$?''
+
+This selective mechanism achieves the best of both worlds: on high-agreement items where the self-answer is likely correct, SSR-Judge <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;leverages&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">leverages</span> self-reference to improve judgment accuracy. On low-agreement items where the self-answer is unreliable, SSR-Judge falls back to no-reference judging to avoid error propagation. To mitigate position bias in pairwise evaluation~\citep{Zheng2023JudgingLW}, we evaluate each item twice with swapped response order and take the majority vote.
+
+┌─ [float] 
+ 
+[figure: framework_overview.jpeg]
+Caption: {Overview of SSR-Judge. Given a question $Q$ and two candidate answers, the judge first generates $k=5$ self-solve samples. If $\geq 4/5$ samples agree on the same answer, the judge uses this consensus answer as a reference when evaluating the candidates (self-reference path). Otherwise, the judge <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;evaluates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">evaluates</span> without reference (no-reference path). This selective mechanism preserves the benefit of self-reference when the judge is confident while avoiding error propagation when uncertain.}
+
+ ─┘
+
+</pre></section><section class="sheet"><h2>Related Work</h2><pre>
+§ Related Work
+
+\textbf{LLM-as-a-Judge.<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]">} Using LLMs as automated evaluators has become a standard approach for </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;assessing&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">assessing</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> model outputs~\citep{Zheng2023JudgingLW, Li2024LLMsasJudgesAC}.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> MT-Bench and Chatbot Arena~\citep{Zheng2023JudgingLW, Chiang2024ChatbotAA} established pairwise comparison frameworks, while G-Eval~\citep{Liu2023GEvalNE} introduced chain-of-thought evaluation prompts.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> PandaLM~\citep{Wang2023PandaLMAA} and AlpacaEval~\citep{Dubois2024LengthControlledAA} provide automated evaluation benchmarks.</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;These&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">These</span> works focus on improving judge accuracy <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> better prompting or training, but do not <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;address&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">address</span> the error propagation problem that arises when judges use <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">their</span> own answers as references.
+
+\textbf{Self-Reference and Self-Consistency.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">} </span><span class="hl hl-CP hl-PB pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;연구 문제를 빌려온 선행연구: Lin2025DoBY (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#e6676740 6px,#e6676740 12px)">\citet{Lin2025DoBY}</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> introduced self-reference-guided evaluation, where the judge first solves the problem and uses its answer as a reference when evaluating candidates.</span> While this improves accuracy when the self-answer is correct, they note the risk of error propagation when the self-answer is wrong.<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> Self-consistency~\citep{Wang2022SelfConsistencyIC} </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">demonstrates</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> that agreement among multiple reasoning paths correlates with answer correctness, and \citet{Kadavath2022LanguageM} show that LLMs can estimate </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">their</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> own uncertainty </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">through</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> sampling.</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> SelfCheckGPT~\citep{Manakul2023SelfCheckGPTZB} uses sampling-based consistency for hallucination detection.</span> Our work connects <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">these</span> threads by using self-consistency to decide when self-reference should be applied in judging.
+
+Judge Reliability. LLM judges <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exhibit&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exhibit</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;various&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">various</span> biases and inconsistencies.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> \citet{Wataoka2024SelfPreferenceBI} identify self-preference bias where judges favor </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">their</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> own outputs. \citet{Haldar2025RatingRS} document self-inconsistency across repeated evaluations.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> TrustJudge~\citep{Wang2025TrustJudgeIO} proposes probabilistic scoring to reduce inconsistencies, while \citet{tian2025overconfidencellmasajudgediagnosisconfidencedriven} diagnose overconfidence in LLM judges and propose confidence-driven solutions.</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> JudgeBench~\citep{Tan2024JudgeBenchAB} provides a benchmark for evaluating judge correctness.</span> Our work <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;addresses&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">addresses</span> a complementary failure mode: error propagation from incorrect self-references, which we mitigate through confidence-gated self-reference.
+
+</pre></section></main>
+<script>
+(function(){
+  var WRAP = document.currentScript.closest('.wrap');
+  var META = {"CRN": {"kr": "참조망 — 섹션을 서로 엮는가", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "다른 섹션을 가리키는 참조 비율 0.167 (다른 섹션 1 / 같은 섹션 5 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.", "verdict": "AI쪽", "pos": 0.68}, "MR": {"kr": "거시 반복 — 같은 말을 또 하는가", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "섹션 간 표현 겹침 0.0469 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.", "verdict": "AI쪽", "pos": 0.78}, "ENG": {"kr": "수치 근거 — 숫자를 선행연구에 붙이는가", "full": "External_Number_Grounding", "color": "#c98500", "fb": "소수점 수치 70개 중 1개만 인용 옆에 붙음 (비율 0.0143). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.", "verdict": "AI쪽", "pos": 2.08}, "CP": {"kr": "비교 배치 — 선행연구끼리 엮는가", "full": "Comparative_Positioning", "color": "#199e70", "fb": "선행연구끼리 엮인 밀도 0.4667 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).", "verdict": "AI쪽", "pos": 0.93}, "STY": {"kr": "문체 — LLM 특유 어휘", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM 과잉 어휘 밀도 230.769 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.", "verdict": "AI쪽", "pos": 1.0}, "ESA": {"kr": "평가 규모 — 모델×데이터셋", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "평가 규모 = 모델 1개 × 데이터셋 1개 = 1칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.", "verdict": "AI쪽", "pos": 1.14}, "PB": {"kr": "문제 차용 — 문제를 선행 1편에서 빌렸는가", "full": "Problem_Borrowing", "color": "#e66767", "fb": "선행 1편의 한계를 그대로 이어받음 (AI형). 빌린 출처: Lin2025DoBY — “When LLM judges use self-reference (their own answer as a guide) to evaluate candidate responses, incorrect self-answers propagate errors into judgmen”", "verdict": "AI쪽", "pos": 1.0}};
+  // --- chip filter (scoped to this paper's wrap) ---
+  WRAP.addEventListener('click', function(e){
+    var c = e.target.closest ? e.target.closest('.chip') : null;
+    if(!c) return;
+    WRAP.setAttribute('data-view', c.getAttribute('data-v'));
+    WRAP.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('active', b===c);});
+  });
+  // --- rich tooltip: hover shows, click pins ---
+  var tip = document.createElement('div');
+  tip.className = 'moldtip';
+  document.body.appendChild(tip);
+  var pinned = false;
+  function render(el){
+    var data;
+    try { data = JSON.parse(el.getAttribute('data-tip')); } catch(err) { return false; }
+    var view = WRAP.getAttribute('data-view');
+    var h = '';
+    data.forEach(function(t){
+      var ab = t[0], pol = t[1], why = t[2];
+      if (view !== 'ALL' && ab !== view) return;
+      var m = META[ab] || {};
+      var badge = pol === 'trigger'
+        ? '<span class="tbadge ai">AI스러움의 증거</span>'
+        : '<span class="tbadge hu">사람다움의 증거</span>';
+      h += '<div class="tsec">'
+        + '<div class="thead"><span class="sw" style="background:' + m.color + '"></span>'
+        + '<b>' + m.kr + '</b>' + badge + '</div>'
+        + '<div class="twhy">' + why + '</div>'
+        + '<div class="tscore">이 논문의 ' + ab + ' 판정: <b>' + m.verdict + '</b>'
+        + (m.pos !== null ? ' (위치 ' + m.pos + ' · 0=사람, 1=AI)' : '') + '</div>'
+        + '<div class="tfb">' + m.fb + '</div></div>';
+    });
+    if(!h) return false;
+    tip.innerHTML = h + '<div class="tclose">클릭=고정 · 다시 클릭/ESC=닫기</div>';
+    return true;
+  }
+  function place(e){
+    var W = window.innerWidth, H = window.innerHeight;
+    var x = Math.min(e.clientX + 14, W - 380), y = e.clientY + 16;
+    tip.style.left = Math.max(8, x) + 'px';
+    var th = tip.offsetHeight;
+    if (y + th > H - 10) y = Math.max(8, e.clientY - th - 12);
+    tip.style.top = y + 'px';
+  }
+  WRAP.addEventListener('mouseover', function(e){
+    if (pinned) return;
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { tip.classList.remove('show'); return; }
+    if (render(el)) { tip.classList.add('show'); place(e); }
+  });
+  WRAP.addEventListener('mousemove', function(e){
+    if (pinned || !tip.classList.contains('show')) return;
+    place(e);
+  });
+  WRAP.addEventListener('mouseleave', function(){ if(!pinned) tip.classList.remove('show'); });
+  WRAP.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { pinned = false; tip.classList.remove('show'); return; }
+    if (pinned) { pinned = false; tip.classList.remove('show'); return; }
+    if (render(el)) { pinned = true; tip.classList.add('show'); place(e); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { pinned = false; tip.classList.remove('show'); }
+  });
+})();
+</script></div></body></html>

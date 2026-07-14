@@ -1,0 +1,389 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FA0106 — mold pages</title><style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#111210;color:#e8e6df}
+header{padding:16px 24px;border-bottom:1px solid #2c2c28;background:#1a1a19;position:sticky;top:0;z-index:5}
+header h1{margin:2px 0 4px;font-size:18px}
+header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
+.back{color:#3987e5;font-size:12px;text-decoration:none}
+.wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
+.side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
+.card{background:#1e1e1c;border:1px solid #2c2c28;border-radius:10px;padding:11px;margin-bottom:10px}
+.chead{display:flex;align-items:center;gap:7px;font-size:12.5px;flex-wrap:wrap}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.abbr{margin-left:auto;font-size:10.5px;border:1px solid;border-radius:5px;padding:0 5px;font-weight:700}
+.pos{margin:8px 0 5px}
+.pos.none{color:#8a887d;font-size:11px}
+.track{position:relative;height:14px;background:linear-gradient(90deg,#20262e,#2e2020);border-radius:4px}
+.track .hu,.track .ai{position:absolute;top:0;font-size:9px;line-height:14px;color:#8a887d}
+.track .hu{left:4px}.track .ai{right:4px}
+.track .fill{position:absolute;top:-2px;width:4px;height:18px;border-radius:2px}
+.posv{font-size:10.5px;color:#c3c2b7;margin-left:6px}
+.fb{font-size:11.5px;color:#c3c2b7;line-height:1.45;margin-top:4px}
+.ct{font-size:10.5px;color:#8a887d;margin-top:5px}
+main{padding:16px 20px;overflow:auto}
+.sheet{background:#171816;border:1px solid #2c2c28;border-radius:12px;padding:22px 26px;margin:0 auto 18px;max-width:900px;
+ box-shadow:0 2px 10px #0006}
+.sheet h2{margin:0 0 10px;font-size:15px;color:#fff;border-bottom:1px solid #2c2c28;padding-bottom:6px}
+pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Roman',serif;
+ font-size:13.5px;line-height:1.7;margin:0;color:#d9d7cd}
+.hl{border-radius:3px;padding:0 1px;cursor:pointer}
+.moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
+ border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
+ color:#e8e6df;display:none;pointer-events:none}
+.moldtip.show{display:block}
+.moldtip .tsec{border-bottom:1px solid #33342e;padding:8px 0}
+.moldtip .tsec:last-of-type{border-bottom:none}
+.moldtip .thead{display:flex;align-items:center;gap:7px;font-size:12.5px;margin-bottom:3px;flex-wrap:wrap}
+.moldtip .tbadge{margin-left:auto;font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700}
+.moldtip .tbadge.ai{background:#e6676733;color:#ff9d9d}
+.moldtip .tbadge.hu{background:#3987e533;color:#8fbcf5}
+.moldtip .twhy{color:#fff;margin:2px 0 4px}
+.moldtip .tscore{color:#c3c2b7;font-size:11px}
+.moldtip .tfb{color:#8a887d;font-size:10.5px;margin-top:3px}
+.moldtip .tclose{color:#6f6e65;font-size:9.5px;margin-top:6px;text-align:right}
+.card.summary{border-color:#3d3d38;background:#22231f}
+.vrow{display:flex;align-items:center;gap:7px;font-size:11.5px;margin-top:6px;color:#c3c2b7}
+.vname{flex:1}
+.vbadge{font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700;flex:none}
+.vbadge.ai{background:#e6676733;color:#e66767}
+.vbadge.hu{background:#3987e533;color:#7db2ee}
+.vbadge.mid{background:#8a887d33;color:#a9a79c}
+.vbadge.na{background:#8a887d22;color:#8a887d}
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:2px 0 12px}
+.chiplab{font-size:10.5px;color:#8a887d;margin-right:2px;width:100%}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#242522;color:#c3c2b7;
+ border:1px solid #2c2c28;border-radius:12px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+.chip.active{border-color:#e8e6df;color:#fff;background:#2e2f2b}
+.chip .sw{width:9px;height:9px}
+.hl-CRN.pol-trigger{background:#3987e555;box-shadow:inset 0 -2px 0 #3987e5}.hl-CRN.pol-counter{background:#3987e522;box-shadow:inset 0 -1px 0 #3987e588}
+.hl-CP.pol-trigger{background:#199e7055;box-shadow:inset 0 -2px 0 #199e70}.hl-CP.pol-counter{background:#199e7022;box-shadow:inset 0 -1px 0 #199e7088}
+.hl-ENG.pol-trigger{background:#c9850055;box-shadow:inset 0 -2px 0 #c98500}.hl-ENG.pol-counter{background:#c9850022;box-shadow:inset 0 -1px 0 #c9850088}
+.hl-MR.pol-trigger{background:#9085e955;box-shadow:inset 0 -2px 0 #9085e9}.hl-MR.pol-counter{background:#9085e922;box-shadow:inset 0 -1px 0 #9085e988}
+.hl-STY.pol-trigger{background:#d5518155;box-shadow:inset 0 -2px 0 #d55181}.hl-STY.pol-counter{background:#d5518122;box-shadow:inset 0 -1px 0 #d5518188}
+.hl-ESA.pol-trigger{background:#d9592655;box-shadow:inset 0 -2px 0 #d95926}.hl-ESA.pol-counter{background:#d9592622;box-shadow:inset 0 -1px 0 #d9592688}
+.hl-PB.pol-trigger{background:#e6676755;box-shadow:inset 0 -2px 0 #e66767}.hl-PB.pol-counter{background:#e6676722;box-shadow:inset 0 -1px 0 #e6676788}
+.wrap[data-view="CRN"] .hl:not(.hl-CRN){background:none!important;box-shadow:none!important}.wrap[data-view="CRN"] .card[data-mold]:not([data-mold="CRN"]){opacity:.35}
+.wrap[data-view="CP"] .hl:not(.hl-CP){background:none!important;box-shadow:none!important}.wrap[data-view="CP"] .card[data-mold]:not([data-mold="CP"]){opacity:.35}
+.wrap[data-view="ENG"] .hl:not(.hl-ENG){background:none!important;box-shadow:none!important}.wrap[data-view="ENG"] .card[data-mold]:not([data-mold="ENG"]){opacity:.35}
+.wrap[data-view="MR"] .hl:not(.hl-MR){background:none!important;box-shadow:none!important}.wrap[data-view="MR"] .card[data-mold]:not([data-mold="MR"]){opacity:.35}
+.wrap[data-view="STY"] .hl:not(.hl-STY){background:none!important;box-shadow:none!important}.wrap[data-view="STY"] .card[data-mold]:not([data-mold="STY"]){opacity:.35}
+.wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
+.wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}</style></head><body>
+<header><a class="back" href="../index.html">← 데모 목록</a>
+ <h1>FA0106 <span class="sub">2025 · AI가 쓴 논문 (FARS)</span></h1>
+ <div class="sub">논문 원문 위에 몰드(AI 지문 패턴)의 증거를 색으로 표시했습니다.
+ <b>진하게 밑줄 = AI스러운 패턴의 증거</b> · <b>옅은 하이라이트 = 사람다운 패턴의 증거</b>.
+ 마우스를 올리면 왜 잡혔는지 설명이 뜹니다. 모든 하이라이트는 이 논문의 실제 LaTeX 원문 조각이며 조작이 없습니다.</div>
+</header>
+<div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
+ <div class="chead"><b>한눈 요약 — 이 논문은 어느 쪽인가</b></div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">종합(5개 몰드 평균): <span class="vbadge ai">AI쪽</span>
+  &nbsp;위치 1.08 (0=사람 논문 중앙값, 1=AI 논문 중앙값)</div>
+ <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">참조망 — 섹션을 서로 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">거시 반복 — 같은 말을 또 하는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">수치 근거 — 숫자를 선행연구에 붙이는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">비교 배치 — 선행연구끼리 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">문체 — LLM 특유 어휘</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">평가 규모 — 모델×데이터셋</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">문제 차용 — 문제를 선행 1편에서 빌렸는가</span><span class="vbadge hu">사람쪽</span></div>
+ <div class="ct">축마다 보는 게 다릅니다 — 아래 칩으로 몰드를 하나씩 켜서 본문에서 확인하세요.</div></div><div class="chips"><span class="chiplab">하이라이트 필터</span><button class="chip active" data-v="ALL">전체</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button></div><div class="card" data-mold="CRN">
+ <div class="chead"><span class="sw" style="background:#3987e5"></span><b>참조망 — 섹션을 서로 엮는가</b>
+   <span class="abbr" style="border-color:#3987e5;color:#3987e5">CRN</span></div>
+ <div class="ct">Cross-Reference_Network</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#3987e5"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">다른 섹션을 가리키는 참조 비율 0.0 (다른 섹션 0 / 같은 섹션 5 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.</div>
+ <div class="ct">하이라이트 5개 · AI 증거 5 / 사람 증거 0</div></div><div class="card" data-mold="MR">
+ <div class="chead"><span class="sw" style="background:#9085e9"></span><b>거시 반복 — 같은 말을 또 하는가</b>
+   <span class="abbr" style="border-color:#9085e9;color:#9085e9">MR</span></div>
+ <div class="ct">Macro_Redundancy</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#9085e9"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">섹션 간 표현 겹침 0.0558 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.</div>
+ <div class="ct">하이라이트 4개 · AI 증거 4 / 사람 증거 0</div></div><div class="card" data-mold="ENG">
+ <div class="chead"><span class="sw" style="background:#c98500"></span><b>수치 근거 — 숫자를 선행연구에 붙이는가</b>
+   <span class="abbr" style="border-color:#c98500;color:#c98500">ENG</span></div>
+ <div class="ct">External_Number_Grounding</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#c98500"></div><div class="ai">AI</div></div><span class="posv">3.13</span></div>
+ <div class="fb">소수점 수치 52개 중 2개만 인용 옆에 붙음 (비율 0.0192). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.</div>
+ <div class="ct">하이라이트 52개 · AI 증거 50 / 사람 증거 2</div></div><div class="card" data-mold="CP">
+ <div class="chead"><span class="sw" style="background:#199e70"></span><b>비교 배치 — 선행연구끼리 엮는가</b>
+   <span class="abbr" style="border-color:#199e70;color:#199e70">CP</span></div>
+ <div class="ct">Comparative_Positioning</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#199e70"></div><div class="ai">AI</div></div><span class="posv">1.04</span></div>
+ <div class="fb">선행연구끼리 엮인 밀도 0.3077 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).</div>
+ <div class="ct">하이라이트 12개 · AI 증거 10 / 사람 증거 2</div></div><div class="card" data-mold="STY">
+ <div class="chead"><span class="sw" style="background:#d55181"></span><b>문체 — LLM 특유 어휘</b>
+   <span class="abbr" style="border-color:#d55181;color:#d55181">STY</span></div>
+ <div class="ct">Stylistic (excess vocab)</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#d55181"></div><div class="ai">AI</div></div><span class="posv">1.22</span></div>
+ <div class="fb">LLM 과잉 어휘 밀도 268.62 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.</div>
+ <div class="ct">하이라이트 105개 · AI 증거 105 / 사람 증거 0</div></div><div class="card" data-mold="ESA">
+ <div class="chead"><span class="sw" style="background:#d95926"></span><b>평가 규모 — 모델×데이터셋</b>
+   <span class="abbr" style="border-color:#d95926;color:#d95926">ESA</span></div>
+ <div class="ct">Evaluation_Surface_Area</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#d95926"></div><div class="ai">AI</div></div><span class="posv">1.14</span></div>
+ <div class="fb">평가 규모 = 모델 1개 × 데이터셋 1개 = 1칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.</div>
+ <div class="ct">하이라이트 7개 · AI 증거 0 / 사람 증거 7</div></div><div class="card" data-mold="PB">
+ <div class="chead"><span class="sw" style="background:#e66767"></span><b>문제 차용 — 문제를 선행 1편에서 빌렸는가</b>
+   <span class="abbr" style="border-color:#e66767;color:#e66767">PB</span></div>
+ <div class="ct">Problem_Borrowing</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#e66767"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
+ <div class="fb">선행 1편의 한계를 그대로 이어받음 (AI형). 빌린 출처: Salim2026TokenomicsQW, Zhou2026FeatureBenchBA — “LLM-based coding agents face a persistent context-cost bottleneck: they must repeatedly ingest large amounts of repository text (reaching millions of ”</div>
+ <div class="ct">하이라이트 4개 · AI 증거 4 / 사람 증거 0</div></div></div>
+<main><section class="sheet"><pre>
+
+ 
+Large language model-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> coding agents consume <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;substantial&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">substantial</span> tokens navigating repository codebases, yet the relationship <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">between</span> file access patterns and token efficiency <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;remains&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">remains</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;underexplored&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">underexplored</span>. We hypothesize that restricting agent file access to execution-trace-derived allowlists could reduce token consumption by eliminating reads of irrelevant files. We introduce TraceBound, an inference-time framework that computes per-task file allowlists from failing test execution traces and enforces hard file-access restrictions <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> agent operation. Evaluating on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: FeatureBench Lite — 모델×데이터셋 조합이 평가 규모&quot;]]">FeatureBench Lite</span> (30 feature development tasks) with OpenHands, we find that TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.72</span>\% rather than reducing them. Root cause <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">analysis</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;reveals&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">reveals</span> that only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>\% of file reads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;were&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">were</span> denied, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;indicating&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">indicating</span> that the agent already naturally focuses on trace-relevant files. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;This&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">This</span> negative result <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">demonstrates</span> that modern coding agents have learned effective file navigation <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;strategies&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">strategies</span>, leaving minimal headroom for restriction-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> context reduction. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Notably&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Notably</span>, TraceBound improves average test pass rate by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.76</span> percentage points, suggesting that explicit file-access guidance may benefit task completion even without token savings.
+
+\textit{WARNING: <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;This&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">This</span> paper was generated by an automated <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;research&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">research</span> system. The code is publicly available.}\footnote{\url{https://gitlab.com/fars-a/trace-bounded-context-featurebench}}
+ 
+
+\input{sections/introduction}
+
+\input{sections/method}
+
+\input{sections/experiments}
+
+\input{sections/related_work}
+
+\input{sections/conclusion}
+
+\bibliography{analemma}
+\bibliographystyle{analemma}
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> short paper
+
+ 
+
+ 
+Large language model-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> coding agents consume <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;substantial&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">substantial</span> tokens navigating repository codebases, yet the relationship <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">between</span> file access patterns and token efficiency <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;remains&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">remains</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;underexplored&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">underexplored</span>. We hypothesize that restricting agent file access to execution-trace-derived allowlists could reduce token consumption by eliminating reads of irrelevant files. We introduce TraceBound, an inference-time framework that computes per-task file allowlists from failing test execution traces and enforces hard file-access restrictions <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> agent operation. Evaluating on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: FeatureBench Lite — 모델×데이터셋 조합이 평가 규모&quot;]]">FeatureBench Lite</span> (30 feature development tasks) with OpenHands, we find that TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.72</span>\% rather than reducing them. Root cause <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">analysis</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;reveals&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">reveals</span> that only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>\% of file reads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;were&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">were</span> denied, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;indicating&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">indicating</span> that the agent already naturally focuses on trace-relevant files. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;This&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">This</span> negative result <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">demonstrates</span> that modern coding agents have learned effective file navigation <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;strategies&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">strategies</span>, leaving minimal headroom for restriction-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> context reduction. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Notably&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Notably</span>, TraceBound improves average test pass rate by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.76</span> percentage points, suggesting that explicit file-access guidance may benefit task completion even without token savings.
+ 
+
+</pre></section><section class="sheet"><h2>Conclusion</h2><pre>
+§ Conclusion
+
+We evaluated TraceBound, a trace-bounded file-access restriction <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> for reducing token consumption in coding agents. Contrary to our hypothesis, TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.72</span>\% rather than reducing them. The root cause is that agents already naturally focus on relevant files---only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>\% of reads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;were&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">were</span> denied.<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Conclusion&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> This finding suggests that binary file-access restriction is insufficient for token reduction; future work should explore content-level filtering approaches such as SWE-Pruner~\citep{Wang2026SWEPrunerSC}.</span> The +<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">5.76</span>pp pass rate improvement indicates that explicit file-access guidance may still provide value for task success, even without efficiency gains.
+
+</pre></section><section class="sheet"><h2>Experiments</h2><pre>
+§ Experiments
+
+§ Experimental Setup
+
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">We evaluate TraceBound on </span><span class="hl hl-MR hl-ESA pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: FeatureBench Lite — 모델×데이터셋 조합이 평가 규모&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d9592640 6px,#d9592640 12px)">FeatureBench Lite</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">~\citep{Zhou2026FeatureBenchBA}, a benchmark of 30 feature-level development tasks </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">across</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> 13 Python repositories.</span> Unlike bug-fix benchmarks such as SWE-bench~\citep{Jimenez2023SWEbenchCL}, FeatureBench tasks require implementing new functionality with larger edit scopes and extensive test suites, making context efficiency <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;particularly&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">particularly</span> important.
+
+We use OpenHands v<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">0.62</span>.0~\citep{Wang2025TheOS} with <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 model: Qwen3-Coder-480B-A35B-Instruct — 모델×데이터셋 조합이 평가 규모&quot;]]">Qwen3-Coder-480B-A35B-Instruct</span> as the base agent, configured with max\_iterations=100, temperature=0, and n\_attempts=1 for deterministic evaluation. We compare two <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span>: (1) Baseline: standard OpenHands without file-access restrictions, and (2) TraceBound: OpenHands with trace-derived allowlist enforcement. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Both</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span> use identical model and configuration settings.
+
+We report the following metrics: \% Resolved (tasks where all fail-to-pass tests pass), \% Passed (average fail-to-pass test pass rate <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> tasks), Median/Mean Input Tokens (<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;primary&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">primary</span> efficiency metrics), and Mean Steps (agent interaction count). Our hypothesis predicts that TraceBound should reduce median input tokens by at least 30\% <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">while</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;preserving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">preserving</span> solve rate.
+
+§ Main Results
+
+Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:main_results}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;presents&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">presents</span> the main experimental results comparing Baseline and TraceBound <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span>.
+
+┌─ [float] 
+ 
+Caption: {Main experimental results on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: FeatureBench Lite — 모델×데이터셋 조합이 평가 규모&quot;]]">FeatureBench Lite</span> (30 tasks). Contrary to our hypothesis, TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.72</span>\% instead of reducing them. Best values in bold.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Method &amp; \% Resolved $\uparrow$ &amp; \% Passed $\uparrow$ &amp; Median Input $\downarrow$ &amp; Mean Input $\downarrow$ &amp; Mean Steps \\
+ 
+Baseline &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.33</span>} &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">20.62</span> &amp; 1,657,415 &amp; 2,748,551 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">92.5</span> \\
+TraceBound &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.33</span>} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">26.38</span>} &amp; 2,083,790 &amp; 2,915,852 &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">90.5</span>} \\
+ 
+$\Delta$ &amp; +0\% &amp; +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.76</span>pp &amp; +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.72</span>\% &amp; +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">6.1</span>\% &amp; $-$<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.2</span>\% \\
+ 
+ 
+}
+ ─┘
+
+Contrary to our hypothesis, TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.72</span>\% (from <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.66</span>M to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.08</span>M) rather than reducing them by the expected 30\%. This triggers our pre-specified hard refutation condition. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Both</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span> resolve exactly 1 of 30 tasks (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.33</span>\%), <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;preserving&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">preserving</span> solve rate as required. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Notably&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Notably</span>, TraceBound improves the average pass rate by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.76</span> percentage points (from <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">20.62</span>\% to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">26.38</span>\%), suggesting that the file-access guidance may help the agent focus on relevant code even though it does not reduce token consumption.
+
+\subsection{Root Cause <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Analysis</span>}
+
+To understand why TraceBound fails to reduce token usage, we examine the file-access restriction diagnostics in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:diagnostics}</span>.
+
+┌─ [float] 
+ 
+Caption: {TraceBound file-access diagnostics. Only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>\% of file reads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;were&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">were</span> denied, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;indicating&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">indicating</span> the agent already naturally focuses on files <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> the trace-derived allowlist.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Method &amp; Allowed Reads &amp; Denied Reads &amp; Denial Rate (\%) \\
+ 
+TraceBound &amp; 425 &amp; 10 &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>} \\
+ 
+ 
+}
+ ─┘
+
+The key finding is that only 10 out of 435 file reads (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>\%) were denied by TraceBound. This <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;reveals&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">reveals</span> the fundamental limitation of our <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span>: the agent already naturally focuses on files <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> the trace-derived allowlist, leaving no headroom for restriction-based token reduction. The agent's file-reading behavior is already well-aligned with the execution trace neighborhood, suggesting that modern coding agents have learned effective file navigation <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;strategies&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">strategies</span> that do not waste tokens reading irrelevant files.
+
+\subsection{Allowlist <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Analysis</span>}
+
+Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:allowlist}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;presents&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">presents</span> statistics on the computed allowlists, and Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:allowlist_composition}</span> shows the composition breakdown <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> tasks.
+
+┌─ [float] 
+ 
+Caption: {Allowlist statistics <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> 30 <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: FeatureBench Lite — 모델×데이터셋 조합이 평가 규모&quot;]]">FeatureBench Lite</span> tasks. Allowlists cover a median of <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">28.2</span>\% of repository files, with execution traces <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;contributing&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">contributing</span> the majority of unique files.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Metric &amp; Median &amp; Mean &amp; Range \\
+ 
+Allowlist Size (files) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">251.5</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">404.6</span> &amp; 2--1,751 \\
+Repository Coverage (\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">28.2</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">27.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.0</span>--<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">50.9</span> \\
+ 
+\multicolumn{4}{l}{Component Unique Contributions (\%)} \\
+ 
+Trace Files &amp; \multicolumn{3}{c}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">51.0</span>} \\
+Import Closure &amp; \multicolumn{3}{c}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.5</span>} \\
+Interface Files &amp; \multicolumn{3}{c}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.1</span>} \\
+ 
+ 
+}
+ ─┘
+
+┌─ [float] 
+ 
+[figure: allowlist_composition.png]
+Caption: {Allowlist composition across 26 <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: FeatureBench Lite — 모델×데이터셋 조합이 평가 규모&quot;]]">FeatureBench Lite</span> tasks. Left: Stacked bar chart showing file counts by component type per task. Right: Pie chart showing unique contribution percentages. Trace files dominate most allowlists (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">51.0</span>\% unique contribution), with import closure <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;providing&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">providing</span> <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.5</span>\% unique files.}
+
+ ─┘
+
+The allowlists are selective, covering a median of only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">28.2</span>\% of repository files, which suggests that the trace-derived boundaries are not overly permissive. Execution traces contribute <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">51.0</span>\% of unique files, with import closure adding <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">24.5</span>\%. The variation across tasks is <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;substantial&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">substantial</span>, with allowlist sizes ranging from 2 to 1,751 files depending on repository structure and test complexity. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Despite&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Despite</span> this selectivity, the low denial rate indicates that the agent's natural <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exploration&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exploration</span> already stays <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">these</span> boundaries.
+
+</pre></section><section class="sheet"><h2>Introduction</h2><pre>
+§ Introduction
+
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">LLM-based coding agents such as SWE-agent and OpenHands~\citep{Wang2025TheOS} solve repository-level tasks by iteratively reading files, editing code, and running tests.</span> A persistent practical bottleneck is context cost: agents must repeatedly ingest large amounts of repository text, which can reach millions of input tokens per task.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> Recent analysis by </span><span class="hl hl-CP hl-PB pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;연구 문제를 빌려온 선행연구: Salim2026TokenomicsQW (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#e6676740 6px,#e6676740 12px)">\citet{Salim2026TokenomicsQW}</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> shows that file reading dominates token consumption in agentic software engineering, motivating the search for more efficient context management </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;strategies&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">strategies</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">.</span>
+
+We hypothesize that execution traces from failing tests provide an instance-specific signal for identifying relevant files. If agents could be restricted to reading only files accessed <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> test execution (plus a shallow import closure), irrelevant file reads would be eliminated, reducing token consumption without harming task success. This trace-bounded context <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> differs from content-level pruning by enforcing a hard file-access constraint rather than compressing retrieved content.
+
+To test this hypothesis, we propose TraceBound, a framework that derives per-task file allowlists from test execution traces and gates agent file reads accordingly.<span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)"> We evaluate TraceBound on FeatureBench Lite~</span><span class="hl hl-MR hl-CP hl-PB pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;연구 문제를 빌려온 선행연구: Zhou2026FeatureBenchBA (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)">\citep{Zhou2026FeatureBenchBA}</span><span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)">, a benchmark of 30 feature-level development tasks.</span> Contrary to our hypothesis, TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">25.72</span>\% (from <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">1.66</span>M to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.08</span>M) instead of reducing them. Root cause analysis <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;reveals&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">reveals</span> that only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>\% of file reads were denied---the agent already naturally focuses on files <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> the trace-derived allowlist, leaving no headroom for restriction-based savings. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Notably&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Notably</span>, TraceBound improves average pass rate by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.76</span> percentage points, suggesting that explicit file-access guidance may still provide value.
+
+Our contributions are:
+ 
+\item TraceBound framework: An inference-time <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> that derives file allowlists from test execution traces and enforces them <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> agent execution.
+\item Empirical finding: Modern coding agents already <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;exhibit&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">exhibit</span> focused file navigation behavior, with only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">2.3</span>\% of reads falling outside trace-derived boundaries.
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Conclusion&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">\item \textbf{Negative result}: Binary file-access restriction is insufficient for token reduction; future work should explore content-level filtering approaches.</span>
+ 
+
+</pre></section><section class="sheet"><h2>Method</h2><pre>
+§ Method
+
+We propose TraceBound, an inference-time framework that restricts file access for coding agents to an automatically computed per-task allowlist derived from test execution traces. The key hypothesis is that files accessed during failing test execution represent the minimal relevant code neighborhood, and restricting agent reads to this neighborhood should reduce token consumption without harming task success.
+
+§ Problem Formulation
+
+Given a feature development task with failing tests $T_{\text{fail}}$, we seek to derive an allowlist $\mathcal{A} \subseteq \mathcal{F}$ where $\mathcal{F}$ is the set of all repository files. During agent execution, file-read operations are gated: a read request for file $f$ succeeds if $f \in \mathcal{A}$ and fails otherwise. The goal is to minimize $|\mathcal{A}|$ (and thus <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;potential&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">potential</span> token consumption) <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">while</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;ensuring&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">ensuring</span> $\mathcal{A}$ contains all files necessary for successful task completion.
+
+§ Allowlist Computation (Stage 1)
+
+TraceBound computes the allowlist $\mathcal{A}$ offline before agent execution <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> the following procedure, illustrated in Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:framework}</span>:
+
+Trace Extraction. We execute the failing tests <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> pytest -x with coverage instrumentation (coverage.py) to collect the set of Python source files $\mathcal{T}$ accessed during test execution. The -x flag stops at the first failure, capturing the execution path <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;leading&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">leading</span> to the failing assertion.
+
+Import Closure. For each file $t \in \mathcal{T}$, we parse import statements and compute a depth-2 transitive closure $\mathcal{C}$ of local module dependencies. This captures files that may be needed for <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;understanding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">understanding</span> the code structure even if not directly executed.
+
+Interface Files. We extract file paths from Path: markers in the problem <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;statement&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">statement</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> regex, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;yielding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">yielding</span> interface files $\mathcal{I}$ that the agent is explicitly instructed to modify.
+
+Auxiliary Files. We include configuration files $\mathcal{G}$ (e.g., setup.py, pyproject.toml) and \_\_init\_\_.py ancestors $\mathcal{N}$ of all allowlisted files to ensure proper module resolution.
+
+The final allowlist is:
+ 
+\mathcal{A} = \mathcal{T} \cup \mathcal{C} \cup \mathcal{I} \cup \mathcal{G} \cup \mathcal{N}
+ 
+
+┌─ [float] 
+ 
+[figure: framework_overview.png]
+Caption: {TraceBound framework overview. Pre-trace Stage (left): Execution traces from failing tests are combined with import closure analysis to derive per-task file allowlists. Bounded Context Stage (right): The allowlist gates file-read operations during agent execution, denying access to files outside the trace-derived set.}
+
+ ─┘
+
+§ File-Access Restriction (Stage 2)
+
+During agent execution, TraceBound intercepts file-read operations and enforces the allowlist policy. When the agent requests to read file $f$, the read proceeds normally if $f \in \mathcal{A}$, returning the file content. If $f \notin \mathcal{A}$, the read is denied with an informative error message guiding the agent to focus on task-relevant files.
+
+This hard constraint differs from soft approaches <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;like&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">like</span> content pruning~\citep{Wang2026SWEPrunerSC} in that it prevents irrelevant file reads entirely rather than compressing content after retrieval. The hypothesis is that this binary restriction will reduce token consumption by eliminating reads of files outside the failing test's execution neighborhood.
+
+</pre></section><section class="sheet"><h2>Related Work</h2><pre>
+§ Related Work
+
+Coding agent benchmarks have evolved to capture increasingly <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;complex&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">complex</span> software engineering tasks.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> SWE-bench~\citep{Jimenez2023SWEbenchCL} established execution-based evaluation for repository-level issue resolution, spawning numerous variants and extensions. FeatureBench~</span><span class="hl hl-CP hl-PB pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;연구 문제를 빌려온 선행연구: Zhou2026FeatureBenchBA (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#e6676740 6px,#e6676740 12px)">\citep{Zhou2026FeatureBenchBA}</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> extends this paradigm to feature-level development tasks with larger edit scopes and extensive test suites, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;revealing&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">revealing</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> that token consumption is a critical bottleneck.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> InterCode~\citep{Yang2023InterCodeSA} standardizes interactive coding with execution feedback, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">while</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> ContextBench~\citep{Li2026ContextBenchAB} </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;specifically&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">specifically</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;evaluates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">evaluates</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> context retrieval quality in coding agents, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;highlighting&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">highlighting</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> evidence drop and retrieval inefficiency as key </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;challenges&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">challenges</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]">.</span>
+
+Recent work <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;addresses&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">addresses</span> the token efficiency problem <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;various&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">various</span> context management approaches.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> SWE-Pruner~\citep{Wang2026SWEPrunerSC} applies line-level content pruning to reduce retrieved file sizes, operating after retrieval rather than restricting access. Context as a Tool~\citep{Liu2025ContextAA} treats context management as explicit agent actions with memory segments. Tokenomics~</span><span class="hl hl-CP hl-PB pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;연구 문제를 빌려온 선행연구: Salim2026TokenomicsQW (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#e6676740 6px,#e6676740 12px)">\citep{Salim2026TokenomicsQW}</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> provides detailed analysis of where tokens are consumed in agentic software engineering, motivating efficiency improvements.</span> Our work differs by <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> a hard file-access constraint derived from execution traces rather than soft content compression.
+
+Graph-based approaches improve code retrieval <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">through</span> repository structure analysis.<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> RepoGraph~\citep{Ouyang2024RepoGraphEA} and CodexGraph~\citep{Liu2024CodexGraphBL} use code graph databases for retrieval, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">while</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> LocAgent~\citep{Chen2025LocAgentGL} provides graph-guided localization tools.</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> TRAIL~\citep{Deshpande2025TRAILTR} uses execution traces for issue localization and agent reasoning. Gistify~\citep{Lee2025GistifyCU} </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">demonstrates</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> that runtime execution traces aid codebase-level </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;understanding&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">understanding</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">.</span> Our work is most closely related to <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">these</span> trace-based approaches, but uniquely applies traces as an access policy rather than a retrieval signal.
+
+</pre></section></main>
+<script>
+(function(){
+  var WRAP = document.currentScript.closest('.wrap');
+  var META = {"CRN": {"kr": "참조망 — 섹션을 서로 엮는가", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "다른 섹션을 가리키는 참조 비율 0.0 (다른 섹션 0 / 같은 섹션 5 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.", "verdict": "AI쪽", "pos": 1.0}, "MR": {"kr": "거시 반복 — 같은 말을 또 하는가", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "섹션 간 표현 겹침 0.0558 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.", "verdict": "AI쪽", "pos": 1.0}, "ENG": {"kr": "수치 근거 — 숫자를 선행연구에 붙이는가", "full": "External_Number_Grounding", "color": "#c98500", "fb": "소수점 수치 52개 중 2개만 인용 옆에 붙음 (비율 0.0192). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.", "verdict": "AI쪽", "pos": 3.13}, "CP": {"kr": "비교 배치 — 선행연구끼리 엮는가", "full": "Comparative_Positioning", "color": "#199e70", "fb": "선행연구끼리 엮인 밀도 0.3077 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).", "verdict": "AI쪽", "pos": 1.04}, "STY": {"kr": "문체 — LLM 특유 어휘", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM 과잉 어휘 밀도 268.62 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.", "verdict": "AI쪽", "pos": 1.22}, "ESA": {"kr": "평가 규모 — 모델×데이터셋", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "평가 규모 = 모델 1개 × 데이터셋 1개 = 1칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.", "verdict": "AI쪽", "pos": 1.14}, "PB": {"kr": "문제 차용 — 문제를 선행 1편에서 빌렸는가", "full": "Problem_Borrowing", "color": "#e66767", "fb": "선행 1편의 한계를 그대로 이어받음 (AI형). 빌린 출처: Salim2026TokenomicsQW, Zhou2026FeatureBenchBA — “LLM-based coding agents face a persistent context-cost bottleneck: they must repeatedly ingest large amounts of repository text (reaching millions of ”", "verdict": "사람쪽", "pos": 0.0}};
+  // --- chip filter (scoped to this paper's wrap) ---
+  WRAP.addEventListener('click', function(e){
+    var c = e.target.closest ? e.target.closest('.chip') : null;
+    if(!c) return;
+    WRAP.setAttribute('data-view', c.getAttribute('data-v'));
+    WRAP.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('active', b===c);});
+  });
+  // --- rich tooltip: hover shows, click pins ---
+  var tip = document.createElement('div');
+  tip.className = 'moldtip';
+  document.body.appendChild(tip);
+  var pinned = false;
+  function render(el){
+    var data;
+    try { data = JSON.parse(el.getAttribute('data-tip')); } catch(err) { return false; }
+    var view = WRAP.getAttribute('data-view');
+    var h = '';
+    data.forEach(function(t){
+      var ab = t[0], pol = t[1], why = t[2];
+      if (view !== 'ALL' && ab !== view) return;
+      var m = META[ab] || {};
+      var badge = pol === 'trigger'
+        ? '<span class="tbadge ai">AI스러움의 증거</span>'
+        : '<span class="tbadge hu">사람다움의 증거</span>';
+      h += '<div class="tsec">'
+        + '<div class="thead"><span class="sw" style="background:' + m.color + '"></span>'
+        + '<b>' + m.kr + '</b>' + badge + '</div>'
+        + '<div class="twhy">' + why + '</div>'
+        + '<div class="tscore">이 논문의 ' + ab + ' 판정: <b>' + m.verdict + '</b>'
+        + (m.pos !== null ? ' (위치 ' + m.pos + ' · 0=사람, 1=AI)' : '') + '</div>'
+        + '<div class="tfb">' + m.fb + '</div></div>';
+    });
+    if(!h) return false;
+    tip.innerHTML = h + '<div class="tclose">클릭=고정 · 다시 클릭/ESC=닫기</div>';
+    return true;
+  }
+  function place(e){
+    var W = window.innerWidth, H = window.innerHeight;
+    var x = Math.min(e.clientX + 14, W - 380), y = e.clientY + 16;
+    tip.style.left = Math.max(8, x) + 'px';
+    var th = tip.offsetHeight;
+    if (y + th > H - 10) y = Math.max(8, e.clientY - th - 12);
+    tip.style.top = y + 'px';
+  }
+  WRAP.addEventListener('mouseover', function(e){
+    if (pinned) return;
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { tip.classList.remove('show'); return; }
+    if (render(el)) { tip.classList.add('show'); place(e); }
+  });
+  WRAP.addEventListener('mousemove', function(e){
+    if (pinned || !tip.classList.contains('show')) return;
+    place(e);
+  });
+  WRAP.addEventListener('mouseleave', function(){ if(!pinned) tip.classList.remove('show'); });
+  WRAP.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { pinned = false; tip.classList.remove('show'); return; }
+    if (pinned) { pinned = false; tip.classList.remove('show'); return; }
+    if (render(el)) { pinned = true; tip.classList.add('show'); place(e); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { pinned = false; tip.classList.remove('show'); }
+  });
+})();
+</script></div></body></html>

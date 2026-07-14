@@ -1,0 +1,376 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FA0421 — mold pages</title><style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#111210;color:#e8e6df}
+header{padding:16px 24px;border-bottom:1px solid #2c2c28;background:#1a1a19;position:sticky;top:0;z-index:5}
+header h1{margin:2px 0 4px;font-size:18px}
+header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
+.back{color:#3987e5;font-size:12px;text-decoration:none}
+.wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
+.side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
+.card{background:#1e1e1c;border:1px solid #2c2c28;border-radius:10px;padding:11px;margin-bottom:10px}
+.chead{display:flex;align-items:center;gap:7px;font-size:12.5px;flex-wrap:wrap}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.abbr{margin-left:auto;font-size:10.5px;border:1px solid;border-radius:5px;padding:0 5px;font-weight:700}
+.pos{margin:8px 0 5px}
+.pos.none{color:#8a887d;font-size:11px}
+.track{position:relative;height:14px;background:linear-gradient(90deg,#20262e,#2e2020);border-radius:4px}
+.track .hu,.track .ai{position:absolute;top:0;font-size:9px;line-height:14px;color:#8a887d}
+.track .hu{left:4px}.track .ai{right:4px}
+.track .fill{position:absolute;top:-2px;width:4px;height:18px;border-radius:2px}
+.posv{font-size:10.5px;color:#c3c2b7;margin-left:6px}
+.fb{font-size:11.5px;color:#c3c2b7;line-height:1.45;margin-top:4px}
+.ct{font-size:10.5px;color:#8a887d;margin-top:5px}
+main{padding:16px 20px;overflow:auto}
+.sheet{background:#171816;border:1px solid #2c2c28;border-radius:12px;padding:22px 26px;margin:0 auto 18px;max-width:900px;
+ box-shadow:0 2px 10px #0006}
+.sheet h2{margin:0 0 10px;font-size:15px;color:#fff;border-bottom:1px solid #2c2c28;padding-bottom:6px}
+pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Roman',serif;
+ font-size:13.5px;line-height:1.7;margin:0;color:#d9d7cd}
+.hl{border-radius:3px;padding:0 1px;cursor:pointer}
+.moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
+ border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
+ color:#e8e6df;display:none;pointer-events:none}
+.moldtip.show{display:block}
+.moldtip .tsec{border-bottom:1px solid #33342e;padding:8px 0}
+.moldtip .tsec:last-of-type{border-bottom:none}
+.moldtip .thead{display:flex;align-items:center;gap:7px;font-size:12.5px;margin-bottom:3px;flex-wrap:wrap}
+.moldtip .tbadge{margin-left:auto;font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700}
+.moldtip .tbadge.ai{background:#e6676733;color:#ff9d9d}
+.moldtip .tbadge.hu{background:#3987e533;color:#8fbcf5}
+.moldtip .twhy{color:#fff;margin:2px 0 4px}
+.moldtip .tscore{color:#c3c2b7;font-size:11px}
+.moldtip .tfb{color:#8a887d;font-size:10.5px;margin-top:3px}
+.moldtip .tclose{color:#6f6e65;font-size:9.5px;margin-top:6px;text-align:right}
+.card.summary{border-color:#3d3d38;background:#22231f}
+.vrow{display:flex;align-items:center;gap:7px;font-size:11.5px;margin-top:6px;color:#c3c2b7}
+.vname{flex:1}
+.vbadge{font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700;flex:none}
+.vbadge.ai{background:#e6676733;color:#e66767}
+.vbadge.hu{background:#3987e533;color:#7db2ee}
+.vbadge.mid{background:#8a887d33;color:#a9a79c}
+.vbadge.na{background:#8a887d22;color:#8a887d}
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:2px 0 12px}
+.chiplab{font-size:10.5px;color:#8a887d;margin-right:2px;width:100%}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#242522;color:#c3c2b7;
+ border:1px solid #2c2c28;border-radius:12px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+.chip.active{border-color:#e8e6df;color:#fff;background:#2e2f2b}
+.chip .sw{width:9px;height:9px}
+.hl-CRN.pol-trigger{background:#3987e555;box-shadow:inset 0 -2px 0 #3987e5}.hl-CRN.pol-counter{background:#3987e522;box-shadow:inset 0 -1px 0 #3987e588}
+.hl-CP.pol-trigger{background:#199e7055;box-shadow:inset 0 -2px 0 #199e70}.hl-CP.pol-counter{background:#199e7022;box-shadow:inset 0 -1px 0 #199e7088}
+.hl-ENG.pol-trigger{background:#c9850055;box-shadow:inset 0 -2px 0 #c98500}.hl-ENG.pol-counter{background:#c9850022;box-shadow:inset 0 -1px 0 #c9850088}
+.hl-MR.pol-trigger{background:#9085e955;box-shadow:inset 0 -2px 0 #9085e9}.hl-MR.pol-counter{background:#9085e922;box-shadow:inset 0 -1px 0 #9085e988}
+.hl-STY.pol-trigger{background:#d5518155;box-shadow:inset 0 -2px 0 #d55181}.hl-STY.pol-counter{background:#d5518122;box-shadow:inset 0 -1px 0 #d5518188}
+.hl-ESA.pol-trigger{background:#d9592655;box-shadow:inset 0 -2px 0 #d95926}.hl-ESA.pol-counter{background:#d9592622;box-shadow:inset 0 -1px 0 #d9592688}
+.hl-PB.pol-trigger{background:#e6676755;box-shadow:inset 0 -2px 0 #e66767}.hl-PB.pol-counter{background:#e6676722;box-shadow:inset 0 -1px 0 #e6676788}
+.wrap[data-view="CRN"] .hl:not(.hl-CRN){background:none!important;box-shadow:none!important}.wrap[data-view="CRN"] .card[data-mold]:not([data-mold="CRN"]){opacity:.35}
+.wrap[data-view="CP"] .hl:not(.hl-CP){background:none!important;box-shadow:none!important}.wrap[data-view="CP"] .card[data-mold]:not([data-mold="CP"]){opacity:.35}
+.wrap[data-view="ENG"] .hl:not(.hl-ENG){background:none!important;box-shadow:none!important}.wrap[data-view="ENG"] .card[data-mold]:not([data-mold="ENG"]){opacity:.35}
+.wrap[data-view="MR"] .hl:not(.hl-MR){background:none!important;box-shadow:none!important}.wrap[data-view="MR"] .card[data-mold]:not([data-mold="MR"]){opacity:.35}
+.wrap[data-view="STY"] .hl:not(.hl-STY){background:none!important;box-shadow:none!important}.wrap[data-view="STY"] .card[data-mold]:not([data-mold="STY"]){opacity:.35}
+.wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
+.wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}</style></head><body>
+<header><a class="back" href="../index.html">← 데모 목록</a>
+ <h1>FA0421 <span class="sub">2025 · AI가 쓴 논문 (FARS)</span></h1>
+ <div class="sub">논문 원문 위에 몰드(AI 지문 패턴)의 증거를 색으로 표시했습니다.
+ <b>진하게 밑줄 = AI스러운 패턴의 증거</b> · <b>옅은 하이라이트 = 사람다운 패턴의 증거</b>.
+ 마우스를 올리면 왜 잡혔는지 설명이 뜹니다. 모든 하이라이트는 이 논문의 실제 LaTeX 원문 조각이며 조작이 없습니다.</div>
+</header>
+<div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
+ <div class="chead"><b>한눈 요약 — 이 논문은 어느 쪽인가</b></div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:87%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">0.87</span></div>
+ <div class="fb">종합(5개 몰드 평균): <span class="vbadge ai">AI쪽</span>
+  &nbsp;위치 0.87 (0=사람 논문 중앙값, 1=AI 논문 중앙값)</div>
+ <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">참조망 — 섹션을 서로 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">거시 반복 — 같은 말을 또 하는가</span><span class="vbadge mid">중간</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">수치 근거 — 숫자를 선행연구에 붙이는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">비교 배치 — 선행연구끼리 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">문체 — LLM 특유 어휘</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">평가 규모 — 모델×데이터셋</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">문제 차용 — 문제를 선행 1편에서 빌렸는가</span><span class="vbadge hu">사람쪽</span></div>
+ <div class="ct">축마다 보는 게 다릅니다 — 아래 칩으로 몰드를 하나씩 켜서 본문에서 확인하세요.</div></div><div class="chips"><span class="chiplab">하이라이트 필터</span><button class="chip active" data-v="ALL">전체</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button></div><div class="card" data-mold="CRN">
+ <div class="chead"><span class="sw" style="background:#3987e5"></span><b>참조망 — 섹션을 서로 엮는가</b>
+   <span class="abbr" style="border-color:#3987e5;color:#3987e5">CRN</span></div>
+ <div class="ct">Cross-Reference_Network</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#3987e5"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">다른 섹션을 가리키는 참조 비율 0.0 (다른 섹션 0 / 같은 섹션 6 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.</div>
+ <div class="ct">하이라이트 6개 · AI 증거 6 / 사람 증거 0</div></div><div class="card" data-mold="MR">
+ <div class="chead"><span class="sw" style="background:#9085e9"></span><b>거시 반복 — 같은 말을 또 하는가</b>
+   <span class="abbr" style="border-color:#9085e9;color:#9085e9">MR</span></div>
+ <div class="ct">Macro_Redundancy</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:58%;background:#9085e9"></div><div class="ai">AI</div></div><span class="posv">0.58</span></div>
+ <div class="fb">섹션 간 표현 겹침 0.0387 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.</div>
+ <div class="ct">하이라이트 2개 · AI 증거 2 / 사람 증거 0</div></div><div class="card" data-mold="ENG">
+ <div class="chead"><span class="sw" style="background:#c98500"></span><b>수치 근거 — 숫자를 선행연구에 붙이는가</b>
+   <span class="abbr" style="border-color:#c98500;color:#c98500">ENG</span></div>
+ <div class="ct">External_Number_Grounding</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#c98500"></div><div class="ai">AI</div></div><span class="posv">3.77</span></div>
+ <div class="fb">소수점 수치 45개 중 1개만 인용 옆에 붙음 (비율 0.0222). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.</div>
+ <div class="ct">하이라이트 45개 · AI 증거 44 / 사람 증거 1</div></div><div class="card" data-mold="CP">
+ <div class="chead"><span class="sw" style="background:#199e70"></span><b>비교 배치 — 선행연구끼리 엮는가</b>
+   <span class="abbr" style="border-color:#199e70;color:#199e70">CP</span></div>
+ <div class="ct">Comparative_Positioning</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:89%;background:#199e70"></div><div class="ai">AI</div></div><span class="posv">0.89</span></div>
+ <div class="fb">선행연구끼리 엮인 밀도 0.5333 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).</div>
+ <div class="ct">하이라이트 16개 · AI 증거 12 / 사람 증거 4</div></div><div class="card" data-mold="STY">
+ <div class="chead"><span class="sw" style="background:#d55181"></span><b>문체 — LLM 특유 어휘</b>
+   <span class="abbr" style="border-color:#d55181;color:#d55181">STY</span></div>
+ <div class="ct">Stylistic (excess vocab)</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:88%;background:#d55181"></div><div class="ai">AI</div></div><span class="posv">0.88</span></div>
+ <div class="fb">LLM 과잉 어휘 밀도 211.792 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.</div>
+ <div class="ct">하이라이트 87개 · AI 증거 87 / 사람 증거 0</div></div><div class="card" data-mold="ESA">
+ <div class="chead"><span class="sw" style="background:#d95926"></span><b>평가 규모 — 모델×데이터셋</b>
+   <span class="abbr" style="border-color:#d95926;color:#d95926">ESA</span></div>
+ <div class="ct">Evaluation_Surface_Area</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#d95926"></div><div class="ai">AI</div></div><span class="posv">1.01</span></div>
+ <div class="fb">평가 규모 = 모델 3개 × 데이터셋 1개 = 3칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.</div>
+ <div class="ct">하이라이트 5개 · AI 증거 0 / 사람 증거 5</div></div><div class="card" data-mold="PB">
+ <div class="chead"><span class="sw" style="background:#e66767"></span><b>문제 차용 — 문제를 선행 1편에서 빌렸는가</b>
+   <span class="abbr" style="border-color:#e66767;color:#e66767">PB</span></div>
+ <div class="ct">Problem_Borrowing</div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#e66767"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
+ <div class="fb">스스로 발견한 문제 (사람다움). 특정 선행연구에 기대지 않음. — “LLM-generated optimization models frequently cannot be repaired via solver-in-the-loop feedback because when the Irreducible Infeasible Subsystem (IIS”</div>
+ <div class="ct">하이라이트 0개 · AI 증거 0 / 사람 증거 0</div></div></div>
+<main><section class="sheet"><pre>
+
+ 
+Large language models (LLMs) can translate natural language optimization problems <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">into</span> mathematical formulations, but frequently generate infeasible models. We investigate whether Farkas dual ray multipliers---which provide a certificate of infeasibility with constraint-level contributions---can improve LLM-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> repair by ranking which constraints to show when the Irreducible Infeasible Subsystem (IIS) must be truncated. We propose DualRayRank, which ranks IIS constraints by <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">their</span> Farkas multiplier magnitudes and provides the top-$K$ to the LLM. In controlled experiments on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MAMO-Optimization — 모델×데이터셋 조합이 평가 규모&quot;]]">MAMO-Optimization</span>, we find that DualRayRank produces identical results to baseline IIS-TopK: <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> achieve 1/31 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.23</span>\%) repair rate under matched <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span>, repairing the same instance.<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> The truncation regime where ranking could theoretically help shows 0/16 repair success.</span> Furthermore, simple Best-of-2 inference scaling (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">65.12</span>\% Pass@1) outperforms all repair methods <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;including&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">including</span> optimized configurations with 10$\times$ larger models (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.86</span>\%). We report <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> negative result to guide future <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;research&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">research</span> away from feedback-format optimization toward more fundamental improvements.
+
+\textit{WARNING: <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;This&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">This</span> paper was generated by an automated <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;research&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">research</span> system. The code is publicly available.}\footnote{\url{https://gitlab.com/fars-a/farkas-dual-ray-optmodel-repair}}
+ 
+
+\input{sections/introduction}
+
+\input{sections/related_work}
+
+\input{sections/method}
+
+\input{sections/experiments}
+
+\input{sections/conclusion}
+
+\bibliography{analemma}
+\bibliographystyle{analemma}
+
+ 
+
+</pre></section><section class="sheet"><h2>Conclusion</h2><pre>
+§ Conclusion
+
+We investigated whether Farkas dual ray multipliers can improve LLM-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> repair of infeasible optimization models by <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;providing&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">providing</span> better constraint ranking when IIS feedback must be truncated. Our controlled experiments show that DualRayRank produces identical results to baseline IIS-TopK: <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> achieve 1/31 repair rate under matched <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span>, repairing the same instance.<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> The truncation regime where ranking could theoretically help shows 0/16 repair success for all methods.</span> Furthermore, simple Best-of-2 inference scaling (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">65.12</span>\%) outperforms all repair methods <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;including&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">including</span> optimized configurations with 10$\times$ larger models (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.86</span>\%).
+
+\paragraph{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Limitations&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Limitations</span>.} Our evaluation is limited to a single benchmark (<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MAMO-Optimization — 모델×데이터셋 조합이 평가 규모&quot;]]">MAMO-Optimization</span>) with only 31 infeasible instances, constraining statistical power. The <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;findings&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">findings</span> may not generalize to other optimization domains or model families.
+
+\paragraph{Future Directions.} More effective repair may require richer feedback signals (e.g., feasibility relaxations, constraint explanations), multi-turn dialogue, or training-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> approaches that learn from solver feedback. Our negative result suggests that inference-time feedback format alone is insufficient for <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> challenging task.
+
+</pre></section><section class="sheet"><h2>Experiments</h2><pre>
+§ Experiments
+
+§ Experimental Setup
+
+\paragraph{Benchmark.} We evaluate on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MAMO-Optimization — 모델×데이터셋 조합이 평가 규모&quot;]]">MAMO-Optimization</span>~\citep{Huang2024LLMsFM}, a benchmark of 863 optimization word problems (652 EasyLP + 211 ComplexLP) with ground-truth optimal objectives. Models generate .lp files that are verified by solving with HiGHS and checking objective correctness <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> tolerance.
+
+\paragraph{Models.} We use Qwen<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;인용 옆에 붙은 수치 — 선행연구에 근거를 댐 (사람다움)&quot;]]">2.5</span>-Instruct models~\citep{Yang2024Qwen25TR} at three scales: 7B (<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;primary&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">primary</span>), 32B, and 72B. The 7B model <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;serves&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">serves</span> as the base for controlled comparisons, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">while</span> larger models are used in extended experiments.
+
+\paragraph{Metrics.} We report three metrics: Pass@1, the fraction of instances where the generated model solves correctly; Repair Rate, the fraction of infeasible instances successfully repaired; and Truncation Repair, the repair rate on instances where IIS size exceeds $K$, representing the truncation regime where ranking could theoretically help.
+
+\paragraph{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Conditions</span>.} For controlled comparison, all methods use identical settings: 7B model, $K=5$, greedy decoding. Extended experiments explore larger $K$, multiple samples, and stronger models.
+
+§ Main Results
+
+Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:main_results}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;presents&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">presents</span> our main <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;findings&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">findings</span>. Under controlled <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;conditions&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">conditions</span> (top section), all three feedback methods---IIS-TopK, DualRay-TopK, and DualRay+Weights---produce identical results: each repairs exactly 1 out of 31 infeasible instances (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.23</span>\%), and critically, all methods repair the same instance (EasyLP\_425, IIS size=2). In the truncation regime where IIS size exceeds $K=5$ (16 instances), no method achieves any repair success.
+
+┌─ [float] 
+ 
+Caption: {Comparison of repair methods under controlled and extended conditions. All methods evaluated on 31 infeasible instances from <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MAMO-Optimization — 모델×데이터셋 조합이 평가 규모&quot;]]">MAMO-Optimization</span>. Controlled comparison (top) uses identical settings: 7B model, $K=5$, greedy decoding. Under controlled conditions, all three feedback methods produce identical results.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Method &amp; Model &amp; $K$ &amp; $N$ &amp; Repair (31) &amp; Trunc (16) &amp; Pass@1 \\
+ 
+\multicolumn{7}{l}{Controlled Comparison} \\
+IIS-TopK (A) &amp; 7B &amp; 5 &amp; 1 &amp; 1 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.23</span>\%) &amp; 0 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.0</span>\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.17</span>\% \\
+DualRay-TopK (B) &amp; 7B &amp; 5 &amp; 1 &amp; 1 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.23</span>\%) &amp; 0 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.0</span>\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.17</span>\% \\
+DualRay+Wt (C) &amp; 7B &amp; 5 &amp; 1 &amp; 1 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">3.23</span>\%) &amp; 0 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.0</span>\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.17</span>\% \\
+ 
+\multicolumn{7}{l}{Extended Comparison} \\
+DualRay+Wt (C+) &amp; 7B &amp; 10 &amp; 6 &amp; 3 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">9.68</span>\%) &amp; 0 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.0</span>\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.40</span>\% \\
+DualRay+Wt (C+) &amp; 32B &amp; 10 &amp; 16$\times$2 &amp; 6 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">19.35</span>\%) &amp; 0 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.0</span>\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.75</span>\% \\
+DualRay+Wt (C+) &amp; 72B &amp; 10 &amp; 16$\times$2 &amp; \textbf{7 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">22.58</span>\%)} &amp; \textbf{1 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">6.25</span>\%)} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.86</span>\%} \\
+ 
+ 
+}
+ ─┘
+
+The extended comparison (bottom section of Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:main_results}</span>) shows that increasing model capacity, context budget $K$, and sampling improves repair rates. The best configuration (72B model, $K=10$, 16 samples $\times$ 2 rounds) achieves 7/31 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">22.58</span>\%) repair rate. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;However&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">However</span>, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> improvement is confounded with model capacity: the 72B model repairs instances that the 7B model cannot regardless of feedback method. For example, EasyLP\_246 achieves 0/6 Pass@1 with 7B but 17/17 with 72B under identical feedback. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Notably&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Notably</span>, even the best configuration repairs only 1/16 truncated instances, suggesting the truncation regime <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;remains&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">remains</span> fundamentally difficult.
+
+§ Inference Scaling Dominates Repair
+
+Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{tab:inference_scaling}</span> compares solver-feedback repair against simple inference scaling. Best-of-2, which generates two samples with temperature <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.7</span> and selects the first correct one, achieves <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">65.12</span>\% Pass@1 <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> the same 7B model. This outperforms all repair methods by over 6 percentage points, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;including&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">including</span> the best repair configuration that uses a 10$\times$ larger model (72B) with 34 total samples plus solver overhead.
+
+┌─ [float] 
+ 
+Caption: {Comparison of inference scaling vs solver-feedback repair. Best-of-2 uses the same 7B model with only 2 samples and outperforms all repair methods by 6+ percentage points.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Method &amp; Model &amp; Samples &amp; Pass@1 Overall &amp; Pass@1 EasyLP &amp; Pass@1 ComplexLP \\
+ 
+Attempt-0 &amp; 7B &amp; 1 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.05</span>\% &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">71.17</span>\% &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">17.54</span>\% \\
+Best-of-2 &amp; 7B &amp; 2 &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">65.12</span>\%} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">79.50</span>\%} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">20.70</span>\%} \\
+Best Repair (C+ 72B) &amp; 72B &amp; 34 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.86</span>\% &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">71.78</span>\% &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">18.96</span>\% \\
+ 
+ 
+}
+ ─┘
+
+┌─ [float] 
+ 
+\includegraphics[width=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.85</span>\textwidth]{inference_scaling_comparison.png}
+Caption: {Comparison of Pass@1 <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> repair methods and inference scaling. Best-of-2 (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">65.12</span>\%) <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> the same 7B model with 2 samples outperforms all repair methods <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;including&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">including</span> the optimized 72B configuration (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.86</span>\%) by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">6.26</span> percentage points.}
+
+ ─┘
+
+Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:inference_scaling}</span> visualizes this comparison. The <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">6.26</span> percentage point gap <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">between</span> Best-of-2 and the best repair method is <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;substantial&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">substantial</span>, especially considering that Best-of-2 requires no solver feedback, no IIS computation, and uses a much smaller model. This suggests that for this benchmark, regenerating the model is more effective than attempting to repair infeasible outputs.
+
+\subsection{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Analysis</span>: Why the Hypothesis Fails}
+
+Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:iis_size}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;reveals&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">reveals</span> why dual-ray ranking does not help: successful repairs concentrate overwhelmingly in small-IIS instances where ranking is irrelevant. Of the 7 instances repaired by the best configuration, 6 have IIS size $\leq 4$, meaning the full IIS fits <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> the context budget $K=10$ without truncation. The single truncation-regime repair (ComplexLP\_86, IIS size=6) required the 72B model and iterative refinement.
+
+┌─ [float] 
+ 
+\includegraphics[width=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.85</span>\textwidth]{repair_by_iis_size.png}
+Caption: {Repair success rate by IIS size. Left: absolute counts of repaired instances. Right: repair success rate (\%). The dashed red line marks $K=5$, the truncation threshold. Repairs concentrate in small-IIS instances (1--2 constraints), with near-zero success in the truncation regime (IIS $&gt; 5$).}
+
+ ─┘
+
+The fundamental issue is that the truncation regime---where dual-ray ranking could theoretically provide value---is precisely where repair is most difficult. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;These&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">These</span> instances have <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;complex&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">complex</span> constraint interactions that current LLMs <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;struggle&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">struggle</span> to resolve regardless of how the feedback is structured. The hypothesis that better constraint ranking would unlock repair success in this regime is refuted: the bottleneck is not which constraints to show, but the model's ability to reason about constraint modifications.
+
+</pre></section><section class="sheet"><h2>Introduction</h2><pre>
+§ Introduction
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]">Large language models (LLMs) are increasingly used to translate natural language optimization problems </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">into</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> executable mathematical formulations~\citep{Huang2024LLMsFM,Huang2024ORLMAC,AhmadiTeshnizi2024OptiMUSSO}.</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;While&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">While</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">these</span> systems achieve reasonable success rates on standard benchmarks, they frequently generate infeasible models---formulations with no solution satisfying all constraints. Infeasibility is <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;particularly&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">particularly</span> problematic because practitioners cannot even inspect candidate solutions when the model has no feasible region.
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]">A natural </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">approach</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> to </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;address&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">address</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> infeasibility is solver-in-the-loop repair: use solver diagnostics to identify problematic constraints and guide the LLM to fix them~\citep{Ao2026OptiRepairCD,Ao2026SolverintheLoopMB}.</span> The standard diagnostic is the Irreducible Infeasible Subsystem (IIS)---a minimal set of constraints that cannot be simultaneously satisfied. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;However&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">However</span>, when the IIS is large, it must be truncated to fit <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> the LLM's context budget, and standard truncation (e.g., alphabetical ordering) provides no guidance on which constraints are most important to show.
+
+We hypothesize that Farkas dual ray multipliers can provide better constraint ranking for truncated IIS feedback.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> For an infeasible linear program, the Farkas dual ray is a certificate of infeasibility where each multiplier $y_i$ represents the ``contribution'' of constraint $i$ to the contradiction~\citep{Andersen2015HowTU}.</span> Constraints with larger $|y_i|$ are more ``responsible'' for infeasibility and may be more useful for repair.
+
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">We test this hypothesis rigorously with controlled experiments on the </span><span class="hl hl-CP hl-ESA pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: MAMO-Optimization — 모델×데이터셋 조합이 평가 규모&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d9592640 6px,#d9592640 12px)">MAMO-Optimization</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> benchmark~\citep{Huang2024LLMsFM}.</span> Our key finding is negative: under controlled conditions (same model, same $K$, same decoding), DualRayRank produces identical results to baseline IIS-TopK---<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> achieve 1/31 repair rate, repairing the same instance. Furthermore, simple Best-of-2 inference scaling (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">65.12</span>\% Pass@1) outperforms all repair methods including optimized configurations with 10$\times$ larger models (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">58.86</span>\%).
+
+Our contributions are fourfold. First, we propose DualRayRank, a method that uses Farkas dual ray multipliers to rank IIS constraints for LLM repair feedback. Second, we conduct rigorous controlled experiments isolating the effect of constraint ranking from confounding factors such as model size, sampling strategy, and context budget. Third, we report a negative result: dual-ray ranking does not improve repair under controlled conditions, and the truncation regime where ranking could theoretically help shows near-zero repair success. Fourth, we demonstrate that simple inference scaling dominates solver-feedback repair on this benchmark, suggesting that regeneration is more effective than repair.
+
+</pre></section><section class="sheet"><h2>Method</h2><pre>
+§ Method
+
+We propose DualRayRank, a training-free feedback interface for solver-in-the-loop optimization model repair. The key idea is to use Farkas dual ray multipliers to rank constraints in the Irreducible Infeasible Subsystem (IIS), prioritizing those most ``responsible'' for infeasibility when the full IIS exceeds the prompt budget.
+
+§ Problem Setup
+
+Given a natural language optimization problem, an LLM generates a linear program (LP) in standard .lp format. When the solver reports infeasibility, our goal is to provide structured feedback that helps the LLM repair the model in a single attempt. The <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;challenge&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">challenge</span> arises when the IIS---a minimal set of mutually inconsistent constraints---is too large to include verbatim in the prompt, requiring truncation to the top-$K$ constraints.
+
+§ Farkas Dual Ray Extraction
+
+For an infeasible LP of the form $\min\{c^\top x : Ax \leq b\}$, Farkas' lemma guarantees the existence of a dual ray $y \geq 0$ such that $A^\top y = 0$ and $b^\top y &lt; 0$. This vector $y$ <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;serves&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">serves</span> as a certificate of infeasibility, where each component $y_i$ represents the ``contribution'' of constraint $i$ to the contradiction. We extract this dual ray from the HiGHS solver with presolve disabled to ensure constraint-level interpretability.
+
+§ Constraint Ranking and Feedback Generation
+
+We compare three feedback conditions, all <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> the same prompt budget of $K$ constraints:
+
+\paragraph{IIS-TopK (Baseline).} Compute the IIS and sort constraints alphabetically by name. Provide the first $K$ constraints with <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">their</span> full text. This represents the standard <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;approach&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">approach</span> in prior work~\citep{Ao2026OptiRepairCD,Ao2026SolverintheLoopMB}.
+
+\paragraph{DualRay-TopK.} Extract the Farkas dual ray $y$ and rank IIS constraints by $|y_i|$ in descending order. Provide the top-$K$ constraints with <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">their</span> text but without numeric multipliers. This tests whether the ranking signal alone improves repair.
+
+\paragraph{DualRay+Weights.} Same constraint selection as DualRay-TopK, but include normalized weights $w_i = |y_i| / \sum_{j \in \text{TopK}} |y_j|$ <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;alongside&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">alongside</span> each constraint. This tests whether explicit magnitude information provides additional benefit.
+
+Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;같은 섹션 안 참조 — 섹션 간 연결에 기여 없음&quot;]]">\ref{fig:framework}</span> illustrates the complete pipeline. For mixed-integer programs, we compute the IIS and dual ray on the LP relaxation, as dual rays are only defined for continuous LPs.
+
+┌─ [float] 
+ 
+[figure: framework_overview.png]
+Caption: {Overview of the DualRayRank repair pipeline. Given an infeasible LP model, we (1) compute the Irreducible Infeasible Subsystem (IIS) and Farkas dual ray, (2) rank IIS constraints by <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;their&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">their</span> Farkas multiplier magnitudes, and (3) provide the top-$K$ ranked constraints as feedback to the LLM for one-step repair.}
+
+ ─┘
+
+</pre></section><section class="sheet"><h2>Related Work</h2><pre>
+§ Related Work
+
+\paragraph{LLM-based Optimization Modeling.}
+Recent work has explored <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> large language models to translate natural language problem descriptions <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;into&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">into</span> mathematical optimization formulations.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> The NL4Opt competition~\citep{Ramamonjison2023NL4OptCF} established early benchmarks for this task, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">while</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> subsequent work has developed more </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;comprehensive&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">comprehensive</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> evaluation frameworks. MAMO~\citep{Huang2024LLMsFM} introduced a benchmark </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;spanning&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">spanning</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> multiple optimization problem types with solver-verifiable evaluation.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> ORLM~\citep{Huang2024ORLMAC} proposed a customizable training framework for optimization modeling, and OptiMUS~\citep{AhmadiTeshnizi2024OptiMUSSO} </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrated&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">demonstrated</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 2편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> scalable approaches using solver feedback.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> OptiBench~\citep{YANG2024OptiBenchMR} and OptMATH~\citep{Lu2025OptMATHAS} further expanded benchmark coverage, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;while&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">while</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;공동 인용 문장 — 선행연구 3편을 서로 엮어 비교 (사람다운 종합)&quot;]]"> LLMOPT~\citep{Jiang2024LLMOPTLT} explored end-to-end optimization problem solving.</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;These&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">These</span> systems achieve reasonable success rates but frequently generate infeasible models that require repair.
+
+\paragraph{Solver-in-the-Loop Approaches.}
+Several methods leverage solver feedback to improve LLM-generated optimization models.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> OptiRepair~\citep{Ao2026OptiRepairCD} introduced a closed-loop diagnosis and repair framework for supply chain optimization, using solver error messages to guide iterative refinement. The Solver-in-the-Loop benchmark~\citep{Ao2026SolverintheLoopMB} formalized this setting as an MDP and evaluated self-correction </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;capabilities&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">capabilities</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">. \citet{Chen2023DiagnosingIO} explored using LLMs to diagnose infeasible optimization problems by interpreting solver output.</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;These&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">These</span> approaches <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;typically&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">typically</span> provide the Irreducible Infeasible Subsystem (IIS) as feedback, but must truncate large IIS sets to fit <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;within&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">within</span> context limits.
+
+\paragraph{Self-Correction and Refinement.}
+Iterative self-improvement has been studied extensively in LLM <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;research&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">research</span>.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> Reflexion~\citep{Shinn2023ReflexionLA} enables agents to learn from verbal feedback </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">through</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> self-reflection. Self-</span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Refine&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">Refine</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">~\citep{Madaan2023SelfRefineIR} </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;demonstrated&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">demonstrated</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> iterative refinement using self-generated feedback without additional training. STaR~\citep{Zelikman2022STaRBR} showed that models can bootstrap reasoning </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;capabilities&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">capabilities</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">through</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> self-generated rationales. </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;However&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">However</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]">, recent work has questioned whether LLMs can genuinely self-correct reasoning errors without external feedback~\citep{Dai2025FeedbackEvalAB}.</span> Our work provides external solver feedback but finds that even with structured feedback, repair success <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;remains&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">remains</span> limited.
+
+\paragraph{Infeasibility <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;Analysis&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">Analysis</span>.}
+The theoretical foundations for analyzing infeasible linear programs are well-established.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> Farkas' lemma provides a certificate of infeasibility </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;through&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">through</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;고립 인용 문장 — 선행연구 1편만 단독 나열 (AI형 리스트)&quot;]]"> dual rays~\citep{Andersen2015HowTU}, and the IIS represents a minimal set of constraints that cannot be simultaneously satisfied.</span> Modern solvers <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;like&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">like</span> HiGHS can compute <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">both</span> IIS and Farkas dual rays efficiently. Our work <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;investigates&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">investigates</span> whether the magnitude of Farkas multipliers can prioritize which IIS constraints to present to an LLM when the full IIS exceeds context limits.
+</pre></section></main>
+<script>
+(function(){
+  var WRAP = document.currentScript.closest('.wrap');
+  var META = {"CRN": {"kr": "참조망 — 섹션을 서로 엮는가", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "다른 섹션을 가리키는 참조 비율 0.0 (다른 섹션 0 / 같은 섹션 6 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.", "verdict": "AI쪽", "pos": 1.0}, "MR": {"kr": "거시 반복 — 같은 말을 또 하는가", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "섹션 간 표현 겹침 0.0387 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.", "verdict": "중간", "pos": 0.58}, "ENG": {"kr": "수치 근거 — 숫자를 선행연구에 붙이는가", "full": "External_Number_Grounding", "color": "#c98500", "fb": "소수점 수치 45개 중 1개만 인용 옆에 붙음 (비율 0.0222). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.", "verdict": "AI쪽", "pos": 3.77}, "CP": {"kr": "비교 배치 — 선행연구끼리 엮는가", "full": "Comparative_Positioning", "color": "#199e70", "fb": "선행연구끼리 엮인 밀도 0.5333 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).", "verdict": "AI쪽", "pos": 0.89}, "STY": {"kr": "문체 — LLM 특유 어휘", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM 과잉 어휘 밀도 211.792 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.", "verdict": "AI쪽", "pos": 0.88}, "ESA": {"kr": "평가 규모 — 모델×데이터셋", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "평가 규모 = 모델 3개 × 데이터셋 1개 = 3칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.", "verdict": "AI쪽", "pos": 1.01}, "PB": {"kr": "문제 차용 — 문제를 선행 1편에서 빌렸는가", "full": "Problem_Borrowing", "color": "#e66767", "fb": "스스로 발견한 문제 (사람다움). 특정 선행연구에 기대지 않음. — “LLM-generated optimization models frequently cannot be repaired via solver-in-the-loop feedback because when the Irreducible Infeasible Subsystem (IIS”", "verdict": "사람쪽", "pos": 0.0}};
+  // --- chip filter (scoped to this paper's wrap) ---
+  WRAP.addEventListener('click', function(e){
+    var c = e.target.closest ? e.target.closest('.chip') : null;
+    if(!c) return;
+    WRAP.setAttribute('data-view', c.getAttribute('data-v'));
+    WRAP.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('active', b===c);});
+  });
+  // --- rich tooltip: hover shows, click pins ---
+  var tip = document.createElement('div');
+  tip.className = 'moldtip';
+  document.body.appendChild(tip);
+  var pinned = false;
+  function render(el){
+    var data;
+    try { data = JSON.parse(el.getAttribute('data-tip')); } catch(err) { return false; }
+    var view = WRAP.getAttribute('data-view');
+    var h = '';
+    data.forEach(function(t){
+      var ab = t[0], pol = t[1], why = t[2];
+      if (view !== 'ALL' && ab !== view) return;
+      var m = META[ab] || {};
+      var badge = pol === 'trigger'
+        ? '<span class="tbadge ai">AI스러움의 증거</span>'
+        : '<span class="tbadge hu">사람다움의 증거</span>';
+      h += '<div class="tsec">'
+        + '<div class="thead"><span class="sw" style="background:' + m.color + '"></span>'
+        + '<b>' + m.kr + '</b>' + badge + '</div>'
+        + '<div class="twhy">' + why + '</div>'
+        + '<div class="tscore">이 논문의 ' + ab + ' 판정: <b>' + m.verdict + '</b>'
+        + (m.pos !== null ? ' (위치 ' + m.pos + ' · 0=사람, 1=AI)' : '') + '</div>'
+        + '<div class="tfb">' + m.fb + '</div></div>';
+    });
+    if(!h) return false;
+    tip.innerHTML = h + '<div class="tclose">클릭=고정 · 다시 클릭/ESC=닫기</div>';
+    return true;
+  }
+  function place(e){
+    var W = window.innerWidth, H = window.innerHeight;
+    var x = Math.min(e.clientX + 14, W - 380), y = e.clientY + 16;
+    tip.style.left = Math.max(8, x) + 'px';
+    var th = tip.offsetHeight;
+    if (y + th > H - 10) y = Math.max(8, e.clientY - th - 12);
+    tip.style.top = y + 'px';
+  }
+  WRAP.addEventListener('mouseover', function(e){
+    if (pinned) return;
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { tip.classList.remove('show'); return; }
+    if (render(el)) { tip.classList.add('show'); place(e); }
+  });
+  WRAP.addEventListener('mousemove', function(e){
+    if (pinned || !tip.classList.contains('show')) return;
+    place(e);
+  });
+  WRAP.addEventListener('mouseleave', function(){ if(!pinned) tip.classList.remove('show'); });
+  WRAP.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { pinned = false; tip.classList.remove('show'); return; }
+    if (pinned) { pinned = false; tip.classList.remove('show'); return; }
+    if (render(el)) { pinned = true; tip.classList.add('show'); place(e); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { pinned = false; tip.classList.remove('show'); }
+  });
+})();
+</script></div></body></html>
