@@ -30,6 +30,15 @@ main{padding:16px 20px;overflow:auto}
 pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Roman',serif;
  font-size:13.5px;line-height:1.7;margin:0;color:#d9d7cd}
 .hl{border-radius:3px;padding:0 1px;cursor:pointer}
+.papernav{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;align-items:center;
+ padding:9px 16px;background:#1a1a19;border-bottom:1px solid #2c2c28}
+.navlab{font-size:11px;color:#8a887d;margin-right:4px}
+.papernav .nav{background:#242522;color:#c3c2b7;border:1px solid #2c2c28;border-radius:7px;
+ padding:4px 10px;font-size:12px;text-decoration:none}
+.papernav .nav.hu{border-color:#3987e544}
+.papernav .nav.ai{border-color:#e6676744}
+.papernav .nav.cur{background:#3987e5;color:#fff;border-color:#3987e5}
+.papernav .nav:hover{border-color:#e8e6df}
 .moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
  border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
  color:#e8e6df;display:none;pointer-events:none}
@@ -78,6 +87,7 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Ro
  <b>진하게 밑줄 = AI스러운 패턴의 증거</b> · <b>옅은 하이라이트 = 사람다운 패턴의 증거</b>.
  마우스를 올리면 왜 잡혔는지 설명이 뜹니다. 모든 하이라이트는 이 논문의 실제 LaTeX 원문 조각이며 조작이 없습니다.</div>
 </header>
+<nav class="papernav"><span class="navlab">논문 바로가기 — 파랑=사람, 빨강=AI:</span><a class="nav" href="../index.html">Overview</a><a class="nav hu" href="./Word2Vec.html">Word2Vec</a><a class="nav hu" href="./Attention.html">Attention</a><a class="nav hu" href="./BERT.html">BERT</a><a class="nav hu" href="./FLAN.html">FLAN</a><a class="nav hu cur" href="./DeepSeek-R1.html">DeepSeek-R1</a><a class="nav ai" href="./FA0001.html">FA0001</a><a class="nav ai" href="./FA0022.html">FA0022</a><a class="nav ai" href="./FA0044.html">FA0044</a><a class="nav ai" href="./FA0067.html">FA0067</a><a class="nav ai" href="./FA0106.html">FA0106</a><a class="nav ai" href="./FA0145.html">FA0145</a><a class="nav ai" href="./FA0187.html">FA0187</a><a class="nav ai" href="./FA0221.html">FA0221</a><a class="nav ai" href="./FA0297.html">FA0297</a><a class="nav ai" href="./FA0421.html">FA0421</a></nav>
 <div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
  <div class="chead"><b>한눈 요약 — 이 논문은 어느 쪽인가</b></div>
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:20%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">0.20</span></div>
