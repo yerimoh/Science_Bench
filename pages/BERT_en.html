@@ -1,0 +1,972 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BERT — mold pages</title><style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#111210;color:#e8e6df}
+header{padding:16px 24px;border-bottom:1px solid #2c2c28;background:#1a1a19;position:sticky;top:0;z-index:5}
+header h1{margin:2px 0 4px;font-size:18px}
+header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
+.back{color:#3987e5;font-size:12px;text-decoration:none}
+.wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
+.side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
+.card{background:#1e1e1c;border:1px solid #2c2c28;border-radius:10px;padding:11px;margin-bottom:10px}
+.chead{display:flex;align-items:center;gap:7px;font-size:12.5px;flex-wrap:wrap}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.abbr{margin-left:auto;font-size:10.5px;border:1px solid;border-radius:5px;padding:0 5px;font-weight:700}
+.pos{margin:8px 0 5px}
+.pos.none{color:#8a887d;font-size:11px}
+.track{position:relative;height:14px;background:linear-gradient(90deg,#20262e,#2e2020);border-radius:4px}
+.track .hu,.track .ai{position:absolute;top:0;font-size:9px;line-height:14px;color:#8a887d}
+.track .hu{left:4px}.track .ai{right:4px}
+.track .fill{position:absolute;top:-2px;width:4px;height:18px;border-radius:2px}
+.posv{font-size:10.5px;color:#c3c2b7;margin-left:6px}
+.fb{font-size:11.5px;color:#c3c2b7;line-height:1.45;margin-top:4px}
+.ct{font-size:10.5px;color:#8a887d;margin-top:5px}
+main{padding:16px 20px;overflow:auto}
+.sheet{background:#171816;border:1px solid #2c2c28;border-radius:12px;padding:22px 26px;margin:0 auto 18px;max-width:900px;
+ box-shadow:0 2px 10px #0006}
+.sheet h2{margin:0 0 10px;font-size:15px;color:#fff;border-bottom:1px solid #2c2c28;padding-bottom:6px}
+pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Roman',serif;
+ font-size:13.5px;line-height:1.7;margin:0;color:#d9d7cd}
+.hl{border-radius:3px;padding:0 1px;cursor:pointer}
+.papernav{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;align-items:center;
+ padding:9px 16px;background:#1a1a19;border-bottom:1px solid #2c2c28}
+.navlab{font-size:11px;color:#8a887d;margin-right:4px}
+.papernav .nav{background:#242522;color:#c3c2b7;border:1px solid #2c2c28;border-radius:7px;
+ padding:4px 10px;font-size:12px;text-decoration:none}
+.papernav .nav.hu{border-color:#3987e544}
+.papernav .nav.ai{border-color:#e6676744}
+.papernav .nav.cur{background:#3987e5;color:#fff;border-color:#3987e5}
+.papernav .nav:hover{border-color:#e8e6df}
+.papernav .nav.lang{margin-left:auto;border-color:#e8e6df66;font-weight:700}
+.moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
+ border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
+ color:#e8e6df;display:none;pointer-events:none}
+.moldtip.show{display:block}
+.moldtip .tsec{border-bottom:1px solid #33342e;padding:8px 0}
+.moldtip .tsec:last-of-type{border-bottom:none}
+.moldtip .thead{display:flex;align-items:center;gap:7px;font-size:12.5px;margin-bottom:3px;flex-wrap:wrap}
+.moldtip .tbadge{margin-left:auto;font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700}
+.moldtip .tbadge.ai{background:#e6676733;color:#ff9d9d}
+.moldtip .tbadge.hu{background:#3987e533;color:#8fbcf5}
+.moldtip .twhy{color:#fff;margin:2px 0 4px}
+.moldtip .tscore{color:#c3c2b7;font-size:11px}
+.moldtip .tfb{color:#8a887d;font-size:10.5px;margin-top:3px}
+.moldtip .tclose{color:#6f6e65;font-size:9.5px;margin-top:6px;text-align:right}
+.card.summary{border-color:#3d3d38;background:#22231f}
+.vrow{display:flex;align-items:center;gap:7px;font-size:11.5px;margin-top:6px;color:#c3c2b7}
+.vname{flex:1}
+.vbadge{font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700;flex:none}
+.vbadge.ai{background:#e6676733;color:#e66767}
+.vbadge.hu{background:#3987e533;color:#7db2ee}
+.vbadge.mid{background:#8a887d33;color:#a9a79c}
+.vbadge.na{background:#8a887d22;color:#8a887d}
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:2px 0 12px}
+.chiplab{font-size:10.5px;color:#8a887d;margin-right:2px;width:100%}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#242522;color:#c3c2b7;
+ border:1px solid #2c2c28;border-radius:12px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+.chip.active{border-color:#e8e6df;color:#fff;background:#2e2f2b}
+.chip .sw{width:9px;height:9px}
+.figthumb{width:100%;border-radius:7px;border:1px solid #2c2c28;margin:7px 0 2px;background:#fff}
+.figsheet .figwrap{position:relative;text-align:center;background:#fff;border-radius:8px;padding:10px}
+.figsheet img{max-width:100%;max-height:520px}
+.figtag{position:absolute;top:8px;left:8px;color:#fff;font-size:11px;font-weight:700;
+ border-radius:5px;padding:2px 8px;opacity:.92}
+.figcap{font-size:12px;color:#c3c2b7;margin-top:9px;line-height:1.5}
+.fignone{font-size:13px;color:#e6b0b0;background:#2a1d1d;border:1px dashed #e6676766;
+ border-radius:8px;padding:18px;text-align:center}
+.hl-CRN.pol-trigger{background:#3987e555;box-shadow:inset 0 -2px 0 #3987e5}.hl-CRN.pol-counter{background:#3987e522;box-shadow:inset 0 -1px 0 #3987e588}
+.hl-CP.pol-trigger{background:#199e7055;box-shadow:inset 0 -2px 0 #199e70}.hl-CP.pol-counter{background:#199e7022;box-shadow:inset 0 -1px 0 #199e7088}
+.hl-ENG.pol-trigger{background:#c9850055;box-shadow:inset 0 -2px 0 #c98500}.hl-ENG.pol-counter{background:#c9850022;box-shadow:inset 0 -1px 0 #c9850088}
+.hl-MR.pol-trigger{background:#9085e955;box-shadow:inset 0 -2px 0 #9085e9}.hl-MR.pol-counter{background:#9085e922;box-shadow:inset 0 -1px 0 #9085e988}
+.hl-STY.pol-trigger{background:#d5518155;box-shadow:inset 0 -2px 0 #d55181}.hl-STY.pol-counter{background:#d5518122;box-shadow:inset 0 -1px 0 #d5518188}
+.hl-ESA.pol-trigger{background:#d9592655;box-shadow:inset 0 -2px 0 #d95926}.hl-ESA.pol-counter{background:#d9592622;box-shadow:inset 0 -1px 0 #d9592688}
+.hl-PB.pol-trigger{background:#e6676755;box-shadow:inset 0 -2px 0 #e66767}.hl-PB.pol-counter{background:#e6676722;box-shadow:inset 0 -1px 0 #e6676788}
+.hl-FIG.pol-trigger{background:#00830055;box-shadow:inset 0 -2px 0 #008300}.hl-FIG.pol-counter{background:#00830022;box-shadow:inset 0 -1px 0 #00830088}
+.wrap[data-view="CRN"] .hl:not(.hl-CRN){background:none!important;box-shadow:none!important}.wrap[data-view="CRN"] .card[data-mold]:not([data-mold="CRN"]){opacity:.35}
+.wrap[data-view="CP"] .hl:not(.hl-CP){background:none!important;box-shadow:none!important}.wrap[data-view="CP"] .card[data-mold]:not([data-mold="CP"]){opacity:.35}
+.wrap[data-view="ENG"] .hl:not(.hl-ENG){background:none!important;box-shadow:none!important}.wrap[data-view="ENG"] .card[data-mold]:not([data-mold="ENG"]){opacity:.35}
+.wrap[data-view="MR"] .hl:not(.hl-MR){background:none!important;box-shadow:none!important}.wrap[data-view="MR"] .card[data-mold]:not([data-mold="MR"]){opacity:.35}
+.wrap[data-view="STY"] .hl:not(.hl-STY){background:none!important;box-shadow:none!important}.wrap[data-view="STY"] .card[data-mold]:not([data-mold="STY"]){opacity:.35}
+.wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
+.wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}
+.wrap[data-view="FIG"] .hl:not(.hl-FIG){background:none!important;box-shadow:none!important}.wrap[data-view="FIG"] .card[data-mold]:not([data-mold="FIG"]){opacity:.35}</style></head><body>
+<header><a class="back" href="../index_en.html">← demo index</a>
+ <h1>BERT <span class="sub">2018 · human-written landmark paper</span></h1>
+ <div class="sub">Evidence for each mold (AI-fingerprint pattern) is highlighted directly on the paper's source.
+ <b>Solid underline = evidence of an AI-typical pattern</b> · <b>faint highlight = evidence of a human-typical pattern</b>.
+ Hover any highlight for the reason it fired. Every highlight is a real slice of this paper's LaTeX source — nothing is fabricated.</div>
+</header>
+<nav class="papernav"><span class="navlab">Papers — blue=human, red=AI:</span><a class="nav" href="../index_en.html">Overview</a><a class="nav hu" href="./Word2Vec_en.html">Word2Vec</a><a class="nav hu" href="./Attention_en.html">Attention</a><a class="nav hu cur" href="./BERT_en.html">BERT</a><a class="nav hu" href="./FLAN_en.html">FLAN</a><a class="nav hu" href="./DeepSeek-R1_en.html">DeepSeek-R1</a><a class="nav ai" href="./FA0001_en.html">FA0001</a><a class="nav ai" href="./FA0022_en.html">FA0022</a><a class="nav ai" href="./FA0044_en.html">FA0044</a><a class="nav ai" href="./FA0067_en.html">FA0067</a><a class="nav ai" href="./FA0106_en.html">FA0106</a><a class="nav ai" href="./FA0145_en.html">FA0145</a><a class="nav ai" href="./FA0187_en.html">FA0187</a><a class="nav ai" href="./FA0221_en.html">FA0221</a><a class="nav ai" href="./FA0297_en.html">FA0297</a><a class="nav ai" href="./FA0421_en.html">FA0421</a><a class="nav lang" href="./BERT.html">한국어</a></nav>
+<div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
+ <div class="chead"><b>At a glance — which side is this paper on?</b></div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:14%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">0.14</span></div>
+ <div class="fb">Overall (mean of 5 molds): <span class="vbadge hu">human-side</span>
+  &nbsp;position 0.14 (0=human-paper median, 1=AI-paper median)</div>
+ <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">Reference mesh — does it link its sections?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">Macro redundancy — does it repeat itself?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">Number grounding — are numbers tied to prior work?</span><span class="vbadge ai">AI-side</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">Comparative positioning — are prior works related to each other?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">Style — LLM-typical vocabulary</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">Evaluation surface — models × datasets</span><span class="vbadge ai">AI-side</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">Problem borrowing — is the problem taken from one prior paper?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#008300"></span><span class="vname">Figure — does the diagram use color to mean something?</span><span class="vbadge hu">human-side</span></div>
+ <div class="ct">Each axis sees something different — use the chips below to view one mold at a time in the text.</div></div><div class="chips"><span class="chiplab">Highlight filter</span><button class="chip active" data-v="ALL">All</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button></div><div class="card" data-mold="CRN">
+ <div class="chead"><span class="sw" style="background:#3987e5"></span><b>Reference mesh — does it link its sections?</b>
+   <span class="abbr" style="border-color:#3987e5;color:#3987e5">CRN</span></div>
+ <div class="ct">Cross-Reference_Network</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#3987e5"></div><div class="ai">AI</div></div><span class="posv">-0.32</span></div>
+ <div class="fb">share of references pointing to another section: 0.684 (cross 27 / same 12 / dangling 0). Humans weave the whole paper (median ~0.47); 65% of AI papers sit at exactly 0.</div>
+ <div class="ct">39 highlights · 12 AI evidence / 27 human evidence</div></div><div class="card" data-mold="MR">
+ <div class="chead"><span class="sw" style="background:#9085e9"></span><b>Macro redundancy — does it repeat itself?</b>
+   <span class="abbr" style="border-color:#9085e9;color:#9085e9">MR</span></div>
+ <div class="ct">Macro_Redundancy</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:4%;background:#9085e9"></div><div class="ai">AI</div></div><span class="posv">0.04</span></div>
+ <div class="fb">cross-section wording overlap 0.0165 (AI mean ~0.057 vs human ~0.021). Highlights = claim sentences repeated almost verbatim in another section.</div>
+ <div class="ct">0 highlights · 0 AI evidence / 0 human evidence</div></div><div class="card" data-mold="ENG">
+ <div class="chead"><span class="sw" style="background:#c98500"></span><b>Number grounding — are numbers tied to prior work?</b>
+   <span class="abbr" style="border-color:#c98500;color:#c98500">ENG</span></div>
+ <div class="ct">External_Number_Grounding</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#c98500"></div><div class="ai">AI</div></div><span class="posv">1.52</span></div>
+ <div class="fb">only 4 of 256 decimal numbers sit next to a citation (rate 0.0117). Humans anchor numbers to prior-work numbers; AI numbers float free.</div>
+ <div class="ct">256 highlights · 252 AI evidence / 4 human evidence</div></div><div class="card" data-mold="CP">
+ <div class="chead"><span class="sw" style="background:#199e70"></span><b>Comparative positioning — are prior works related to each other?</b>
+   <span class="abbr" style="border-color:#199e70;color:#199e70">CP</span></div>
+ <div class="ct">Comparative_Positioning</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:20%;background:#199e70"></div><div class="ai">AI</div></div><span class="posv">0.20</span></div>
+ <div class="fb">work-to-work edge density 1.5758 (AI median 0.36 vs human 1.88). Faint green = several prior works compared in one sentence (human-like); solid green = listed one at a time (AI-typical).</div>
+ <div class="ct">22 highlights · 9 AI evidence / 13 human evidence</div></div><div class="card" data-mold="STY">
+ <div class="chead"><span class="sw" style="background:#d55181"></span><b>Style — LLM-typical vocabulary</b>
+   <span class="abbr" style="border-color:#d55181;color:#d55181">STY</span></div>
+ <div class="ct">Stylistic (excess vocab)</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:8%;background:#d55181"></div><div class="ai">AI</div></div><span class="posv">0.08</span></div>
+ <div class="fb">LLM excess-vocabulary density 78.626 (per 10k words; pre-LLM human papers ~70 vs AI papers ~232). Words like 'delve/comprehensive/notably' that spiked after LLMs.</div>
+ <div class="ct">130 highlights · 130 AI evidence / 0 human evidence</div></div><div class="card" data-mold="ESA">
+ <div class="chead"><span class="sw" style="background:#d95926"></span><b>Evaluation surface — models × datasets</b>
+   <span class="abbr" style="border-color:#d95926;color:#d95926">ESA</span></div>
+ <div class="ct">Evaluation_Surface_Area</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:68%;background:#d95926"></div><div class="ai">AI</div></div><span class="posv">0.68</span></div>
+ <div class="fb">evaluation surface = 2 models × 4 datasets = 8 cells (AI mean 3.1 vs human 18.4). AI papers validate on a very narrow surface.</div>
+ <div class="ct">18 highlights · 0 AI evidence / 18 human evidence</div></div><div class="card" data-mold="PB">
+ <div class="chead"><span class="sw" style="background:#e66767"></span><b>Problem borrowing — is the problem taken from one prior paper?</b>
+   <span class="abbr" style="border-color:#e66767;color:#e66767">PB</span></div>
+ <div class="ct">Problem_Borrowing</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#e66767"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
+ <div class="fb">problem discovered by the authors (human-like). not pinned on any specific prior work. — “Standard language model pre-training uses unidirectional architectures (left-to-right), which restricts the ability to leverage bidirectional context ”</div>
+ <div class="ct">0 highlights · 0 AI evidence / 0 human evidence</div></div><div class="card" data-mold="FIG">
+ <div class="chead"><span class="sw" style="background:#008300"></span><b>Figure — does the diagram use color to mean something?</b>
+   <span class="abbr" style="border-color:#008300;color:#008300">FIG</span></div>
+ <div class="ct">Visualization (figure mold)</div>
+ <a href="figs/BERT.jpg" target="_blank"><img class="figthumb" src="figs/BERT.jpg" alt="method diagram"></a>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#008300"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
+ <div class="fb">has a method diagram (~80% of human papers do; only 44% of AI papers).</div>
+ <div class="ct">figure-level measurement (no text highlights)</div></div><div class="card"><div class="chead"><span class="sw" style="background:#9ca3af"></span>
+ <b>Argument_Graph (Qwen2.5-32B)</b></div><div class="fb">A1 depth=16 (HU~15.7/AI~12.7) ·
+ A2 cites=2 (HU~3.9/AI~2.4) · A3 result-nodes=0 ·
+ A5 method=5 · A6 degree=40 · A7 addresses=3</div>
+ <div class="ct">graph fingerprint, no spans (LLM extraction)</div></div></div>
+<main><section class="sheet figsheet">
+ <h2>Main figure — method diagram
+  <span class="vbadge hu" style="float:right">FIG: human-side</span></h2>
+ <div class="figwrap"><img src="figs/BERT.jpg" alt="method diagram">
+  <span class="figtag" style="background:#008300">FIG</span></div>
+ <div class="figcap">has a method diagram (~80% of human papers do; only 44% of AI papers).</div></section><section class="sheet"><pre>
+
+ 
+ 
+We introduce a new language representation model called {\bf \bert}, which <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;stands&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">stands</span> for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models~\cite{peters-etal:2018:_deep, radford-etal:2018}, \bert is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;both&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">both</span> left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM stock phrase &#x27;a wide range of&#x27;&quot;]]">a wide range of</span> tasks, such as question answering and language inference, without <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;substantial&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">substantial</span> task-specific architecture modifications. 
+
+\bert is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;including&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">including</span> pushing the <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: GLUE — models × datasets = evaluation surface&quot;]]">GLUE</span> score to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.5</span>\% (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">7.7</span>\% point absolute improvement), MultiNLI accuracy to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.7</span>\% (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">4.6</span>\% absolute improvement), <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v1.1 — models × datasets = evaluation surface&quot;]]">SQuAD v</span><span class="hl hl-ENG hl-ESA pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v1.1 — models × datasets = evaluation surface&quot;]]" style="background:repeating-linear-gradient(45deg,#c9850040,#c9850040 6px,#d9592640 6px,#d9592640 12px)">1.1</span> question answering Test F1 to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">93.2</span> (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.5</span> point absolute improvement) and <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v2.0 — models × datasets = evaluation surface&quot;]]">SQuAD v</span><span class="hl hl-ENG hl-ESA pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v2.0 — models × datasets = evaluation surface&quot;]]" style="background:repeating-linear-gradient(45deg,#c9850040,#c9850040 6px,#d9592640 6px,#d9592640 12px)">2.0</span> Test F1 to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">83.1</span> (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.1</span> point absolute improvement).
+
+ 
+
+</pre></section><section class="sheet"><h2>Introduction</h2><pre>
+§ Introduction
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;]]">Language model pre-training has been shown to be effective for improving many natural language processing tasks~\cite{dai-le:2015:_semi, peters-etal:2018:_deep, radford-etal:2018, howard-ruder:2018}.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;]]"> </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;These&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">These</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;]]"> include sentence-level tasks such as natural language inference~\cite{bowman-etal:2015, williams-nangia-bowman:2018} and paraphrasing~\cite{dolan-brockett:2005:_autom}, which aim to predict the relationships </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;between&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">between</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;]]"> sentences by analyzing them holistically, as well as token-level tasks such as named entity recognition and question answering, where models are required to produce fine-grained output at the token level~\cite{tjong-de:2003, rajpurkar-etal:2016:_squad}.</span>
+
+There are two existing <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;strategies&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">strategies</span> for applying pre-trained language representations to downstream tasks: {\em feature-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;based&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">based</span>} and {\em fine-tuning}.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> The feature-</span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;based&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">based</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;approach&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">approach</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]">, such as ELMo~\cite{peters-etal:2018:_deep}, uses task-specific architectures that include the pre-trained representations as additional features. The fine-tuning </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;approach&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">approach</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]">, such as the Generative Pre-trained Transformer (OpenAI GPT)~\cite{radford-etal:2018}, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;introduces&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">introduces</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> minimal task-specific parameters, and is trained on the downstream tasks by simply fine-tuning {\em all} pre-trained parameters.</span> The two approaches share the same objective function <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;during&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">during</span> pre-training, where they use unidirectional language models to learn general language representations.
+
+We argue that current <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;techniques&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">techniques</span> restrict the power of the pre-trained representations, especially for the fine-tuning approaches. The major limitation is that standard language models are unidirectional, and <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;this&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">this</span> limits the choice of architectures that can be used <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;during&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">during</span> pre-training.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> For example, in OpenAI GPT, the authors use a left-to-right architecture, where every token can only attend to previous tokens in the self-attention layers of the Transformer~\cite{vaswani-etal:2017:_atten}.</span> Such restrictions are sub-optimal for sentence-level tasks, and could be very harmful when applying fine-tuning <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;based&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">based</span> approaches to token-level tasks such as question answering, where it is <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;crucial&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">crucial</span> to incorporate context from <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;both&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">both</span> directions.
+
+In <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;this&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">this</span> paper, we improve the fine-tuning <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;based&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">based</span> approaches by proposing \bert: Bidirectional Encoder Representations from Transformers.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> \bert alleviates the previously mentioned unidirectionality constraint by </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;using&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">using</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> a ``masked language model''~(MLM) pre-training objective, inspired by the Cloze task~\cite{taylor:1953:_cloze}.</span> The masked language model randomly masks some of the tokens from the input, and the objective is to predict the original vocabulary id of the masked word based only on its context. Unlike left-to-right language model pre-training, the MLM objective enables the representation to fuse the left and the right context, which allows us to pre-train a deep bidirectional Transformer. In addition to the masked language model, we also use a ``next sentence prediction'' task that jointly pre-trains text-pair representations. The contributions of our paper are as follows:
+ 
+ \item We demonstrate the importance of bidirectional pre-training for language representations.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> Unlike \citet{radford-etal:2018}, which uses unidirectional language models for pre-training, \bert uses masked language models to enable pre-trained deep bidirectional representations. This is also in contrast to \citet{peters-etal:2018:_deep}, which uses a shallow concatenation of independently trained left-to-right and right-to-left LMs.</span>
+ \item We show that pre-trained representations reduce the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;need&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">need</span> for many heavily-engineered task-specific architectures. \bert is the first fine-tuning based representation model that achieves state-of-the-art performance on a large suite of sentence-level {\em and} token-level tasks, outperforming many task-specific architectures.
+ \item \bert advances the state of the art for eleven NLP tasks. 
+ The code and pre-trained models are available at \url{https://github.com/google-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;research&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">research</span>/bert}.
+ 
+
+</pre></section><section class="sheet"><h2>Related Work</h2><pre>
+§ Related Work
+
+There is a long history of pre-training general language representations, and we briefly review the most widely-used approaches in this section.
+
+§ Unsupervised Feature-based Approaches
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;]]">Learning widely applicable representations of words has been an active area of </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;research&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">research</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;]]"> for decades, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;including&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">including</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 5 prior works to each other (human-like synthesis)&quot;]]"> non-neural~\cite{brown-etal:1992:_class, ando-zhang:2005, blitzer-mcdonald-pereira:2006:_domain} and neural~\cite{mikolov-etal:2013, pennington-socher-manning:2014:_glove} methods.</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> Pre-trained word embeddings are an integral part of modern NLP systems, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;offering&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">offering</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> significant improvements over embeddings learned from scratch~\cite{turian-ratinov-bengio:2010:_word_repres}.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> To pre-train word embedding vectors, left-to-right language modeling objectives have been used~\cite{minh09}, as well as objectives to  discriminate correct from incorrect words in left and right context~\cite{mikolov-etal:2013}.</span>
+
+<span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 3 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;These&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">These</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 3 prior works to each other (human-like synthesis)&quot;]]"> approaches have been generalized to coarser granularities, such as sentence embeddings~\cite{kiros-etal:2015:_skip, logeswaran2018an} or paragraph embeddings~\cite{le-mikolov:2014:_distr}.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;]]"> To train sentence representations, prior work has used objectives to rank candidate next sentences  \cite{DBLP:journals/corr/JerniteBS17, logeswaran2018an},  left-to-right generation of next sentence words given a representation of the previous sentence~\cite{kiros-etal:2015:_skip}, or denoising auto-encoder derived objectives~\cite{hill16}.</span>
+
+┌─ [float] 
+ 
+[figure: BERT_Overall.pdf]
+ 
+Caption: {Overall pre-training and fine-tuning procedures for BERT. Apart from output layers, the same architectures are used in <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;both&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">both</span> pre-training and fine-tuning. The same pre-trained model parameters are used to initialize models for different down-stream tasks. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;During&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">During</span> fine-tuning, all parameters are fine-tuned. {\tt [CLS]} is a special symbol added
+in front of every input example, and {\tt [SEP]} is a special separator token (e.g. separating questions/answers).}
+
+ ─┘
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]">ELMo and its predecessor~\cite{peters-etal:2017:_semi, peters-etal:2018:_deep} generalize traditional word embedding </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;research&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">research</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> along a different dimension.</span> They extract context-sensitive features from a left-to-right and a right-to-left language model. The contextual representation of each token is the concatenation of the left-to-right and right-to-left representations.<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;]]"> When </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;integrating&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">integrating</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;]]"> contextual word embeddings with existing task-specific architectures, ELMo advances the state of the art for several major NLP benchmarks~\cite{peters-etal:2018:_deep} </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;including&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">including</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;]]"> question answering~\cite{rajpurkar-etal:2016:_squad}, sentiment </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;analysis&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">analysis</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 4 prior works to each other (human-like synthesis)&quot;]]">~\cite{socher-etal:2013:_recur}, and named entity recognition~\cite{tjong-de:2003}.</span>
+\citet{melamud2016context2vec} proposed learning contextual representations <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;through&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">through</span> a task to predict a single word from <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;both&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">both</span> left and right context
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;using&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">using</span> LSTMs. Similar to ELMo, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;their&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">their</span> model is feature-based and not deeply bidirectional. 
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]">\citet{fedus2018maskgan} shows that the cloze task can be used to improve the robustness of text generation models.</span> 
+
+§ Unsupervised Fine-tuning Approaches
+
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]">As with the feature-based approaches, the first works in this direction only pre-trained word embedding parameters from unlabeled text ~\cite{collobert-weston:2008}.</span> 
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 3 prior works to each other (human-like synthesis)&quot;]]">More recently, sentence or document encoders which produce contextual token representations have been pre-trained from unlabeled text and fine-tuned for a supervised downstream task~\cite{dai-le:2015:_semi, howard-ruder:2018, radford-etal:2018}.</span> The advantage of <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;these&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">these</span> approaches is that few parameters <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;need&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">need</span> to be learned from scratch.<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> At least partly due to this advantage, OpenAI GPT~\cite{radford-etal:2018} achieved previously state-of-the-art results on many sentence-level tasks from the </span><span class="hl hl-CP hl-ESA pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: GLUE — models × datasets = evaluation surface&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d9592640 6px,#d9592640 12px)">GLUE</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> benchmark~\cite{wang-etal:2018:_glue}.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 3 prior works to each other (human-like synthesis)&quot;]]">  Left-to-right language modeling and auto-encoder objectives have been used for pre-training such models~\cite{howard-ruder:2018, radford-etal:2018,dai-le:2015:_semi}.</span>
+
+§ Transfer Learning from Supervised Data
+
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]">There has also been work showing effective transfer from supervised tasks with large datasets, such as natural language inference~\cite{conneau-EtAl:2017:EMNLP2017} and machine translation~\cite{mccann-etal:2017:_learn_trans}.</span> 
+<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]">Computer vision </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;research&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">research</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> has also </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;demonstrated&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">demonstrated</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> the importance of transfer learning from large pre-trained models, where an effective recipe is to fine-tune models pre-trained with ImageNet~\cite{imagenet_cvpr09, yosinski2014transferable}.</span> 
+
+</pre></section><section class="sheet"><h2>BERT</h2><pre>
+§ BERT
+
+We introduce BERT and its detailed implementation in this section. There are two steps in our framework: {\em pre-training} and {\em fine-tuning}. 
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;During&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">During</span> pre-training, the model is trained on unlabeled data over different pre-training tasks.
+For fine-tuning, the BERT model is first initialized with the pre-trained parameters, and all of the parameters are fine-tuned <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;using&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">using</span> labeled data from the downstream tasks. 
+Each downstream task has separate fine-tuned models, even though they
+are initialized with the same pre-trained parameters. The question-answering example in Figure~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{fig:bert_overall}</span> will serve as a running example for this section.
+
+A <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;distinctive&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">distinctive</span> feature of BERT is its unified architecture <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;across&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">across</span> different tasks.
+There is minimal difference <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;between&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">between</span> the pre-trained architecture and the final downstream architecture.
+
+\paragraph{Model Architecture}
+BERT's model architecture is a multi-layer bidirectional Transformer encoder based on the original implementation described in \citet{vaswani-etal:2017:_atten} and released in the {\tt tensor2tensor} library.\footnote{https://github.com/tensorflow/tensor2tensor} Because the use of Transformers has become common and our implementation is almost identical to the original, we will omit an exhaustive background description of the model architecture and refer readers to \citet{vaswani-etal:2017:_atten} as well as excellent guides such as ``The Annotated Transformer.''\footnote{http://nlp.seas.harvard.edu/2018/04/03/attention.html}
+
+In this work, we denote the number of layers (i.e., Transformer blocks) as $L$, the hidden size as $H$, and the number of self-attention heads as $A$.\footnote{In all cases we set the feed-forward/filter size to be $4H$, i.e., 3072 for the $H=768$ and 4096 for the $H=1024$.} We <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;primarily&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">primarily</span> report results on two model sizes: {\bf \bertbase} (L=12, H=768, A=12, Total Parameters=110M) and {\bf \bertlarge} (L=24, H=1024, A=16, Total Parameters=340M).
+
+\bertbase was chosen to have the same model size as OpenAI GPT for comparison purposes. Critically, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;however&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">however</span>, the BERT Transformer uses bidirectional self-attention, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;while&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">while</span> the GPT Transformer uses constrained self-attention where every token can only attend to context to its left.\footnote{We note that in the literature the bidirectional Transformer is often referred to as a ``Transformer encoder'' <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;while&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">while</span> the left-context-only version is referred to as a ``Transformer decoder'' since it can be used for text generation.} 
+
+\paragraph{Input/Output Representations} % Claim we shared the structures
+To make BERT handle a variety of down-stream tasks,
+our input representation is able to unambiguously represent both a single sentence and a pair of sentences (e.g., $\langle$ Question, Answer $\rangle$) in one token sequence. Throughout this work, a ``sentence'' can be an arbitrary span of contiguous text, rather than an actual linguistic sentence. A ``sequence'' refers to the input token sequence to BERT, which may be a single sentence or two sentences packed together.
+
+We use WordPiece embeddings \cite{wu-etal:2016:_googl} with a 30,000 token vocabulary.
+The first token of every sequence is always a special classification token ({\tt [CLS]}). The final hidden state corresponding to this token is used as the aggregate sequence representation for classification tasks. 
+Sentence pairs are packed together <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;into&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">into</span> a single sequence. We differentiate the sentences in two ways. First, we separate them with a special token ({\tt [SEP]}). Second, we add a learned embedding to every token <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;indicating&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">indicating</span> whether it belongs to sentence {\tt A} or sentence {\tt B}. 
+As shown in Figure~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{fig:bert_overall}</span>, we denote 
+input embedding as $E$, the final hidden vector of the special {\tt [CLS]} token as $C \in \mathbb{R}^{H}$, and the final hidden vector for the $i^{\rm th}$ input token as $T_i \in \mathbb{R}^H$.
+
+For a given token, its input representation is constructed by summing the corresponding token, segment, and position embeddings. 
+A visualization of this construction can be seen in Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{fig:input_embeddings}</span>.
+
+┌─ [float] 
+ 
+\hspace{-<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.2</span>in}
+[figure: Input_Emebeddings.pdf]
+ 
+Caption: {BERT input representation. The input embeddings are the sum of the token embeddings, the segmentation embeddings and the position embeddings.}
+
+ ─┘
+
+§ Pre-training BERT
+
+Unlike \citet{peters-etal:2018:_deep} and \citet{radford-etal:2018}, we do not use traditional left-to-right or right-to-left language models to pre-train BERT. Instead, we pre-train BERT <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;using&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">using</span> two unsupervised tasks, described in this section. This step
+is presented in the left part of Figure~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{fig:bert_overall}</span>.
+
+\paragraph{Task \#1: Masked LM}
+Intuitively, it is reasonable to believe that a deep bidirectional model is strictly more powerful than either a left-to-right model or the shallow concatenation of a left-to-right and a right-to-left model. Unfortunately, standard conditional language models can only be trained left-to-right {\it or} right-to-left, since bidirectional conditioning would 
+allow each word to indirectly ``see itself'', and
+the model could trivially predict the target word in a multi-layered context.
+
+In order to train a deep bidirectional representation, we simply mask some percentage of the input tokens at random, and then predict those masked tokens. We refer to this procedure as a ``masked LM'' (MLM), although it is often referred to as a {\it Cloze} task in the literature~\cite{taylor:1953:_cloze}. In this case, the final hidden vectors corresponding to the mask tokens are fed <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;into&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">into</span> an output softmax over the vocabulary, as in a standard LM. In all of our experiments, we mask 15\% of all WordPiece tokens in each sequence at random. In contrast to denoising auto-encoders \cite{vincent:2008}, we only predict the masked words rather than reconstructing the entire input. 
+
+Although this allows us to obtain a bidirectional pre-trained model, a downside is that we are creating a mismatch <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;between&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">between</span> pre-training and fine-tuning, since the {\tt [MASK]} token does not appear during fine-tuning. To mitigate this, we do not always replace ``masked'' words with the actual {\tt [MASK]} token. The training data generator chooses 15\% of the token positions at random for prediction. If the $i$-th token is chosen, we replace the $i$-th token with (1) the {\tt [MASK]} token 80\% of the time (2) a random token 10\% of the time (3) the unchanged $i$-th token 10\% of the time. Then, $T_i$ will be used to predict the original token with cross entropy loss.
+We compare variations of this procedure in Appendix~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:different_masks}</span>.
+ 
+
+\paragraph{Task \#2: Next Sentence Prediction (NSP)}
+Many important downstream tasks such as Question Answering (QA) and Natural Language Inference (NLI) are based on <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;understanding&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">understanding</span> the {\it relationship} <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;between&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">between</span> two sentences, which is not directly captured by language modeling. In order to train a model that understands sentence relationships, we pre-train for a binarized {\it next sentence prediction} task that can be trivially generated from any monolingual corpus. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Specifically&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Specifically</span>, when choosing the sentences {\tt A} and {\tt B} for each pre-training example, 50\% of the time {\tt B} is the actual next sentence that follows {\tt A} (labeled
+ as {\tt { IsNext}}), and 50\% of the time it is a random sentence from the corpus
+ (labeled as {\tt { NotNext}}). 
+As we show in Figure~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{fig:bert_overall}</span>, $C$ is used for next sentence prediction (NSP).\footnote{The final model achieves 97\%-98\% accuracy on NSP.} <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Despite&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Despite</span> its simplicity, we demonstrate in Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:task_ablation}</span> that pre-training towards this task is very beneficial to both QA and NLI.
+\footnote{The vector $C$ is not a meaningful sentence representation without fine-tuning, since it was trained with NSP.}
+The NSP task is closely related to representation-learning objectives used in \citet{DBLP:journals/corr/JerniteBS17} and \citet{logeswaran2018an}. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;However&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">However</span>, in prior work, only sentence embeddings are transferred to down-stream tasks, where BERT transfers all parameters to initialize end-task model parameters.
+
+ 
+ Pre-training data
+The pre-training procedure largely follows the existing literature on language model pre-training. For the pre-training corpus we use the BooksCorpus (800M words)~\cite{zhu:2015} and English Wikipedia (2,500M words). For Wikipedia we extract only the text passages and ignore lists, tables, and headers. It is critical to use a document-level corpus rather than a shuffled sentence-level corpus such as the Billion Word Benchmark \cite{chelba-etal:2013:_one} in order to extract long contiguous sequences.
+
+§ Fine-tuning BERT
+
+Fine-tuning is straightforward since the self-attention mechanism in the Transformer allows BERT to model many downstream tasks---whether they involve single text or text pairs---by swapping out the appropriate inputs and outputs.
+For applications <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;involving&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">involving</span> text pairs, a common pattern is to independently encode text pairs before applying bidirectional cross attention, such as~\newcite{parikh-etal:2016, bidaf}. BERT instead uses the self-attention mechanism to unify <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;these&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">these</span> two stages, as encoding 
+a concatenated text pair with self-attention <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;effectively&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">effectively</span> includes bidirectional cross attention between two sentences. 
+
+For each task, we simply plug in the task-specific inputs and outputs <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;into&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">into</span> BERT and fine-tune all the parameters end-to-end. 
+At the input, sentence {\tt A} and sentence {\tt B} from pre-training are analogous to (1) sentence pairs in paraphrasing, (2) hypothesis-premise pairs in entailment, (3) question-passage pairs in question answering, and (4) a degenerate text-$\varnothing$ pair in text classification or sequence tagging. At the output, the token representations are fed <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;into&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">into</span> an output layer for token-level tasks, such as sequence tagging or question answering, and the {\tt [CLS]} representation is fed into an output layer for classification, such as entailment or sentiment <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;analysis&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">analysis</span>.
+
+Compared to pre-training, fine-tuning is relatively inexpensive. All of the results in the paper can be replicated in at most 1 hour on a single Cloud TPU, or a few hours on a GPU, starting from the exact same pre-trained model.\footnote{For example, the BERT SQuAD model can be trained in around 30 minutes on a single Cloud TPU to achieve a Dev F1 score of <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.0</span>\%.}
+We describe the task-specific details in the corresponding subsections of Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:experiments}</span>. 
+More details can be found in Appendix~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:fine_tune_details_and_figures}</span>.
+
+\eat{The standard pattern in many NLP models is to independently encode text pairs before apply bidirectional cross attention, such as ~\newcite{parikh-etal:2016, bidaf}. BERT instead <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;leverages&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">leverages</span> the self-attention mechanism in the Transformer to unify these two stages. Encoding with self-attention is performed jointly with iterative and bidirectional cross attention.
+Therefore, many downstream tasks---whether they involve single text or text pairs---can be modeled by simply swapping out the appropriate inputs and outputs.
+
+At the input, sentence {\tt A} and sentence {\tt B} from pre-training are analogous to (1) sentence pairs in paraphrasing, (2) hypothesis-premise pairs in entailment, (3) question-passage pairs in question answering, and (4) a degenerate text-$\varnothing$ pair in text classification or sequence tagging. At the output, the token representations are fed into an output layer for token-level tasks, such as sequence tagging or question answering, and the {\tt [CLS]} representation is fed into an output layer for classification, such as entailment or sentiment <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;analysis&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">analysis</span>.
+
+During the fine-tuning stage, we simply plug in the task-specific inputs and outputs into BERT and fine-tune all the parameters end-to-end. We describe the task-specific details in the corresponding subsections of Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:experiments}</span>. In-depth task specific design figures are also shown in Appendix~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:fine_tune_details_and_figures}</span>.
+}
+
+\eat{
+ 
+ Cross-attention
+BERT is designed such that it does not distinguish between self-attention used <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;within&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">within</span> a single sequence and cross-attention used between multiple sequences. Cross-attention between
+question and passage has been shown to be important for question-answering~\cite{bidaf}, where they cross
+attend question and passage for two times.
+When fine-tuning a twelve-layer BERT for question answering, the question and passage will cross attend to each other for {\em twelve} times given that question and passage are packed into a single input sequence
+iteratively. Moreover, the parameters for cross-attention are pretrained. The iterative attention also happened in OpenAI GPT, but
+the second sequence cannot attend to the first sequence due to the unidirectionality constraint.
+}
+
+┌─ [float] 
+ 
+\renewcommand{\arraystretch}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.2</span>}
+ 
+ {l@{\extracolsep{\fill}}cccccccc c}
+ 
+System &amp; MNLI-(m/mm) &amp; QQP &amp; QNLI &amp; SST-2 &amp; CoLA &amp; STS-B &amp; MRPC &amp; RTE &amp; {\bf Average} \\
+ &amp; 392k &amp; 363k &amp; 108k &amp; 67k &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">8.5</span>k &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.7</span>k &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">3.5</span>k &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.5</span>k &amp; - \\ 
+ 
+Pre-OpenAI SOTA &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.6</span>/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">66.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">93.2</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">35.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">61.7</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">74.0</span> \\
+BiLSTM+ELMo+Attn &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">76.4</span>/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">76.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">64.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">79.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">90.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">36.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">73.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">56.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">71.0</span> \\
+OpenAI GPT &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.1</span>/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">70.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">87.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">45.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">56.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">75.1</span> \\
+
+ 
+\bertbase &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.6</span>/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">83.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">71.2</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">90.5</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">93.5</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">52.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">85.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">88.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">66.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">79.6</span> \\
+\bertlarge &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.7</span>/<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">85.9</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">72.1</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.7</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.9</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">60.5</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.5</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">89.3</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">70.1</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.1</span>} \\
+ 
+ 
+ Caption: {<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: GLUE — models × datasets = evaluation surface&quot;]]">GLUE</span> Test results, scored by the evaluation server ({ \url{https://gluebenchmark.com/leaderboard}}). The number below each task denotes the number of training examples. The ``Average'' column is slightly different than the official <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: GLUE — models × datasets = evaluation surface&quot;]]">GLUE</span> score, since we exclude the problematic WNLI set.\footnote{See question 10 in \url{https://gluebenchmark.com/faq}.} 
+ BERT and OpenAI GPT are single-model, single task. F1 scores are reported for QQP and MRPC, Spearman correlations are reported for STS-B, and accuracy scores are reported for
+ the other tasks. We exclude entries that use BERT as one of <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;their&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">their</span> components.}
+ 
+ 
+ ─┘
+
+\footnotetext{See (10) in \url{https://gluebenchmark.com/faq}.}
+
+</pre></section><section class="sheet"><h2>Experiments</h2><pre>
+§ Experiments
+
+In this section, we present BERT fine-tuning results on 11 NLP tasks. 
+
+\subsection{<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: GLUE — models × datasets = evaluation surface&quot;]]">GLUE</span>}
+
+The General Language <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Understanding&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Understanding</span> Evaluation (<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: GLUE — models × datasets = evaluation surface&quot;]]">GLUE</span>) benchmark~\cite{wang-etal:2018:_glue} is a collection of <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;diverse&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">diverse</span> natural language <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;understanding&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">understanding</span> tasks.
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;their&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">their</span> predictions to the GLUE server for evaluation, with limits on the number of submissions.
+Detailed descriptions of GLUE datasets are included in Appendix~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:glue}</span>.
+
+To fine-tune on GLUE, we represent the input sequence (for single sentence or sentence pairs) as described in Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:bert}</span>, and use the final hidden vector $C \in \mathbb{R}^{H}$ corresponding to the first input token ({\tt [CLS]}) as the aggregate representation.
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;demonstrated&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">demonstrated</span> visually in Figure~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{fig:bert_fine_tune}</span> (a) and (b).
+The only new parameters introduced during fine-tuning are classification layer weights $W \in \mathbb{R}^{K \times H}$, where $K$ is the number of labels. We compute a standard classification loss with $C$ and $W$, i.e., $\log({\rm softmax}(CW^T))$.
+
+We use a batch size of 32 and fine-tune for 3 epochs over the data for all GLUE tasks. For each task, we selected the best fine-tuning learning rate (among 5e-5, 4e-5, 3e-5, and 2e-5) on the Dev set. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Additionally&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Additionally</span>, for \bertlarge we found that fine-tuning was sometimes unstable on small datasets, so we ran several random restarts and selected the best model on the Dev set. With random restarts, we use the same pre-trained checkpoint but perform different fine-tuning data shuffling and classifier layer initialization.\footnote{The GLUE data set distribution does not include the Test labels, and we only made a single GLUE evaluation server submission for each of \bertbase and \bertlarge.}
+
+Results are presented in Table~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{tab:glue_official}</span>. Both \bertbase and \bertlarge outperform all systems on all tasks by a <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;substantial&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">substantial</span> margin, obtaining <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">4.5</span>\% and <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">7.0</span>\% respective average accuracy improvement over the prior state of the art. Note that \bertbase and OpenAI GPT are nearly identical in terms of model architecture apart from the attention masking. For the largest and most widely reported GLUE task, MNLI, BERT obtains a <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">4.6</span>\% absolute accuracy improvement. On the official GLUE leaderboard\footnote{https://gluebenchmark.com/leaderboard},
+\bertlarge obtains a score of <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.5</span>, compared to OpenAI GPT, which obtains <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">72.8</span> as of the date of writing.
+
+We find that \bertlarge significantly outperforms \bertbase <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;across&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">across</span> all tasks, especially those with very little training data. The effect of model size is explored more thoroughly in Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:model_size_ablation}</span>.
+
+\subsection{<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v1.1 — models × datasets = evaluation surface&quot;]]">SQuAD v</span><span class="hl hl-ENG hl-ESA pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v1.1 — models × datasets = evaluation surface&quot;]]" style="background:repeating-linear-gradient(45deg,#c9850040,#c9850040 6px,#d9592640 6px,#d9592640 12px)">1.1</span>}
+
+The Stanford Question Answering Dataset (<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v1.1 — models × datasets = evaluation surface&quot;]]">SQuAD v</span><span class="hl hl-ENG hl-ESA pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v1.1 — models × datasets = evaluation surface&quot;]]" style="background:repeating-linear-gradient(45deg,#c9850040,#c9850040 6px,#d9592640 6px,#d9592640 12px)">1.1</span>) is a collection of 100k crowdsourced question/answer pairs~\cite{rajpurkar-etal:2016:_squad}. Given a question and a passage from Wikipedia containing the answer, the task is to predict the answer text span in the passage. 
+
+\eat{
+For example: 
+
+ 
+\item Input Question: \\{\tt { Where do water droplets collide with ice crystals to form precipitation?}}
+\item Input Paragraph: \\{\tt { ... Precipitation forms as smaller droplets coalesce via collision with other rain drops or ice crystals <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;within&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">within</span> a cloud. ...}}
+\item Output Answer: \\ {\tt { <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;within&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">within</span> a cloud}}
+ 
+}
+
+As shown in Figure~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{fig:bert_overall}</span>, in the question answering task,
+we represent the input question and passage as a single packed sequence, with the question using the {\tt A} embedding and the passage using the {\tt B} embedding. We only introduce a start vector $S \in \mathbb{R}^H$ and an end vector $E \in \mathbb{R}^H$ during fine-tuning.
+The probability of word $i$ being the start of the answer span is computed as a dot product between $T_i$ and $S$ followed by a softmax over all of the words in the paragraph: $P_i = \frac{e^{S{\cdot}T_i}}{\sum_j e^{S{\cdot}T_j}}$. The analogous formula is used for the end of the answer span. The score of a candidate span from position $i$ to position $j$ is defined as $S{\cdot}T_i + E{\cdot}T_j$, and the maximum scoring span where $j \geq i$ is used as a prediction. The training objective is the sum of the log-likelihoods of the correct start and end positions. We fine-tune for 3 epochs with a learning rate of 5e-5 and a batch size of 32. 
+
+┌─ [float] 
+ 
+{ 
+ {@{}lcccc@{}}
+ 
+ \multicolumn{1}{c}{System} &amp; \multicolumn{2}{c}{Dev} &amp; \multicolumn{2}{c}{Test} \\
+ &amp; EM &amp; F1 &amp; EM &amp; F1 \\
+ 
+
+ \multicolumn{5}{c}{Top Leaderboard Systems (Dec 10th, 2018)} \\
+ Human &amp; - &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.2</span> \\ 
+ \#1 Ensemble - nlnet &amp; - &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.7</span> \\ 
+ \#2 Ensemble - QANet &amp; - &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.5</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">90.5</span> \\ 
+ 
+ \multicolumn{5}{c}{Published} \\
+ BiDAF+ELMo (Single) &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">85.6</span> &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">85.8</span> \\ 
+ R.M. Reader (Ensemble) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.2</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">87.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">88.5</span> \\ 
+ 
+ \multicolumn{5}{c}{Ours} \\
+ \bertbase (Single) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">88.5</span> &amp; - &amp; - \\ 
+ \bertlarge (Single) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">90.9</span> &amp; - &amp; - \\ 
+ \bertlarge (Ensemble) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">85.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.8</span> &amp; - &amp; - \\ 
+ \bertlarge (Sgl.+<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: TriviaQA — models × datasets = evaluation surface&quot;]]">TriviaQA</span>) &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.2</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.1</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">85.1</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.8</span>} \\ 
+ \bertlarge (Ens.+<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: TriviaQA — models × datasets = evaluation surface&quot;]]">TriviaQA</span>) &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.2</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.2</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">87.4</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">93.2</span>}
+ \\ 
+
+ 
+ 
+} % small
+ 
+Caption: { SQuAD <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.1</span> results. The BERT ensemble is 7x systems which use different pre-training checkpoints and fine-tuning seeds.}
+ ─┘
+
+┌─ [float] 
+ 
+{ 
+ {@{}lcccc@{}}
+ 
+ \multicolumn{1}{c}{System} &amp; \multicolumn{2}{c}{Dev} &amp; \multicolumn{2}{c}{Test} \\
+ &amp; EM &amp; F1 &amp; EM &amp; F1 \\
+ 
+
+\multicolumn{5}{c}{Top Leaderboard Systems (Dec 10th, 2018)} \\
+ Human &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">89.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.9</span>&amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">89.5</span> \\ 
+ \#1 Single - MIR-MRC (F-Net) &amp; - &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">74.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">78.0</span> \\ 
+ \#2 Single - nlnet &amp; - &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">74.2</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">77.1</span> \\ 
+ 
+ \multicolumn{5}{c}{Published} \\
+ unet (Ensemble) &amp; - &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">71.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">74.9</span> \\ 
+ SLQA+ (Single) &amp; - &amp; &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">71.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">74.4</span>\\
+ 
+ \multicolumn{5}{c}{Ours} \\
+ \bertlarge (Single) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">78.7</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.0</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">83.1</span>
+ \\ 
+
+ 
+ 
+} % small
+ 
+Caption: { SQuAD <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.0</span> results. We exclude entries that use BERT as one of <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;their&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">their</span> components.}
+ ─┘
+
+Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:squad_results}</span> shows top leaderboard entries as well as results from top published systems~\cite{bidaf,clark-gardner:2018:_simpl,peters-etal:2018:_deep,hu2017reinforced}.
+The top results from the SQuAD leaderboard do not have up-to-date public system descriptions available,\footnote{QANet is described in \newcite{yu-etal:2018:_qanet}, but the system has improved substantially after publication.} and are allowed to use any public data when training their systems. We therefore use modest data augmentation in our system by first fine-tuning on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: TriviaQA — models × datasets = evaluation surface&quot;]]">TriviaQA</span>~\cite{joshi-etal:2017:_triviaq} befor fine-tuning on SQuAD.
+
+Our best performing system outperforms the top leaderboard system by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.5</span> F1 in ensembling and +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.3</span> F1 as a single system. In fact, our single BERT model outperforms the top ensemble system in terms of F1 score. Without <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: TriviaQA — models × datasets = evaluation surface&quot;]]">TriviaQA</span> fine-tuning data, we only lose <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.1</span>-<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.4</span> F1, still outperforming all existing systems by a wide margin.\footnote{The <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: TriviaQA — models × datasets = evaluation surface&quot;]]">TriviaQA</span> data we used consists of paragraphs from <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: TriviaQA — models × datasets = evaluation surface&quot;]]">TriviaQA</span>-Wiki formed of the first 400 tokens in documents, that contain at least one of the provided possible answers.}
+
+\subsection{<span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v2.0 — models × datasets = evaluation surface&quot;]]">SQuAD v</span><span class="hl hl-ENG hl-ESA pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v2.0 — models × datasets = evaluation surface&quot;]]" style="background:repeating-linear-gradient(45deg,#c9850040,#c9850040 6px,#d9592640 6px,#d9592640 12px)">2.0</span>}
+
+The SQuAD <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.0</span> task extends the SQuAD <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.1</span> problem definition by allowing for the possibility that no short answer exists in the provided paragraph, making the problem more realistic.
+
+We use a simple <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;approach&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">approach</span> to extend the <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v1.1 — models × datasets = evaluation surface&quot;]]">SQuAD v</span><span class="hl hl-ENG hl-ESA pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: SQuAD v1.1 — models × datasets = evaluation surface&quot;]]" style="background:repeating-linear-gradient(45deg,#c9850040,#c9850040 6px,#d9592640 6px,#d9592640 12px)">1.1</span> BERT model for this task. We treat questions that do not have an answer as having an answer span with start and end at the {\tt [CLS]} token. The probability space for the start and end answer span positions is extended to include the position of the {\tt [CLS]} token. For prediction, we compare the score of the no-answer span: $s_{\tt null} = S{\cdot}C + E{\cdot}C$ to the score of the best non-null span $\hat{s_{i,j}}$ = $ {\tt max}_{j \geq i} S{\cdot}T_i + E{\cdot}T_j$. We predict a non-null answer when $\hat{s_{i,j}} &gt; s_{\tt null} + \tau $, where the threshold $\tau$ is selected on the dev set to maximize F1. We did not use TriviaQA data for this model. We fine-tuned for 2 epochs with a learning rate of 5e-5 and a batch size of 48.
+
+The results compared to prior leaderboard entries and top published work \cite{unet,slqa} are shown in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:squad2_results}</span>, excluding systems that use BERT as one of their components. We observe a +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.1</span> F1 improvement over the previous best system.
+
+§ SWAG
+
+The Situations With Adversarial Generations (SWAG) dataset contains 113k sentence-pair completion examples that evaluate grounded commonsense inference~\cite{zellers2018swag}. Given a sentence, the task is to choose the most plausible continuation among four choices.
+
+When fine-tuning on the SWAG dataset, we construct four input sequences, each containing the concatenation of the given sentence (sentence {\tt A}) and a possible continuation (sentence {\tt B}). The only task-specific parameters introduced is a vector whose dot product with the {\tt [CLS]} token representation $C$ denotes a score for each choice which is normalized with a softmax layer.
+
+We fine-tune the model for 3 epochs with a learning rate of 2e-5 and a batch size of 16. Results are presented in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:swag_official}</span>. \bertlarge outperforms the authors' baseline ESIM+ELMo system by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">27.1</span>\% and OpenAI GPT by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">8.3</span>\%.
+
+┌─ [float] 
+ 
+{
+ 
+ 
+ 
+System &amp; Dev &amp; Test\\ 
+ 
+ESIM+GloVe &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">51.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">52.7</span> \\
+ESIM+ELMo &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">59.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">59.2</span> \\
+OpenAI GPT &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">78.0</span> \\
+ 
+\bertbase &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.6</span> &amp; - \\
+\bertlarge &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.6</span>} &amp; {\bf <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.3</span>} \\
+ 
+Human (expert)$^\dagger$ &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">85.0</span> \\
+Human (5 annotations)$^\dagger$ &amp; - &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">88.0</span> \\
+ 
+ 
+}
+Caption: {SWAG Dev and Test accuracies. 
+$^\dagger$Human performance is measured with 100 samples, as reported in the SWAG paper.}
+
+ 
+ ─┘
+
+</pre></section><section class="sheet"><h2>Ablation Studies</h2><pre>
+§ Ablation Studies
+
+In this section, we perform ablation experiments over a number of facets of BERT in order to better understand their relative importance. Additional ablation studies can be found in Appendix~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:more_ablation_studies}</span>.
+
+§ Effect of Pre-training Tasks
+
+We demonstrate the importance of the deep bidirectionality of BERT by evaluating two pre-training objectives using exactly the same pre-training data, fine-tuning scheme, and hyperparameters as \bertbase:
+\vspace{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.3</span>cm}
+\\
+ No NSP: A bidirectional model which is trained using the ``masked LM'' (MLM) but without the ``next sentence prediction'' (NSP) task.\\
+ LTR \&amp; No NSP: A left-context-only model which is trained using a standard Left-to-Right (LTR) LM, rather than an MLM. The left-only constraint was also applied at fine-tuning, because removing it introduced a pre-train/fine-tune mismatch that degraded downstream performance. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Additionally&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Additionally</span>, this model was pre-trained without the NSP task. This is directly comparable to OpenAI GPT, but using our larger training dataset, our input representation, and our fine-tuning scheme.
+
+┌─ [float] 
+ 
+ {@{}lccccc@{}}
+ 
+ &amp; \multicolumn{5}{c}{Dev Set} \\
+ Tasks &amp; MNLI-m &amp; QNLI &amp; MRPC &amp; SST-2 &amp; SQuAD \\
+ &amp; (Acc) &amp; (Acc) &amp; (Acc) &amp; (Acc) &amp; (F1) \\
+ 
+\bertbase &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">88.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.7</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.7</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">88.5</span> \\
+No NSP &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">83.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.5</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.6</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">87.9</span> \\
+LTR \&amp; No NSP &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.3</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">77.5</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">77.8</span> \\
+\quad + BiLSTM &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.1</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">75.7</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.6</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.9</span> \\
+ 
+ 
+ Caption: {Ablation over the pre-training tasks using the \bertbase architecture. ``No NSP'' is trained without the next sentence prediction task. ``LTR \&amp; No NSP'' is trained as a left-to-right LM without the next sentence prediction, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;like&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">like</span> OpenAI GPT. ``+ BiLSTM'' adds a randomly initialized BiLSTM on top of the ``LTR + No NSP'' model during fine-tuning.
+ }
+ 
+ ─┘
+
+We first examine the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;impact&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">impact</span> brought by the NSP task. In Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:task_ablation}</span>, we show that removing NSP hurts performance significantly on QNLI, MNLI, and SQuAD <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.1</span>. Next, we evaluate the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;impact&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">impact</span> of training bidirectional representations by comparing ``No NSP'' to ``LTR \&amp; No NSP''. The LTR model performs worse than the MLM model on all tasks, with large drops on MRPC and SQuAD.
+
+For SQuAD it is intuitively clear that a LTR model will perform poorly at token predictions, since the token-level hidden states have no right-side context.
+In order to make a good faith attempt at strengthening the LTR system, we added a randomly initialized BiLSTM on top. This does significantly improve results on SQuAD, but the results are still far worse than those of the pre-trained bidirectional models. The BiLSTM hurts performance on the GLUE tasks. 
+
+We recognize that it would also be possible to train separate LTR and RTL models and represent each token as the concatenation of the two models, as ELMo does. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;However&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">However</span>: (a) this is twice as expensive as a single bidirectional model; (b) this is non-intuitive for tasks <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;like&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">like</span> QA, since the RTL model would not be able to condition the answer on the question; (c) this it is strictly less powerful than a deep bidirectional model, since it can use both left and right context at every layer.
+
+§ Effect of Model Size
+
+In this section, we explore the effect of model size on fine-tuning task accuracy. We trained a number of BERT models with a differing number of layers, hidden units, and attention heads, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;while&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">while</span> otherwise using the same hyperparameters and training procedure as described previously.
+
+Results on selected GLUE tasks are shown in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:size_ablation}</span>. In this table, we report the average Dev Set accuracy from 5 random restarts of fine-tuning. We can see that larger models lead to a strict accuracy improvement <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;across&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">across</span> all four datasets, even for MRPC which only has 3,600 labeled training examples, and is substantially different from the pre-training tasks. It is also perhaps surprising that we are able to achieve such significant improvements on top of models which are already quite large relative to the existing literature. For example, the largest Transformer explored in \citet{vaswani-etal:2017:_atten} is (L=6, H=1024, A=16) with 100M parameters for the encoder, and the largest Transformer we have found in the literature is (L=64, H=512, A=2) with 235M parameters \cite{alrfou:2018}. By contrast, \bertbase contains 110M parameters and \bertlarge contains 340M parameters.
+
+┌─ [float] 
+ 
+{ 
+ {@{}rrrcccc@{}}
+ 
+ \multicolumn{3}{c}{Hyperparams} &amp; &amp; \multicolumn{3}{c}{Dev Set Accuracy} \\
+ 
+ \#L &amp; \#H &amp;\#A &amp; LM (ppl) &amp; MNLI-m &amp; MRPC &amp;SST-2 \\
+ 
+ \
+ 3 &amp; 768 &amp; 12 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.84</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">77.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">79.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">88.4</span> \\
+ 6 &amp; 768 &amp; 3 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.24</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.6</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.2</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">90.7</span> \\
+ 6 &amp; 768 &amp; 12 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">4.68</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.3</span> \\
+ 12 &amp; 768 &amp; 12 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">3.99</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.7</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.9</span> \\
+ 12 &amp; 1024 &amp; 16 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">3.54</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">85.7</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.9</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">93.3</span> \\
+ 24 &amp; 1024 &amp; 16 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">3.23</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">86.6</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">87.8</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">93.7</span> \\
+ 
+ 
+} % small
+ 
+Caption: { Ablation over BERT model size. \#L = the number of layers; \#H = hidden size; \#A = number of attention heads. ``LM (ppl)'' is the masked LM perplexity of held-out training data.}
+ ─┘
+
+It has long been known that increasing the model size will lead to continual improvements on large-scale tasks such as machine translation and language modeling, which is <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;demonstrated&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">demonstrated</span> by the LM perplexity of held-out training data shown in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:size_ablation}</span>. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;However&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">However</span>, we believe that this is the first work to demonstrate convincingly that scaling to extreme model sizes also leads to large improvements on very small scale tasks, provided that the model has been sufficiently pre-trained. \citet{peters2018dissecting} presented mixed results on the downstream task <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;impact&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">impact</span> of increasing the pre-trained bi-LM size from two to four layers and \citet{melamud2016context2vec} mentioned in passing that increasing hidden dimension size from 200 to 600 helped, but increasing further to 1,000 did not bring further improvements. Both of these prior works used a feature-based <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;approach&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">approach</span> --- we hypothesize that when the model is fine-tuned directly on the downstream tasks and uses only a very small number of randomly initialized additional parameters, the task-specific models can benefit from the larger, more expressive pre-trained representations even when downstream task data is very small. 
+
+§ Feature-based Approach with BERT
+
+All of the BERT results presented so far have used the fine-tuning approach, where a simple classification layer is added to the pre-trained model, and all parameters are jointly fine-tuned on a downstream task. However, the feature-based approach, where fixed features are extracted from the pre-trained model, has certain advantages. First, not all
+tasks can be easily represented by a Transformer encoder architecture, and therefore require a task-specific model architecture to be added. Second, there are major computational benefits to
+pre-compute an expensive representation of the training data once and then run many experiments with 
+cheaper
+models on top of this representation. 
+
+In this section, we compare the two approaches by applying BERT to the CoNLL-2003 Named Entity Recognition (NER) task~\cite{tjong-de:2003}. In the input to BERT, we use a case-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;preserving&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">preserving</span> WordPiece model, and we include the maximal document context provided by the data. Following standard practice, we formulate this as a tagging task but do not use a CRF layer in the output. We use the representation of the first sub-token as the input to the token-level classifier over the NER label set.
+
+To ablate the fine-tuning approach, we apply the feature-based approach by extracting the activations from one or more layers {\it without} fine-tuning any parameters of BERT. These contextual embeddings are used as input to a randomly initialized two-layer 768-dimensional BiLSTM before the classification layer.
+
+Results are presented in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:pretrained_embeddings}</span>. \bertlarge performs competitively with state-of-the-art methods. The best performing method concatenates the token representations from the top four hidden layers of the pre-trained Transformer, which is only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.3</span> F1 behind fine-tuning the entire model. This <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;demonstrates&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">demonstrates</span> that BERT is effective for both fine-tuning and feature-based approaches.
+
+┌─ [float] 
+ 
+ 
+ {@{}lcc@{}}
+ 
+System &amp; Dev F1 &amp; Test F1 \\
+ 
+ELMo~\cite{peters-etal:2018:_deep}&amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;number next to a citation — grounded in prior work (human-like)&quot;]]">95.7</span> &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;number next to a citation — grounded in prior work (human-like)&quot;]]">92.2</span> \\
+CVT~\cite{clark2018semi} &amp; - &amp; <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;number next to a citation — grounded in prior work (human-like)&quot;]]">92.6</span> \\
+CSE~\cite{akbik2018contextual} &amp; - &amp; {\bf <span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;number next to a citation — grounded in prior work (human-like)&quot;]]">93.1</span>} \\
+ 
+Fine-tuning approach &amp; &amp; \\
+\;\;\;\bertlarge &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">96.6</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.8</span> \\
+\;\;\;\bertbase&amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">96.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.4</span> \\
+ 
+Feature-based approach (\bertbase) &amp; &amp; \\
+\;\;\;Embeddings &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">91.0</span> &amp;- \\
+\;\;\;Second-to-Last Hidden &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">95.6</span>&amp;- \\
+\;\;\;Last Hidden &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.9</span>&amp;- \\
+\;\;\;Weighted Sum Last Four Hidden &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">95.9</span>&amp;- \\
+\;\;\;Concat Last Four Hidden &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">96.1</span>&amp;- \\
+\;\;\;Weighted Sum All 12 Layers &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">95.5</span>&amp;- \\
+ 
+ 
+Caption: {CoNLL-2003 Named Entity Recognition results. Hyperparameters <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;were&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">were</span> selected using the Dev set. The reported Dev and Test scores are averaged over 5 random restarts using those hyperparameters.
+}
+ 
+ 
+ ─┘
+
+</pre></section><section class="sheet"><h2>Conclusion</h2><pre>
+§ Conclusion
+
+Recent empirical improvements due to transfer learning with language models have <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;demonstrated&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">demonstrated</span> that rich, unsupervised pre-training is an integral part of many language understanding systems. In particular, these results enable even low-resource tasks to benefit from deep unidirectional architectures. Our major contribution is further generalizing these <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;findings&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">findings</span> to deep bidirectional architectures, allowing the same pre-trained model to successfully tackle a broad set of NLP tasks.
+
+\bibliographystyle{acl_natbib}
+\bibliography{lumiere}
+
+\pagenumbering{arabic} 
+\appendix 
+
+ 
+{\bf \large{
+ Appendix for ``BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding''}}
+ 
+
+We organize the appendix into three sections:
+ 
+ \item Additional implementation details for BERT are presented in Appendix~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:bert_description}</span>;
+ 
+ \item Additional details for our experiments are presented in Appendix~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:exp_details}</span>; and
+ 
+ 
+ \item Additional ablation studies are presented in Appendix~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:more_ablation_studies}</span>.
+ 
+ We present additional ablation studies for BERT <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;including&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">including</span>:
+ 
+ \item Effect of Number of Training Steps; and
+ \item Ablation for Different Masking Procedures.
+ 
+ 
+
+</pre></section><section class="sheet"><h2>Additional Details for BERT</h2><pre>
+§ Additional Details for BERT
+
+┌─ [float] 
+ 
+[figure: BERT_comparisons.pdf]
+ 
+Caption: {Differences in pre-training model architectures. BERT uses a bidirectional Transformer. OpenAI GPT uses a left-to-right Transformer. ELMo uses the concatenation of independently trained left-to-right and right-to-left LSTMs to generate features for downstream tasks. Among the three, only \bert representations are jointly conditioned on both left and right context in all layers. In addition to the architecture differences, BERT and OpenAI GPT are fine-tuning approaches, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;while&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">while</span> ELMo is a feature-based approach.}
+
+ ─┘
+
+§ Illustration of the Pre-training Tasks
+
+We provide examples of the pre-training tasks in the following.
+
+\paragraph{Masked LM and the Masking Procedure} 
+
+Assuming the unlabeled sentence is {\tt { my dog is hairy}}, 
+and during the random masking procedure we chose the 4-th token (which corresponding to {\tt { hairy}}), our masking procedure
+can be further illustrated by
+ 
+\item 80\% of the time: Replace the word with the {\tt [MASK]} token, e.g., {\tt { my dog is hairy $\rightarrow$ my dog is [MASK]}}
+\item 10\% of the time: Replace the word with a random word, e.g., {\tt { my dog is hairy $\rightarrow$ my dog is apple}}
+\item 10\% of the time: Keep the word unchanged, e.g., {\tt { my dog is hairy $\rightarrow$ my dog is hairy}}. The purpose of this is to bias the representation towards the actual <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;observed&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">observed</span> word.
+ 
+
+The advantage of this procedure is that the Transformer encoder does not know which words it will be asked to predict or which have been replaced by random words, so it is forced to keep a distributional contextual representation of {\it every} input token. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Additionally&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Additionally</span>, because random replacement only occurs for <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.5</span>\% of all tokens (i.e., 10\% of 15\%), this does not seem to harm the model's language understanding capability. In Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{appendix:sec:different_masks}</span>,
+we evaluate the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;impact&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">impact</span> this procedure.
+
+Compared to standard langauge model training, the masked LM only
+make predictions on 15\% of tokens in each batch, which suggests that more pre-training steps may be required for the model to converge. In Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:num_training_steps}</span> we demonstrate that MLM does converge marginally slower than a left-to-right model (which predicts every token), but the empirical improvements of the MLM model far outweigh the increased training cost.
+
+\paragraph{Next Sentence Prediction} 
+
+The next sentence prediction task can be illustrated in the following examples.
+\begin{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;align&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">align</span>*}
+\text{Input\;} &amp;= \text{\tt { [CLS] the man went to [MASK] store [SEP]}} \\ 
+&amp; \text{\tt { \;\;\;\;\;\;\;he bought a gallon [MASK] milk [SEP]}}\\
+\text{Label} &amp;= \text{\tt { IsNext}} \\
+\\
+\text{Input\;} &amp;= \text{\tt { [CLS] the man [MASK] to the store [SEP]}}\\
+&amp;\text{\tt { \;\;\;\;\;\;\;penguin [MASK] are flight \#\#less birds [SEP]}}\\
+\text{Label} &amp;= \text{\tt { NotNext}}
+\end{<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;align&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">align</span>*}
+
+§ Pre-training Procedure
+
+To generate each training input sequence, we sample two spans of text from the corpus, which we refer to as ``sentences'' even though they are <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;typically&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">typically</span> much longer than single sentences (but can be shorter also). The first sentence receives the {\tt A} embedding and the second receives the {\tt B} embedding. 50\% of the time {\tt B} is the actual next sentence that follows {\tt A} and 50\% of the time it is a random sentence, which is done for the ``next sentence prediction'' task. They are sampled such that the combined length is $\le$ 512 tokens. The LM masking is applied after WordPiece tokenization with a uniform masking rate of 15\%, and no special consideration given to partial word pieces.
+
+We train with batch size of 256 sequences (256 sequences * 512 tokens = 128,000 tokens/batch) for 1,000,000 steps, which is approximately 40 epochs over the <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">3.3</span> billion word corpus. We use Adam with learning rate of 1e-4, ${\beta}_1=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.9</span>$, ${\beta}_2=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.999</span>$, L2 weight decay of $<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.01</span>$, learning rate warmup over the first 10,000 steps, and linear decay of the learning rate. We use a dropout probability of <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.1</span> on all layers. We use a {\tt gelu} activation \cite{hendrycks:2016} rather than the standard {\tt relu}, following OpenAI GPT. The training loss is the sum of the mean masked LM likelihood and the mean next sentence prediction likelihood.
+
+Training of \bertbase was performed on 4 Cloud TPUs in Pod configuration (16 TPU chips total).\footnote{https://cloudplatform.googleblog.com/2018/06/Cloud-TPU-now-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;offers&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">offers</span>-preemptible-pricing-and-global-availability.html} Training of \bertlarge was performed on 16 Cloud TPUs (64 TPU chips total). Each pre-training took 4 days to complete.
+
+Longer sequences are disproportionately expensive because attention is quadratic to the sequence length. To speed up pretraing in our experiments, we pre-train the model with sequence length of 128 for 90\% of the steps. Then, we train
+the rest 10\% of the steps of sequence of 512 to learn the positional embeddings.
+
+§ Fine-tuning Procedure
+
+For fine-tuning, most model hyperparameters are the same as in pre-training, with the exception of the batch size, learning rate, and number of training epochs. The dropout probability was always kept at <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.1</span>. The optimal hyperparameter values are task-specific, but we found the following range of possible values to work well <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;across&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">across</span> all tasks:
+
+ 
+\item {\bf Batch size}: 16, 32
+\item {\bf Learning rate (Adam)}: 5e-5, 3e-5, 2e-5
+\item {\bf Number of epochs}: 2, 3, 4
+ 
+
+We also <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;observed&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">observed</span> that large data sets (e.g., 100k+ labeled training examples) <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;were&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">were</span> far less sensitive to hyperparameter choice than small data sets. Fine-tuning is <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;typically&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">typically</span> very fast, so it is reasonable to simply run an exhaustive search over the above parameters and choose the model that performs best on the development set.
+
+§ Comparison of BERT, ELMo ,and OpenAI GPT
+
+Here we studies the differences in recent popular representation learning
+models including ELMo, OpenAI GPT and BERT.
+The comparisons between the model
+architectures are shown visually in Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{fig:BERT_comparisons}</span>. Note that
+in addition to the architecture differences, BERT and OpenAI GPT are fine-tuning approaches, while ELMo is a feature-based approach.
+
+The most comparable existing pre-training method to BERT is OpenAI GPT, which trains a left-to-right Transformer LM on a large text corpus. 
+In fact, many of the design decisions in BERT <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;were&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">were</span> intentionally made to make it as close to GPT as possible so that the two methods could be minimally compared.
+The core argument of this work is that the bi-directionality and the two pre-training tasks presented in Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:pretraining_tasks}</span> account for the majority of the empirical improvements, but we do note that there are several other differences between how BERT and GPT <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;were&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">were</span> trained:
+
+ 
+\item GPT is trained on the BooksCorpus (800M words); BERT is trained on the BooksCorpus (800M words) and Wikipedia (2,500M words).
+\item GPT uses a sentence separator ({\tt [SEP]}) and classifier token ({\tt [CLS]}) which are only introduced at fine-tuning time; BERT learns {\tt [SEP]}, {\tt [CLS]} and sentence {\tt A}/{\tt B} embeddings during pre-training.
+\item GPT was trained for 1M steps with a batch size of 32,000 words; BERT was trained for 1M steps with a batch size of 128,000 words.
+\item GPT used the same learning rate of 5e-5 for all fine-tuning experiments; BERT chooses a task-specific fine-tuning learning rate which performs the best on the development set.
+ 
+
+To isolate the effect of these differences, we perform ablation experiments in Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:task_ablation}</span> which demonstrate that the majority of the improvements are in fact coming from the two pre-training tasks and the bidirectionality they enable.
+
+§ Illustrations of Fine-tuning on Different Tasks
+
+The illustration of fine-tuning BERT on different tasks can be seen in
+Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{fig:bert_fine_tune}</span>. Our task-specific models are formed by <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;incorporating&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">incorporating</span> \bert with one additional output layer, so a minimal number of parameters <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;need&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">need</span> to be learned from scratch. Among the tasks, (a) and (b) are sequence-level tasks while (c) and (d) are token-level tasks. In the figure, $E$ represents the input embedding, $T_i$ represents the contextual representation of token $i$, [CLS] is the special symbol for classification output, and [SEP] is the special symbol to separate non-consecutive token sequences.
+
+┌─ [float] 
+ 
+\includegraphics[width=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.85</span>\textwidth]{BERT_fine_tune.pdf}
+ 
+Caption: {Illustrations of Fine-tuning BERT on Different Tasks.}
+
+ ─┘
+
+</pre></section><section class="sheet"><h2>Detailed Experimental Setup</h2><pre>
+§ Detailed Experimental Setup
+
+§ Detailed Descriptions for the GLUE Benchmark Experiments.
+
+Our GLUE results in Table<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{tab:glue_official}</span> are obtained from \url{https://gluebenchmark.com/leaderboard} and \url{https://blog.openai.com/language-unsupervised}.
+The GLUE benchmark includes the following datasets, the descriptions of which were originally summarized in \citet{wang-etal:2018:_glue}:
+
+\paragraph{MNLI} Multi-Genre Natural Language Inference is a large-scale, crowdsourced entailment classification task~\cite{williams-nangia-bowman:2018}. Given a pair of sentences, the goal is to predict whether the second sentence is an {\it entailment}, {\it contradiction}, or {\it neutral} with respect to the first one.
+
+\paragraph{QQP} Quora Question Pairs is a binary classification task where the goal is to determine if two questions asked on Quora are semantically equivalent~\cite{chen-etal:2018:_quora}.
+
+\paragraph{QNLI} Question Natural Language Inference is a version of the Stanford Question Answering Dataset~\cite{rajpurkar-etal:2016:_squad} which has been converted to a binary classification task~\cite{wang-etal:2018:_glue}. The positive examples are (question, sentence) pairs which do contain the correct answer, and the negative examples are (question, sentence) from the same paragraph which do not contain the answer.
+
+\paragraph{SST-2} The Stanford Sentiment Treebank is a binary single-sentence classification task consisting of sentences extracted from movie reviews with human annotations of their sentiment~\cite{socher-etal:2013:_recur}.
+
+\paragraph{CoLA} The Corpus of Linguistic Acceptability is a binary single-sentence classification task, where the goal is to predict whether an English sentence is linguistically ``acceptable'' or not~\cite{warstadt-singh-bowman:2018:_corpus}.
+
+\paragraph{STS-B} The Semantic Textual Similarity Benchmark is a collection of sentence pairs drawn from news headlines and other sources~\cite{cer-etal:2017}. They were annotated with a score from 1 to 5 denoting how similar the two sentences are in terms of semantic meaning. 
+
+\paragraph{MRPC} Microsoft Research Paraphrase Corpus consists of sentence pairs automatically extracted from online news sources, with human annotations for whether the sentences in the pair are semantically equivalent~\cite{dolan-brockett:2005:_autom}.
+
+\paragraph{RTE} <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Recognizing&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Recognizing</span> Textual Entailment is a binary entailment task similar to MNLI, but with much less training data~\cite{bentivogli-etal:2009}.\footnote{Note that we only report single-task fine-tuning results in this paper. A multitask fine-tuning approach could <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;potentially&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">potentially</span> push
+the performance even further. For example, we did observe <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;substantial&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">substantial</span> improvements on RTE from multi-task training with MNLI.}
+
+\paragraph{WNLI} Winograd NLI is a small natural language inference dataset \cite{levesque-davis-morgenstern:2011:_winog}. The GLUE webpage notes that there are issues with the construction of this dataset,~\footnote{\url{https://gluebenchmark.com/faq}} and every trained system that's been submitted to GLUE has performed worse than the <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">65.1</span> baseline accuracy of predicting the majority class. We therefore exclude this set to be fair to OpenAI GPT. For our GLUE submission, we always predicted the majority class.
+
+</pre></section><section class="sheet"><h2>Additional Ablation Studies</h2><pre>
+§ Additional Ablation Studies
+
+§ Effect of Number of Training Steps
+
+Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{fig:step_abalation}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;presents&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">presents</span> MNLI Dev accuracy after fine-tuning from a checkpoint that has been pre-trained for $k$ steps. This allows us to answer the following questions:
+
+┌─ [float] 
+ 
+ [
+ width=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.95</span>\columnwidth,
+ height=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.7</span>\columnwidth,
+ legend cell <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;align&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">align</span>=left,
+ legend style={at={(1, 0)},anchor=south east,font= },
+ mark options={mark size=3},
+ font= ,
+ xmin=0, xmax=1000,
+ ymin=75, ymax=85,
+ xtick={200,400,600,800,1000},
+ ymajorgrids=true,
+ xmajorgrids=true,
+ xlabel style={yshift=<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.5</span>ex,},
+ xlabel=Pre-training Steps (Thousands) ,
+ ylabel=MNLI Dev Accuracy,
+ ylabel style={yshift=-<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.5</span>ex,}]
+ \addplot[mark=triangle,g-blue] plot coordinates {
+ (30, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">78.6</span>)
+ (50, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">79.6</span>)
+ (100, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.5</span>)
+ (200, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.2</span>)
+ (400, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">83.2</span>)
+ (600, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.0</span>)
+ (800, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.3</span>)
+ (1000, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.4</span>)
+ };
+ \addlegendentry{\bertbase (Masked LM)}
+ \addplot[mark=x,g-red] plot coordinates {
+ (30, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">79.4</span>)
+ (50, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">79.8</span>)
+ (100, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">80.3</span>)
+ (200, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.0</span>)
+ (400, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.7</span>)
+ (600, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">81.9</span>)
+ (800, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.1</span>)
+ (1000, <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">82.2</span>)
+ };
+ \addlegendentry{\bertbase (Left-to-Right)}
+ 
+ 
+Caption: {Ablation over number of training steps. This shows the MNLI accuracy after fine-tuning, starting from model parameters that have been pre-trained for $k$ steps. The x-axis is the value of $k$.}
+
+ ─┘
+
+ 
+\item Question: Does BERT really <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;need&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">need</span> such a large amount of pre-training (128,000 words/batch * 1,000,000 steps) to achieve high fine-tuning accuracy? \\
+Answer: Yes, \bertbase achieves almost <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.0</span>\% additional accuracy on MNLI when trained on 1M steps compared to 500k steps.
+\item Question: Does MLM pre-training converge slower than LTR pre-training, since only 15\% of words are predicted in each batch rather than every word? \\
+Answer: The MLM model does converge slightly slower than the LTR model. However, in terms of absolute accuracy the MLM model begins to outperform the LTR model almost immediately.
+ 
+
+§ Ablation for Different Masking Procedures
+
+In Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:pretraining_tasks}</span>, we mention that BERT uses a mixed strategy for masking the target tokens when pre-training with the masked language
+model (MLM) objective. The following is an ablation study to evaluate the effect of different masking <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;strategies&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">strategies</span>.
+
+Note that the purpose of the masking <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;strategies&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">strategies</span> is to reduce the mismatch
+between pre-training and fine-tuning, as the {\tt [MASK]} symbol never appears during the fine-tuning stage. We report the Dev results for both
+MNLI and NER. For NER, we report both fine-tuning and feature-based approaches,
+as we expect the mismatch will be amplified for the feature-based approach as
+the model will not have the chance to adjust the representations.
+
+┌─ [float] 
+ 
+{ 
+ {@{}rrrccc@{}}
+ 
+ \multicolumn{3}{c}{Masking Rates} &amp; \multicolumn{3}{c}{Dev Set Results} \\
+ \cmidrule(r{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.2</span>cm}){1-3}
+ \cmidrule(l{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.2</span>cm}){4-6}
+ Mask &amp;	Same&amp;	Rnd	&amp; {MNLI} &amp;	\multicolumn{2}{c}{NER}\\
+ &amp; &amp; &amp; { Fine-tune} &amp; { Fine-tune}	&amp; { Feature-based}\\
+ \cmidrule(r{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.2</span>cm}){1-3}
+ \cmidrule(l{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.1</span>cm}r{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.1</span>cm}){4-4}
+ \cmidrule(l{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.2</span>cm}){5-6}
+ 
+ 80\%	&amp;10\%	&amp;10\%	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.2</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">95.4</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.9</span>\\
+100\%	&amp;0\%	&amp;0\%	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.3</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.9</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.0</span>\\
+80\%	&amp;0\%	&amp;20\%	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.1</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">95.2</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.6</span>\\
+80\%	&amp;20\%	&amp;0\%	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">84.4</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">95.2</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.7</span>\\
+0\%	&amp;20\%	&amp;80\%	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">83.7</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.8</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.6</span> \\
+0\%	&amp;0\%	&amp;100\%	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">83.6</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.9</span>	&amp;<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">94.6</span>\\
+ 
+ 
+} % small
+ 
+Caption: { Ablation over different masking <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;strategies&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">strategies</span>.}
+ ─┘
+
+The results are presented in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:mask_ablation}</span>. In the table,
+ Mask means that we replace the target token with the {\tt [MASK]} symbol
+for MLM; Same means that we keep the target token as is; Rnd
+means that we replace the target token with another random token. 
+
+The numbers in the left part of the table represent the probabilities of the specific strategies used during MLM pre-training (BERT uses 80\%, 10\%, 10\%). The right part of the paper represents the Dev set results. For the feature-based
+approach, we concatenate the last 4 layers of BERT as the features, which
+was shown to be the best approach in Section~<span class="hl hl-CRN pol-counter" data-tip="[[&quot;CRN&quot;, &quot;counter&quot;, &quot;cross-section reference — weaves the paper together (human-like)&quot;]]">\ref{sec:ner}</span>.
+
+From the table it can be seen that fine-tuning is surprisingly robust to
+different masking strategies. However, as expected, using only the Mask strategy
+was problematic when applying the feature-based approach to NER. Interestingly,
+using only the Rnd strategy performs much worse than our strategy as well.
+
+ 
+</pre></section></main>
+<script>
+(function(){
+  var WRAP = document.currentScript.closest('.wrap');
+  var META = {"CRN": {"kr": "Reference mesh — does it link its sections?", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "share of references pointing to another section: 0.684 (cross 27 / same 12 / dangling 0). Humans weave the whole paper (median ~0.47); 65% of AI papers sit at exactly 0.", "verdict": "human-side", "pos": -0.32}, "MR": {"kr": "Macro redundancy — does it repeat itself?", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "cross-section wording overlap 0.0165 (AI mean ~0.057 vs human ~0.021). Highlights = claim sentences repeated almost verbatim in another section.", "verdict": "human-side", "pos": 0.04}, "ENG": {"kr": "Number grounding — are numbers tied to prior work?", "full": "External_Number_Grounding", "color": "#c98500", "fb": "only 4 of 256 decimal numbers sit next to a citation (rate 0.0117). Humans anchor numbers to prior-work numbers; AI numbers float free.", "verdict": "AI-side", "pos": 1.52}, "CP": {"kr": "Comparative positioning — are prior works related to each other?", "full": "Comparative_Positioning", "color": "#199e70", "fb": "work-to-work edge density 1.5758 (AI median 0.36 vs human 1.88). Faint green = several prior works compared in one sentence (human-like); solid green = listed one at a time (AI-typical).", "verdict": "human-side", "pos": 0.2}, "STY": {"kr": "Style — LLM-typical vocabulary", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM excess-vocabulary density 78.626 (per 10k words; pre-LLM human papers ~70 vs AI papers ~232). Words like 'delve/comprehensive/notably' that spiked after LLMs.", "verdict": "human-side", "pos": 0.08}, "ESA": {"kr": "Evaluation surface — models × datasets", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "evaluation surface = 2 models × 4 datasets = 8 cells (AI mean 3.1 vs human 18.4). AI papers validate on a very narrow surface.", "verdict": "AI-side", "pos": 0.68}, "PB": {"kr": "Problem borrowing — is the problem taken from one prior paper?", "full": "Problem_Borrowing", "color": "#e66767", "fb": "problem discovered by the authors (human-like). not pinned on any specific prior work. — “Standard language model pre-training uses unidirectional architectures (left-to-right), which restricts the ability to leverage bidirectional context ”", "verdict": "human-side", "pos": 0.0}, "FIG": {"kr": "Figure — does the diagram use color to mean something?", "full": "Visualization (figure mold)", "color": "#008300", "fb": "has a method diagram (~80% of human papers do; only 44% of AI papers).", "verdict": "human-side", "pos": 0.0}};
+  // --- chip filter (scoped to this paper's wrap) ---
+  WRAP.addEventListener('click', function(e){
+    var c = e.target.closest ? e.target.closest('.chip') : null;
+    if(!c) return;
+    WRAP.setAttribute('data-view', c.getAttribute('data-v'));
+    WRAP.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('active', b===c);});
+  });
+  // --- rich tooltip: hover shows, click pins ---
+  var tip = document.createElement('div');
+  tip.className = 'moldtip';
+  document.body.appendChild(tip);
+  var pinned = false;
+  function render(el){
+    var data;
+    try { data = JSON.parse(el.getAttribute('data-tip')); } catch(err) { return false; }
+    var view = WRAP.getAttribute('data-view');
+    var h = '';
+    data.forEach(function(t){
+      var ab = t[0], pol = t[1], why = t[2];
+      if (view !== 'ALL' && ab !== view) return;
+      var m = META[ab] || {};
+      var badge = pol === 'trigger'
+        ? '<span class="tbadge ai">evidence of AI-likeness</span>'
+        : '<span class="tbadge hu">evidence of human-likeness</span>';
+      h += '<div class="tsec">'
+        + '<div class="thead"><span class="sw" style="background:' + m.color + '"></span>'
+        + '<b>' + m.kr + '</b>' + badge + '</div>'
+        + '<div class="twhy">' + why + '</div>'
+        + '<div class="tscore">This paper&#39;s ' + ab + ' verdict: <b>' + m.verdict + '</b>'
+        + (m.pos !== null ? ' (position ' + m.pos + ' · 0=human, 1=AI)' : '') + '</div>'
+        + '<div class="tfb">' + m.fb + '</div></div>';
+    });
+    if(!h) return false;
+    tip.innerHTML = h + '<div class="tclose">click=pin · click again/ESC=close</div>';
+    return true;
+  }
+  function place(e){
+    var W = window.innerWidth, H = window.innerHeight;
+    var x = Math.min(e.clientX + 14, W - 380), y = e.clientY + 16;
+    tip.style.left = Math.max(8, x) + 'px';
+    var th = tip.offsetHeight;
+    if (y + th > H - 10) y = Math.max(8, e.clientY - th - 12);
+    tip.style.top = y + 'px';
+  }
+  WRAP.addEventListener('mouseover', function(e){
+    if (pinned) return;
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { tip.classList.remove('show'); return; }
+    if (render(el)) { tip.classList.add('show'); place(e); }
+  });
+  WRAP.addEventListener('mousemove', function(e){
+    if (pinned || !tip.classList.contains('show')) return;
+    place(e);
+  });
+  WRAP.addEventListener('mouseleave', function(){ if(!pinned) tip.classList.remove('show'); });
+  WRAP.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { pinned = false; tip.classList.remove('show'); return; }
+    if (pinned) { pinned = false; tip.classList.remove('show'); return; }
+    if (render(el)) { pinned = true; tip.classList.add('show'); place(e); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { pinned = false; tip.classList.remove('show'); }
+  });
+})();
+</script></div></body></html>

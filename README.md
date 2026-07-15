@@ -1,8 +1,5 @@
 # Mold demo website — famous papers as highlighted pages
 
-
-https://yerimoh.github.io/Science_Bench/
-
 Static site: landmark ML papers (2013-2025) + FARS AI positive controls, each rendered
 as paper pages with 7 molds' evidence highlighted in place (Korean UI, rich hover tooltips).
 

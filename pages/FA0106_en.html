@@ -1,0 +1,433 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FA0106 — mold pages</title><style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#111210;color:#e8e6df}
+header{padding:16px 24px;border-bottom:1px solid #2c2c28;background:#1a1a19;position:sticky;top:0;z-index:5}
+header h1{margin:2px 0 4px;font-size:18px}
+header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
+.back{color:#3987e5;font-size:12px;text-decoration:none}
+.wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
+.side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
+.card{background:#1e1e1c;border:1px solid #2c2c28;border-radius:10px;padding:11px;margin-bottom:10px}
+.chead{display:flex;align-items:center;gap:7px;font-size:12.5px;flex-wrap:wrap}
+.sw{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.abbr{margin-left:auto;font-size:10.5px;border:1px solid;border-radius:5px;padding:0 5px;font-weight:700}
+.pos{margin:8px 0 5px}
+.pos.none{color:#8a887d;font-size:11px}
+.track{position:relative;height:14px;background:linear-gradient(90deg,#20262e,#2e2020);border-radius:4px}
+.track .hu,.track .ai{position:absolute;top:0;font-size:9px;line-height:14px;color:#8a887d}
+.track .hu{left:4px}.track .ai{right:4px}
+.track .fill{position:absolute;top:-2px;width:4px;height:18px;border-radius:2px}
+.posv{font-size:10.5px;color:#c3c2b7;margin-left:6px}
+.fb{font-size:11.5px;color:#c3c2b7;line-height:1.45;margin-top:4px}
+.ct{font-size:10.5px;color:#8a887d;margin-top:5px}
+main{padding:16px 20px;overflow:auto}
+.sheet{background:#171816;border:1px solid #2c2c28;border-radius:12px;padding:22px 26px;margin:0 auto 18px;max-width:900px;
+ box-shadow:0 2px 10px #0006}
+.sheet h2{margin:0 0 10px;font-size:15px;color:#fff;border-bottom:1px solid #2c2c28;padding-bottom:6px}
+pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Roman',serif;
+ font-size:13.5px;line-height:1.7;margin:0;color:#d9d7cd}
+.hl{border-radius:3px;padding:0 1px;cursor:pointer}
+.papernav{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;align-items:center;
+ padding:9px 16px;background:#1a1a19;border-bottom:1px solid #2c2c28}
+.navlab{font-size:11px;color:#8a887d;margin-right:4px}
+.papernav .nav{background:#242522;color:#c3c2b7;border:1px solid #2c2c28;border-radius:7px;
+ padding:4px 10px;font-size:12px;text-decoration:none}
+.papernav .nav.hu{border-color:#3987e544}
+.papernav .nav.ai{border-color:#e6676744}
+.papernav .nav.cur{background:#3987e5;color:#fff;border-color:#3987e5}
+.papernav .nav:hover{border-color:#e8e6df}
+.papernav .nav.lang{margin-left:auto;border-color:#e8e6df66;font-weight:700}
+.moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
+ border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
+ color:#e8e6df;display:none;pointer-events:none}
+.moldtip.show{display:block}
+.moldtip .tsec{border-bottom:1px solid #33342e;padding:8px 0}
+.moldtip .tsec:last-of-type{border-bottom:none}
+.moldtip .thead{display:flex;align-items:center;gap:7px;font-size:12.5px;margin-bottom:3px;flex-wrap:wrap}
+.moldtip .tbadge{margin-left:auto;font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700}
+.moldtip .tbadge.ai{background:#e6676733;color:#ff9d9d}
+.moldtip .tbadge.hu{background:#3987e533;color:#8fbcf5}
+.moldtip .twhy{color:#fff;margin:2px 0 4px}
+.moldtip .tscore{color:#c3c2b7;font-size:11px}
+.moldtip .tfb{color:#8a887d;font-size:10.5px;margin-top:3px}
+.moldtip .tclose{color:#6f6e65;font-size:9.5px;margin-top:6px;text-align:right}
+.card.summary{border-color:#3d3d38;background:#22231f}
+.vrow{display:flex;align-items:center;gap:7px;font-size:11.5px;margin-top:6px;color:#c3c2b7}
+.vname{flex:1}
+.vbadge{font-size:10px;border-radius:9px;padding:1px 7px;font-weight:700;flex:none}
+.vbadge.ai{background:#e6676733;color:#e66767}
+.vbadge.hu{background:#3987e533;color:#7db2ee}
+.vbadge.mid{background:#8a887d33;color:#a9a79c}
+.vbadge.na{background:#8a887d22;color:#8a887d}
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:2px 0 12px}
+.chiplab{font-size:10.5px;color:#8a887d;margin-right:2px;width:100%}
+.chip{display:inline-flex;align-items:center;gap:5px;background:#242522;color:#c3c2b7;
+ border:1px solid #2c2c28;border-radius:12px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
+.chip.active{border-color:#e8e6df;color:#fff;background:#2e2f2b}
+.chip .sw{width:9px;height:9px}
+.figthumb{width:100%;border-radius:7px;border:1px solid #2c2c28;margin:7px 0 2px;background:#fff}
+.figsheet .figwrap{position:relative;text-align:center;background:#fff;border-radius:8px;padding:10px}
+.figsheet img{max-width:100%;max-height:520px}
+.figtag{position:absolute;top:8px;left:8px;color:#fff;font-size:11px;font-weight:700;
+ border-radius:5px;padding:2px 8px;opacity:.92}
+.figcap{font-size:12px;color:#c3c2b7;margin-top:9px;line-height:1.5}
+.fignone{font-size:13px;color:#e6b0b0;background:#2a1d1d;border:1px dashed #e6676766;
+ border-radius:8px;padding:18px;text-align:center}
+.hl-CRN.pol-trigger{background:#3987e555;box-shadow:inset 0 -2px 0 #3987e5}.hl-CRN.pol-counter{background:#3987e522;box-shadow:inset 0 -1px 0 #3987e588}
+.hl-CP.pol-trigger{background:#199e7055;box-shadow:inset 0 -2px 0 #199e70}.hl-CP.pol-counter{background:#199e7022;box-shadow:inset 0 -1px 0 #199e7088}
+.hl-ENG.pol-trigger{background:#c9850055;box-shadow:inset 0 -2px 0 #c98500}.hl-ENG.pol-counter{background:#c9850022;box-shadow:inset 0 -1px 0 #c9850088}
+.hl-MR.pol-trigger{background:#9085e955;box-shadow:inset 0 -2px 0 #9085e9}.hl-MR.pol-counter{background:#9085e922;box-shadow:inset 0 -1px 0 #9085e988}
+.hl-STY.pol-trigger{background:#d5518155;box-shadow:inset 0 -2px 0 #d55181}.hl-STY.pol-counter{background:#d5518122;box-shadow:inset 0 -1px 0 #d5518188}
+.hl-ESA.pol-trigger{background:#d9592655;box-shadow:inset 0 -2px 0 #d95926}.hl-ESA.pol-counter{background:#d9592622;box-shadow:inset 0 -1px 0 #d9592688}
+.hl-PB.pol-trigger{background:#e6676755;box-shadow:inset 0 -2px 0 #e66767}.hl-PB.pol-counter{background:#e6676722;box-shadow:inset 0 -1px 0 #e6676788}
+.hl-FIG.pol-trigger{background:#00830055;box-shadow:inset 0 -2px 0 #008300}.hl-FIG.pol-counter{background:#00830022;box-shadow:inset 0 -1px 0 #00830088}
+.wrap[data-view="CRN"] .hl:not(.hl-CRN){background:none!important;box-shadow:none!important}.wrap[data-view="CRN"] .card[data-mold]:not([data-mold="CRN"]){opacity:.35}
+.wrap[data-view="CP"] .hl:not(.hl-CP){background:none!important;box-shadow:none!important}.wrap[data-view="CP"] .card[data-mold]:not([data-mold="CP"]){opacity:.35}
+.wrap[data-view="ENG"] .hl:not(.hl-ENG){background:none!important;box-shadow:none!important}.wrap[data-view="ENG"] .card[data-mold]:not([data-mold="ENG"]){opacity:.35}
+.wrap[data-view="MR"] .hl:not(.hl-MR){background:none!important;box-shadow:none!important}.wrap[data-view="MR"] .card[data-mold]:not([data-mold="MR"]){opacity:.35}
+.wrap[data-view="STY"] .hl:not(.hl-STY){background:none!important;box-shadow:none!important}.wrap[data-view="STY"] .card[data-mold]:not([data-mold="STY"]){opacity:.35}
+.wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
+.wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}
+.wrap[data-view="FIG"] .hl:not(.hl-FIG){background:none!important;box-shadow:none!important}.wrap[data-view="FIG"] .card[data-mold]:not([data-mold="FIG"]){opacity:.35}</style></head><body>
+<header><a class="back" href="../index_en.html">← demo index</a>
+ <h1>FA0106 <span class="sub">2025 · AI-written paper (FARS)</span></h1>
+ <div class="sub">Evidence for each mold (AI-fingerprint pattern) is highlighted directly on the paper's source.
+ <b>Solid underline = evidence of an AI-typical pattern</b> · <b>faint highlight = evidence of a human-typical pattern</b>.
+ Hover any highlight for the reason it fired. Every highlight is a real slice of this paper's LaTeX source — nothing is fabricated.</div>
+</header>
+<nav class="papernav"><span class="navlab">Papers — blue=human, red=AI:</span><a class="nav" href="../index_en.html">Overview</a><a class="nav hu" href="./Word2Vec_en.html">Word2Vec</a><a class="nav hu" href="./Attention_en.html">Attention</a><a class="nav hu" href="./BERT_en.html">BERT</a><a class="nav hu" href="./FLAN_en.html">FLAN</a><a class="nav hu" href="./DeepSeek-R1_en.html">DeepSeek-R1</a><a class="nav ai" href="./FA0001_en.html">FA0001</a><a class="nav ai" href="./FA0022_en.html">FA0022</a><a class="nav ai" href="./FA0044_en.html">FA0044</a><a class="nav ai" href="./FA0067_en.html">FA0067</a><a class="nav ai cur" href="./FA0106_en.html">FA0106</a><a class="nav ai" href="./FA0145_en.html">FA0145</a><a class="nav ai" href="./FA0187_en.html">FA0187</a><a class="nav ai" href="./FA0221_en.html">FA0221</a><a class="nav ai" href="./FA0297_en.html">FA0297</a><a class="nav ai" href="./FA0421_en.html">FA0421</a><a class="nav lang" href="./FA0106.html">한국어</a></nav>
+<div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
+ <div class="chead"><b>At a glance — which side is this paper on?</b></div>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">Overall (mean of 5 molds): <span class="vbadge ai">AI-side</span>
+  &nbsp;position 1.08 (0=human-paper median, 1=AI-paper median)</div>
+ <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">Reference mesh — does it link its sections?</span><span class="vbadge ai">AI-side</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">Macro redundancy — does it repeat itself?</span><span class="vbadge ai">AI-side</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">Number grounding — are numbers tied to prior work?</span><span class="vbadge ai">AI-side</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">Comparative positioning — are prior works related to each other?</span><span class="vbadge ai">AI-side</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">Style — LLM-typical vocabulary</span><span class="vbadge ai">AI-side</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">Evaluation surface — models × datasets</span><span class="vbadge ai">AI-side</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">Problem borrowing — is the problem taken from one prior paper?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#008300"></span><span class="vname">Figure — does the diagram use color to mean something?</span><span class="vbadge hu">human-side</span></div>
+ <div class="ct">Each axis sees something different — use the chips below to view one mold at a time in the text.</div></div><div class="chips"><span class="chiplab">Highlight filter</span><button class="chip active" data-v="ALL">All</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button></div><div class="card" data-mold="CRN">
+ <div class="chead"><span class="sw" style="background:#3987e5"></span><b>Reference mesh — does it link its sections?</b>
+   <span class="abbr" style="border-color:#3987e5;color:#3987e5">CRN</span></div>
+ <div class="ct">Cross-Reference_Network</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#3987e5"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">share of references pointing to another section: 0.0 (cross 0 / same 5 / dangling 0). Humans weave the whole paper (median ~0.47); 65% of AI papers sit at exactly 0.</div>
+ <div class="ct">5 highlights · 5 AI evidence / 0 human evidence</div></div><div class="card" data-mold="MR">
+ <div class="chead"><span class="sw" style="background:#9085e9"></span><b>Macro redundancy — does it repeat itself?</b>
+   <span class="abbr" style="border-color:#9085e9;color:#9085e9">MR</span></div>
+ <div class="ct">Macro_Redundancy</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#9085e9"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
+ <div class="fb">cross-section wording overlap 0.0558 (AI mean ~0.057 vs human ~0.021). Highlights = claim sentences repeated almost verbatim in another section.</div>
+ <div class="ct">4 highlights · 4 AI evidence / 0 human evidence</div></div><div class="card" data-mold="ENG">
+ <div class="chead"><span class="sw" style="background:#c98500"></span><b>Number grounding — are numbers tied to prior work?</b>
+   <span class="abbr" style="border-color:#c98500;color:#c98500">ENG</span></div>
+ <div class="ct">External_Number_Grounding</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#c98500"></div><div class="ai">AI</div></div><span class="posv">3.13</span></div>
+ <div class="fb">only 2 of 52 decimal numbers sit next to a citation (rate 0.0192). Humans anchor numbers to prior-work numbers; AI numbers float free.</div>
+ <div class="ct">52 highlights · 50 AI evidence / 2 human evidence</div></div><div class="card" data-mold="CP">
+ <div class="chead"><span class="sw" style="background:#199e70"></span><b>Comparative positioning — are prior works related to each other?</b>
+   <span class="abbr" style="border-color:#199e70;color:#199e70">CP</span></div>
+ <div class="ct">Comparative_Positioning</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#199e70"></div><div class="ai">AI</div></div><span class="posv">1.04</span></div>
+ <div class="fb">work-to-work edge density 0.3077 (AI median 0.36 vs human 1.88). Faint green = several prior works compared in one sentence (human-like); solid green = listed one at a time (AI-typical).</div>
+ <div class="ct">12 highlights · 10 AI evidence / 2 human evidence</div></div><div class="card" data-mold="STY">
+ <div class="chead"><span class="sw" style="background:#d55181"></span><b>Style — LLM-typical vocabulary</b>
+   <span class="abbr" style="border-color:#d55181;color:#d55181">STY</span></div>
+ <div class="ct">Stylistic (excess vocab)</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#d55181"></div><div class="ai">AI</div></div><span class="posv">1.22</span></div>
+ <div class="fb">LLM excess-vocabulary density 268.62 (per 10k words; pre-LLM human papers ~70 vs AI papers ~232). Words like 'delve/comprehensive/notably' that spiked after LLMs.</div>
+ <div class="ct">105 highlights · 105 AI evidence / 0 human evidence</div></div><div class="card" data-mold="ESA">
+ <div class="chead"><span class="sw" style="background:#d95926"></span><b>Evaluation surface — models × datasets</b>
+   <span class="abbr" style="border-color:#d95926;color:#d95926">ESA</span></div>
+ <div class="ct">Evaluation_Surface_Area</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#d95926"></div><div class="ai">AI</div></div><span class="posv">1.14</span></div>
+ <div class="fb">evaluation surface = 1 models × 1 datasets = 1 cells (AI mean 3.1 vs human 18.4). AI papers validate on a very narrow surface.</div>
+ <div class="ct">7 highlights · 0 AI evidence / 7 human evidence</div></div><div class="card" data-mold="PB">
+ <div class="chead"><span class="sw" style="background:#e66767"></span><b>Problem borrowing — is the problem taken from one prior paper?</b>
+   <span class="abbr" style="border-color:#e66767;color:#e66767">PB</span></div>
+ <div class="ct">Problem_Borrowing</div>
+ 
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#e66767"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
+ <div class="fb">limitation inherited as-is from ONE prior paper (AI-typical). borrowed from: Salim2026TokenomicsQW, Zhou2026FeatureBenchBA — “LLM-based coding agents face a persistent context-cost bottleneck: they must repeatedly ingest large amounts of repository text (reaching millions of ”</div>
+ <div class="ct">4 highlights · 4 AI evidence / 0 human evidence</div></div><div class="card" data-mold="FIG">
+ <div class="chead"><span class="sw" style="background:#008300"></span><b>Figure — does the diagram use color to mean something?</b>
+   <span class="abbr" style="border-color:#008300;color:#008300">FIG</span></div>
+ <div class="ct">Visualization (figure mold)</div>
+ <a href="figs/FA0106.jpg" target="_blank"><img class="figthumb" src="figs/FA0106.jpg" alt="method diagram"></a>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#008300"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
+ <div class="fb">has a method diagram (~80% of human papers do; only 44% of AI papers).</div>
+ <div class="ct">figure-level measurement (no text highlights)</div></div><div class="card"><div class="chead"><span class="sw" style="background:#9ca3af"></span>
+ <b>Argument_Graph (Qwen2.5-32B)</b></div><div class="fb">A1 depth=10 (HU~15.7/AI~12.7) ·
+ A2 cites=1 (HU~3.9/AI~2.4) · A3 result-nodes=4 ·
+ A5 method=1 · A6 degree=22 · A7 addresses=0</div>
+ <div class="ct">graph fingerprint, no spans (LLM extraction)</div></div></div>
+<main><section class="sheet figsheet">
+ <h2>Main figure — method diagram
+  <span class="vbadge hu" style="float:right">FIG: human-side</span></h2>
+ <div class="figwrap"><img src="figs/FA0106.jpg" alt="method diagram">
+  <span class="figtag" style="background:#008300">FIG</span></div>
+ <div class="figcap">has a method diagram (~80% of human papers do; only 44% of AI papers).</div></section><section class="sheet"><pre>
+
+ 
+Large language model-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;based&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">based</span> coding agents consume <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;substantial&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">substantial</span> tokens navigating repository codebases, yet the relationship <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;between&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">between</span> file access patterns and token efficiency <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;remains&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">remains</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;underexplored&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">underexplored</span>. We hypothesize that restricting agent file access to execution-trace-derived allowlists could reduce token consumption by eliminating reads of irrelevant files. We introduce TraceBound, an inference-time framework that computes per-task file allowlists from failing test execution traces and enforces hard file-access restrictions <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;during&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">during</span> agent operation. Evaluating on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: FeatureBench Lite — models × datasets = evaluation surface&quot;]]">FeatureBench Lite</span> (30 feature development tasks) with OpenHands, we find that TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">25.72</span>\% rather than reducing them. Root cause <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;analysis&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">analysis</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;reveals&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">reveals</span> that only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.3</span>\% of file reads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;were&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">were</span> denied, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;indicating&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">indicating</span> that the agent already naturally focuses on trace-relevant files. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;This&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">This</span> negative result <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;demonstrates&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">demonstrates</span> that modern coding agents have learned effective file navigation <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;strategies&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">strategies</span>, leaving minimal headroom for restriction-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;based&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">based</span> context reduction. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Notably&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Notably</span>, TraceBound improves average test pass rate by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.76</span> percentage points, suggesting that explicit file-access guidance may benefit task completion even without token savings.
+
+\textit{WARNING: <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;This&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">This</span> paper was generated by an automated <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;research&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">research</span> system. The code is publicly available.}\footnote{\url{https://gitlab.com/fars-a/trace-bounded-context-featurebench}}
+ 
+
+\input{sections/introduction}
+
+\input{sections/method}
+
+\input{sections/experiments}
+
+\input{sections/related_work}
+
+\input{sections/conclusion}
+
+\bibliography{analemma}
+\bibliographystyle{analemma}
+
+<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;this&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">this</span> short paper
+
+ 
+
+ 
+Large language model-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;based&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">based</span> coding agents consume <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;substantial&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">substantial</span> tokens navigating repository codebases, yet the relationship <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;between&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">between</span> file access patterns and token efficiency <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;remains&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">remains</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;underexplored&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">underexplored</span>. We hypothesize that restricting agent file access to execution-trace-derived allowlists could reduce token consumption by eliminating reads of irrelevant files. We introduce TraceBound, an inference-time framework that computes per-task file allowlists from failing test execution traces and enforces hard file-access restrictions <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;during&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">during</span> agent operation. Evaluating on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: FeatureBench Lite — models × datasets = evaluation surface&quot;]]">FeatureBench Lite</span> (30 feature development tasks) with OpenHands, we find that TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">25.72</span>\% rather than reducing them. Root cause <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;analysis&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">analysis</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;reveals&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">reveals</span> that only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.3</span>\% of file reads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;were&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">were</span> denied, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;indicating&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">indicating</span> that the agent already naturally focuses on trace-relevant files. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;This&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">This</span> negative result <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;demonstrates&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">demonstrates</span> that modern coding agents have learned effective file navigation <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;strategies&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">strategies</span>, leaving minimal headroom for restriction-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;based&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">based</span> context reduction. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Notably&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Notably</span>, TraceBound improves average test pass rate by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.76</span> percentage points, suggesting that explicit file-access guidance may benefit task completion even without token savings.
+ 
+
+</pre></section><section class="sheet"><h2>Conclusion</h2><pre>
+§ Conclusion
+
+We evaluated TraceBound, a trace-bounded file-access restriction <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;approach&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">approach</span> for reducing token consumption in coding agents. Contrary to our hypothesis, TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">25.72</span>\% rather than reducing them. The root cause is that agents already naturally focus on relevant files---only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.3</span>\% of reads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;were&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">were</span> denied.<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Conclusion&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;]]"> This finding suggests that binary file-access restriction is insufficient for token reduction; future work should explore content-level filtering approaches such as SWE-Pruner~\citep{Wang2026SWEPrunerSC}.</span> The +<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;number next to a citation — grounded in prior work (human-like)&quot;]]">5.76</span>pp pass rate improvement indicates that explicit file-access guidance may still provide value for task success, even without efficiency gains.
+
+</pre></section><section class="sheet"><h2>Experiments</h2><pre>
+§ Experiments
+
+§ Experimental Setup
+
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;]]">We evaluate TraceBound on </span><span class="hl hl-MR hl-ESA pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: FeatureBench Lite — models × datasets = evaluation surface&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d9592640 6px,#d9592640 12px)">FeatureBench Lite</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;]]">~\citep{Zhou2026FeatureBenchBA}, a benchmark of 30 feature-level development tasks </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;across&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">across</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;]]"> 13 Python repositories.</span> Unlike bug-fix benchmarks such as SWE-bench~\citep{Jimenez2023SWEbenchCL}, FeatureBench tasks require implementing new functionality with larger edit scopes and extensive test suites, making context efficiency <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;particularly&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">particularly</span> important.
+
+We use OpenHands v<span class="hl hl-ENG pol-counter" data-tip="[[&quot;ENG&quot;, &quot;counter&quot;, &quot;number next to a citation — grounded in prior work (human-like)&quot;]]">0.62</span>.0~\citep{Wang2025TheOS} with <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation model: Qwen3-Coder-480B-A35B-Instruct — models × datasets = evaluation surface&quot;]]">Qwen3-Coder-480B-A35B-Instruct</span> as the base agent, configured with max\_iterations=100, temperature=0, and n\_attempts=1 for deterministic evaluation. We compare two <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;conditions&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">conditions</span>: (1) Baseline: standard OpenHands without file-access restrictions, and (2) TraceBound: OpenHands with trace-derived allowlist enforcement. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Both&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Both</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;conditions&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">conditions</span> use identical model and configuration settings.
+
+We report the following metrics: \% Resolved (tasks where all fail-to-pass tests pass), \% Passed (average fail-to-pass test pass rate <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;across&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">across</span> tasks), Median/Mean Input Tokens (<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;primary&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">primary</span> efficiency metrics), and Mean Steps (agent interaction count). Our hypothesis predicts that TraceBound should reduce median input tokens by at least 30\% <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;while&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">while</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;preserving&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">preserving</span> solve rate.
+
+§ Main Results
+
+Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:main_results}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;presents&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">presents</span> the main experimental results comparing Baseline and TraceBound <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;conditions&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">conditions</span>.
+
+┌─ [float] 
+ 
+Caption: {Main experimental results on <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: FeatureBench Lite — models × datasets = evaluation surface&quot;]]">FeatureBench Lite</span> (30 tasks). Contrary to our hypothesis, TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">25.72</span>\% instead of reducing them. Best values in bold.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Method &amp; \% Resolved $\uparrow$ &amp; \% Passed $\uparrow$ &amp; Median Input $\downarrow$ &amp; Mean Input $\downarrow$ &amp; Mean Steps \\
+ 
+Baseline &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">3.33</span>} &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">20.62</span> &amp; 1,657,415 &amp; 2,748,551 &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">92.5</span> \\
+TraceBound &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">3.33</span>} &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">26.38</span>} &amp; 2,083,790 &amp; 2,915,852 &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">90.5</span>} \\
+ 
+$\Delta$ &amp; +0\% &amp; +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.76</span>pp &amp; +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">25.72</span>\% &amp; +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">6.1</span>\% &amp; $-$<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.2</span>\% \\
+ 
+ 
+}
+ ─┘
+
+Contrary to our hypothesis, TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">25.72</span>\% (from <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.66</span>M to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.08</span>M) rather than reducing them by the expected 30\%. This triggers our pre-specified hard refutation condition. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Both&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Both</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;conditions&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">conditions</span> resolve exactly 1 of 30 tasks (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">3.33</span>\%), <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;preserving&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">preserving</span> solve rate as required. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Notably&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Notably</span>, TraceBound improves the average pass rate by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.76</span> percentage points (from <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">20.62</span>\% to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">26.38</span>\%), suggesting that the file-access guidance may help the agent focus on relevant code even though it does not reduce token consumption.
+
+\subsection{Root Cause <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Analysis&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Analysis</span>}
+
+To understand why TraceBound fails to reduce token usage, we examine the file-access restriction diagnostics in Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:diagnostics}</span>.
+
+┌─ [float] 
+ 
+Caption: {TraceBound file-access diagnostics. Only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.3</span>\% of file reads <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;were&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">were</span> denied, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;indicating&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">indicating</span> the agent already naturally focuses on files <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;within&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">within</span> the trace-derived allowlist.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Method &amp; Allowed Reads &amp; Denied Reads &amp; Denial Rate (\%) \\
+ 
+TraceBound &amp; 425 &amp; 10 &amp; \textbf{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.3</span>} \\
+ 
+ 
+}
+ ─┘
+
+The key finding is that only 10 out of 435 file reads (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.3</span>\%) were denied by TraceBound. This <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;reveals&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">reveals</span> the fundamental limitation of our <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;approach&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">approach</span>: the agent already naturally focuses on files <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;within&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">within</span> the trace-derived allowlist, leaving no headroom for restriction-based token reduction. The agent's file-reading behavior is already well-aligned with the execution trace neighborhood, suggesting that modern coding agents have learned effective file navigation <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;strategies&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">strategies</span> that do not waste tokens reading irrelevant files.
+
+\subsection{Allowlist <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Analysis&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Analysis</span>}
+
+Table~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{tab:allowlist}</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;presents&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">presents</span> statistics on the computed allowlists, and Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{fig:allowlist_composition}</span> shows the composition breakdown <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;across&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">across</span> tasks.
+
+┌─ [float] 
+ 
+Caption: {Allowlist statistics <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;across&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">across</span> 30 <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: FeatureBench Lite — models × datasets = evaluation surface&quot;]]">FeatureBench Lite</span> tasks. Allowlists cover a median of <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">28.2</span>\% of repository files, with execution traces <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;contributing&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">contributing</span> the majority of unique files.}
+
+\adjustbox{max width=\textwidth}{
+ 
+ 
+Metric &amp; Median &amp; Mean &amp; Range \\
+ 
+Allowlist Size (files) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">251.5</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">404.6</span> &amp; 2--1,751 \\
+Repository Coverage (\%) &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">28.2</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">27.4</span> &amp; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.0</span>--<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">50.9</span> \\
+ 
+\multicolumn{4}{l}{Component Unique Contributions (\%)} \\
+ 
+Trace Files &amp; \multicolumn{3}{c}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">51.0</span>} \\
+Import Closure &amp; \multicolumn{3}{c}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">24.5</span>} \\
+Interface Files &amp; \multicolumn{3}{c}{<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">0.1</span>} \\
+ 
+ 
+}
+ ─┘
+
+┌─ [float] 
+ 
+[figure: allowlist_composition.png]
+Caption: {Allowlist composition across 26 <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;evaluation dataset: FeatureBench Lite — models × datasets = evaluation surface&quot;]]">FeatureBench Lite</span> tasks. Left: Stacked bar chart showing file counts by component type per task. Right: Pie chart showing unique contribution percentages. Trace files dominate most allowlists (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">51.0</span>\% unique contribution), with import closure <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;providing&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">providing</span> <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">24.5</span>\% unique files.}
+
+ ─┘
+
+The allowlists are selective, covering a median of only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">28.2</span>\% of repository files, which suggests that the trace-derived boundaries are not overly permissive. Execution traces contribute <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">51.0</span>\% of unique files, with import closure adding <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">24.5</span>\%. The variation across tasks is <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;substantial&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">substantial</span>, with allowlist sizes ranging from 2 to 1,751 files depending on repository structure and test complexity. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Despite&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Despite</span> this selectivity, the low denial rate indicates that the agent's natural <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;exploration&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">exploration</span> already stays <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;within&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">within</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;these&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">these</span> boundaries.
+
+</pre></section><section class="sheet"><h2>Introduction</h2><pre>
+§ Introduction
+
+<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]">LLM-based coding agents such as SWE-agent and OpenHands~\citep{Wang2025TheOS} solve repository-level tasks by iteratively reading files, editing code, and running tests.</span> A persistent practical bottleneck is context cost: agents must repeatedly ingest large amounts of repository text, which can reach millions of input tokens per task.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> Recent analysis by </span><span class="hl hl-CP hl-PB pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;prior work the research problem is borrowed from: Salim2026TokenomicsQW (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#e6676740 6px,#e6676740 12px)">\citet{Salim2026TokenomicsQW}</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> shows that file reading dominates token consumption in agentic software engineering, motivating the search for more efficient context management </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;strategies&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">strategies</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]">.</span>
+
+We hypothesize that execution traces from failing tests provide an instance-specific signal for identifying relevant files. If agents could be restricted to reading only files accessed <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;during&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">during</span> test execution (plus a shallow import closure), irrelevant file reads would be eliminated, reducing token consumption without harming task success. This trace-bounded context <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;approach&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">approach</span> differs from content-level pruning by enforcing a hard file-access constraint rather than compressing retrieved content.
+
+To test this hypothesis, we propose TraceBound, a framework that derives per-task file allowlists from test execution traces and gates agent file reads accordingly.<span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;], [&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)"> We evaluate TraceBound on FeatureBench Lite~</span><span class="hl hl-MR hl-CP hl-PB pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;], [&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;prior work the research problem is borrowed from: Zhou2026FeatureBenchBA (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)">\citep{Zhou2026FeatureBenchBA}</span><span class="hl hl-MR hl-CP pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Experiments&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;], [&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#199e7040 6px,#199e7040 12px)">, a benchmark of 30 feature-level development tasks.</span> Contrary to our hypothesis, TraceBound increases median input tokens by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">25.72</span>\% (from <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">1.66</span>M to <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.08</span>M) instead of reducing them. Root cause analysis <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;reveals&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">reveals</span> that only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.3</span>\% of file reads were denied---the agent already naturally focuses on files <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;within&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">within</span> the trace-derived allowlist, leaving no headroom for restriction-based savings. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;Notably&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">Notably</span>, TraceBound improves average pass rate by +<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">5.76</span> percentage points, suggesting that explicit file-access guidance may still provide value.
+
+Our contributions are:
+ 
+\item TraceBound framework: An inference-time <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;approach&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">approach</span> that derives file allowlists from test execution traces and enforces them <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;during&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">during</span> agent execution.
+\item Empirical finding: Modern coding agents already <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;exhibit&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">exhibit</span> focused file navigation behavior, with only <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;ungrounded number — no citation within ±35 chars&quot;]]">2.3</span>\% of reads falling outside trace-derived boundaries.
+<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;same claim restated across sections &#x27;Conclusion&#x27; ↔ &#x27;Introduction&#x27; (no new information)&quot;]]">\item \textbf{Negative result}: Binary file-access restriction is insufficient for token reduction; future work should explore content-level filtering approaches.</span>
+ 
+
+</pre></section><section class="sheet"><h2>Method</h2><pre>
+§ Method
+
+We propose TraceBound, an inference-time framework that restricts file access for coding agents to an automatically computed per-task allowlist derived from test execution traces. The key hypothesis is that files accessed during failing test execution represent the minimal relevant code neighborhood, and restricting agent reads to this neighborhood should reduce token consumption without harming task success.
+
+§ Problem Formulation
+
+Given a feature development task with failing tests $T_{\text{fail}}$, we seek to derive an allowlist $\mathcal{A} \subseteq \mathcal{F}$ where $\mathcal{F}$ is the set of all repository files. During agent execution, file-read operations are gated: a read request for file $f$ succeeds if $f \in \mathcal{A}$ and fails otherwise. The goal is to minimize $|\mathcal{A}|$ (and thus <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;potential&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">potential</span> token consumption) <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;while&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">while</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;ensuring&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">ensuring</span> $\mathcal{A}$ contains all files necessary for successful task completion.
+
+§ Allowlist Computation (Stage 1)
+
+TraceBound computes the allowlist $\mathcal{A}$ offline before agent execution <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;through&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">through</span> the following procedure, illustrated in Figure~<span class="hl hl-CRN pol-trigger" data-tip="[[&quot;CRN&quot;, &quot;trigger&quot;, &quot;same-section reference — adds no cross-section mesh&quot;]]">\ref{fig:framework}</span>:
+
+Trace Extraction. We execute the failing tests <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;using&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">using</span> pytest -x with coverage instrumentation (coverage.py) to collect the set of Python source files $\mathcal{T}$ accessed during test execution. The -x flag stops at the first failure, capturing the execution path <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;leading&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">leading</span> to the failing assertion.
+
+Import Closure. For each file $t \in \mathcal{T}$, we parse import statements and compute a depth-2 transitive closure $\mathcal{C}$ of local module dependencies. This captures files that may be needed for <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;understanding&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">understanding</span> the code structure even if not directly executed.
+
+Interface Files. We extract file paths from Path: markers in the problem <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;statement&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">statement</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;using&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">using</span> regex, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;yielding&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">yielding</span> interface files $\mathcal{I}$ that the agent is explicitly instructed to modify.
+
+Auxiliary Files. We include configuration files $\mathcal{G}$ (e.g., setup.py, pyproject.toml) and \_\_init\_\_.py ancestors $\mathcal{N}$ of all allowlisted files to ensure proper module resolution.
+
+The final allowlist is:
+ 
+\mathcal{A} = \mathcal{T} \cup \mathcal{C} \cup \mathcal{I} \cup \mathcal{G} \cup \mathcal{N}
+ 
+
+┌─ [float] 
+ 
+[figure: framework_overview.png]
+Caption: {TraceBound framework overview. Pre-trace Stage (left): Execution traces from failing tests are combined with import closure analysis to derive per-task file allowlists. Bounded Context Stage (right): The allowlist gates file-read operations during agent execution, denying access to files outside the trace-derived set.}
+
+ ─┘
+
+§ File-Access Restriction (Stage 2)
+
+During agent execution, TraceBound intercepts file-read operations and enforces the allowlist policy. When the agent requests to read file $f$, the read proceeds normally if $f \in \mathcal{A}$, returning the file content. If $f \notin \mathcal{A}$, the read is denied with an informative error message guiding the agent to focus on task-relevant files.
+
+This hard constraint differs from soft approaches <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;like&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">like</span> content pruning~\citep{Wang2026SWEPrunerSC} in that it prevents irrelevant file reads entirely rather than compressing content after retrieval. The hypothesis is that this binary restriction will reduce token consumption by eliminating reads of files outside the failing test's execution neighborhood.
+
+</pre></section><section class="sheet"><h2>Related Work</h2><pre>
+§ Related Work
+
+Coding agent benchmarks have evolved to capture increasingly <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;complex&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">complex</span> software engineering tasks.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> SWE-bench~\citep{Jimenez2023SWEbenchCL} established execution-based evaluation for repository-level issue resolution, spawning numerous variants and extensions. FeatureBench~</span><span class="hl hl-CP hl-PB pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;prior work the research problem is borrowed from: Zhou2026FeatureBenchBA (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#e6676740 6px,#e6676740 12px)">\citep{Zhou2026FeatureBenchBA}</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> extends this paradigm to feature-level development tasks with larger edit scopes and extensive test suites, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;revealing&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">revealing</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> that token consumption is a critical bottleneck.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> InterCode~\citep{Yang2023InterCodeSA} standardizes interactive coding with execution feedback, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;while&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">while</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> ContextBench~\citep{Li2026ContextBenchAB} </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;specifically&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">specifically</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;evaluates&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">evaluates</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> context retrieval quality in coding agents, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;highlighting&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">highlighting</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> evidence drop and retrieval inefficiency as key </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;challenges&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">challenges</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]">.</span>
+
+Recent work <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;addresses&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">addresses</span> the token efficiency problem <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;through&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">through</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;various&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">various</span> context management approaches.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> SWE-Pruner~\citep{Wang2026SWEPrunerSC} applies line-level content pruning to reduce retrieved file sizes, operating after retrieval rather than restricting access. Context as a Tool~\citep{Liu2025ContextAA} treats context management as explicit agent actions with memory segments. Tokenomics~</span><span class="hl hl-CP hl-PB pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;PB&quot;, &quot;trigger&quot;, &quot;prior work the research problem is borrowed from: Salim2026TokenomicsQW (origin=INHERITED)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#e6676740 6px,#e6676740 12px)">\citep{Salim2026TokenomicsQW}</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> provides detailed analysis of where tokens are consumed in agentic software engineering, motivating efficiency improvements.</span> Our work differs by <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;using&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">using</span> a hard file-access constraint derived from execution traces rather than soft content compression.
+
+Graph-based approaches improve code retrieval <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;through&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">through</span> repository structure analysis.<span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 3 prior works to each other (human-like synthesis)&quot;]]"> RepoGraph~\citep{Ouyang2024RepoGraphEA} and CodexGraph~\citep{Liu2024CodexGraphBL} use code graph databases for retrieval, </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 3 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;while&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">while</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 3 prior works to each other (human-like synthesis)&quot;]]"> LocAgent~\citep{Chen2025LocAgentGL} provides graph-guided localization tools.</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> TRAIL~\citep{Deshpande2025TRAILTR} uses execution traces for issue localization and agent reasoning. Gistify~\citep{Lee2025GistifyCU} </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;demonstrates&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">demonstrates</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> that runtime execution traces aid codebase-level </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;understanding&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">understanding</span><span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]">.</span> Our work is most closely related to <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;these&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">these</span> trace-based approaches, but uniquely applies traces as an access policy rather than a retrieval signal.
+
+</pre></section></main>
+<script>
+(function(){
+  var WRAP = document.currentScript.closest('.wrap');
+  var META = {"CRN": {"kr": "Reference mesh — does it link its sections?", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "share of references pointing to another section: 0.0 (cross 0 / same 5 / dangling 0). Humans weave the whole paper (median ~0.47); 65% of AI papers sit at exactly 0.", "verdict": "AI-side", "pos": 1.0}, "MR": {"kr": "Macro redundancy — does it repeat itself?", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "cross-section wording overlap 0.0558 (AI mean ~0.057 vs human ~0.021). Highlights = claim sentences repeated almost verbatim in another section.", "verdict": "AI-side", "pos": 1.0}, "ENG": {"kr": "Number grounding — are numbers tied to prior work?", "full": "External_Number_Grounding", "color": "#c98500", "fb": "only 2 of 52 decimal numbers sit next to a citation (rate 0.0192). Humans anchor numbers to prior-work numbers; AI numbers float free.", "verdict": "AI-side", "pos": 3.13}, "CP": {"kr": "Comparative positioning — are prior works related to each other?", "full": "Comparative_Positioning", "color": "#199e70", "fb": "work-to-work edge density 0.3077 (AI median 0.36 vs human 1.88). Faint green = several prior works compared in one sentence (human-like); solid green = listed one at a time (AI-typical).", "verdict": "AI-side", "pos": 1.04}, "STY": {"kr": "Style — LLM-typical vocabulary", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM excess-vocabulary density 268.62 (per 10k words; pre-LLM human papers ~70 vs AI papers ~232). Words like 'delve/comprehensive/notably' that spiked after LLMs.", "verdict": "AI-side", "pos": 1.22}, "ESA": {"kr": "Evaluation surface — models × datasets", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "evaluation surface = 1 models × 1 datasets = 1 cells (AI mean 3.1 vs human 18.4). AI papers validate on a very narrow surface.", "verdict": "AI-side", "pos": 1.14}, "PB": {"kr": "Problem borrowing — is the problem taken from one prior paper?", "full": "Problem_Borrowing", "color": "#e66767", "fb": "limitation inherited as-is from ONE prior paper (AI-typical). borrowed from: Salim2026TokenomicsQW, Zhou2026FeatureBenchBA — “LLM-based coding agents face a persistent context-cost bottleneck: they must repeatedly ingest large amounts of repository text (reaching millions of ”", "verdict": "human-side", "pos": 0.0}, "FIG": {"kr": "Figure — does the diagram use color to mean something?", "full": "Visualization (figure mold)", "color": "#008300", "fb": "has a method diagram (~80% of human papers do; only 44% of AI papers).", "verdict": "human-side", "pos": 0.0}};
+  // --- chip filter (scoped to this paper's wrap) ---
+  WRAP.addEventListener('click', function(e){
+    var c = e.target.closest ? e.target.closest('.chip') : null;
+    if(!c) return;
+    WRAP.setAttribute('data-view', c.getAttribute('data-v'));
+    WRAP.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('active', b===c);});
+  });
+  // --- rich tooltip: hover shows, click pins ---
+  var tip = document.createElement('div');
+  tip.className = 'moldtip';
+  document.body.appendChild(tip);
+  var pinned = false;
+  function render(el){
+    var data;
+    try { data = JSON.parse(el.getAttribute('data-tip')); } catch(err) { return false; }
+    var view = WRAP.getAttribute('data-view');
+    var h = '';
+    data.forEach(function(t){
+      var ab = t[0], pol = t[1], why = t[2];
+      if (view !== 'ALL' && ab !== view) return;
+      var m = META[ab] || {};
+      var badge = pol === 'trigger'
+        ? '<span class="tbadge ai">evidence of AI-likeness</span>'
+        : '<span class="tbadge hu">evidence of human-likeness</span>';
+      h += '<div class="tsec">'
+        + '<div class="thead"><span class="sw" style="background:' + m.color + '"></span>'
+        + '<b>' + m.kr + '</b>' + badge + '</div>'
+        + '<div class="twhy">' + why + '</div>'
+        + '<div class="tscore">This paper&#39;s ' + ab + ' verdict: <b>' + m.verdict + '</b>'
+        + (m.pos !== null ? ' (position ' + m.pos + ' · 0=human, 1=AI)' : '') + '</div>'
+        + '<div class="tfb">' + m.fb + '</div></div>';
+    });
+    if(!h) return false;
+    tip.innerHTML = h + '<div class="tclose">click=pin · click again/ESC=close</div>';
+    return true;
+  }
+  function place(e){
+    var W = window.innerWidth, H = window.innerHeight;
+    var x = Math.min(e.clientX + 14, W - 380), y = e.clientY + 16;
+    tip.style.left = Math.max(8, x) + 'px';
+    var th = tip.offsetHeight;
+    if (y + th > H - 10) y = Math.max(8, e.clientY - th - 12);
+    tip.style.top = y + 'px';
+  }
+  WRAP.addEventListener('mouseover', function(e){
+    if (pinned) return;
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { tip.classList.remove('show'); return; }
+    if (render(el)) { tip.classList.add('show'); place(e); }
+  });
+  WRAP.addEventListener('mousemove', function(e){
+    if (pinned || !tip.classList.contains('show')) return;
+    place(e);
+  });
+  WRAP.addEventListener('mouseleave', function(){ if(!pinned) tip.classList.remove('show'); });
+  WRAP.addEventListener('click', function(e){
+    var el = e.target.closest ? e.target.closest('.hl[data-tip]') : null;
+    if (!el) { pinned = false; tip.classList.remove('show'); return; }
+    if (pinned) { pinned = false; tip.classList.remove('show'); return; }
+    if (render(el)) { pinned = true; tip.classList.add('show'); place(e); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { pinned = false; tip.classList.remove('show'); }
+  });
+})();
+</script></div></body></html>

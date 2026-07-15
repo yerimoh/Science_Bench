@@ -39,6 +39,7 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Ro
 .papernav .nav.ai{border-color:#e6676744}
 .papernav .nav.cur{background:#3987e5;color:#fff;border-color:#3987e5}
 .papernav .nav:hover{border-color:#e8e6df}
+.papernav .nav.lang{margin-left:auto;border-color:#e8e6df66;font-weight:700}
 .moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
  border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
  color:#e8e6df;display:none;pointer-events:none}
@@ -67,6 +68,14 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Ro
  border:1px solid #2c2c28;border-radius:12px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit}
 .chip.active{border-color:#e8e6df;color:#fff;background:#2e2f2b}
 .chip .sw{width:9px;height:9px}
+.figthumb{width:100%;border-radius:7px;border:1px solid #2c2c28;margin:7px 0 2px;background:#fff}
+.figsheet .figwrap{position:relative;text-align:center;background:#fff;border-radius:8px;padding:10px}
+.figsheet img{max-width:100%;max-height:520px}
+.figtag{position:absolute;top:8px;left:8px;color:#fff;font-size:11px;font-weight:700;
+ border-radius:5px;padding:2px 8px;opacity:.92}
+.figcap{font-size:12px;color:#c3c2b7;margin-top:9px;line-height:1.5}
+.fignone{font-size:13px;color:#e6b0b0;background:#2a1d1d;border:1px dashed #e6676766;
+ border-radius:8px;padding:18px;text-align:center}
 .hl-CRN.pol-trigger{background:#3987e555;box-shadow:inset 0 -2px 0 #3987e5}.hl-CRN.pol-counter{background:#3987e522;box-shadow:inset 0 -1px 0 #3987e588}
 .hl-CP.pol-trigger{background:#199e7055;box-shadow:inset 0 -2px 0 #199e70}.hl-CP.pol-counter{background:#199e7022;box-shadow:inset 0 -1px 0 #199e7088}
 .hl-ENG.pol-trigger{background:#c9850055;box-shadow:inset 0 -2px 0 #c98500}.hl-ENG.pol-counter{background:#c9850022;box-shadow:inset 0 -1px 0 #c9850088}
@@ -74,70 +83,95 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Ro
 .hl-STY.pol-trigger{background:#d5518155;box-shadow:inset 0 -2px 0 #d55181}.hl-STY.pol-counter{background:#d5518122;box-shadow:inset 0 -1px 0 #d5518188}
 .hl-ESA.pol-trigger{background:#d9592655;box-shadow:inset 0 -2px 0 #d95926}.hl-ESA.pol-counter{background:#d9592622;box-shadow:inset 0 -1px 0 #d9592688}
 .hl-PB.pol-trigger{background:#e6676755;box-shadow:inset 0 -2px 0 #e66767}.hl-PB.pol-counter{background:#e6676722;box-shadow:inset 0 -1px 0 #e6676788}
+.hl-FIG.pol-trigger{background:#00830055;box-shadow:inset 0 -2px 0 #008300}.hl-FIG.pol-counter{background:#00830022;box-shadow:inset 0 -1px 0 #00830088}
 .wrap[data-view="CRN"] .hl:not(.hl-CRN){background:none!important;box-shadow:none!important}.wrap[data-view="CRN"] .card[data-mold]:not([data-mold="CRN"]){opacity:.35}
 .wrap[data-view="CP"] .hl:not(.hl-CP){background:none!important;box-shadow:none!important}.wrap[data-view="CP"] .card[data-mold]:not([data-mold="CP"]){opacity:.35}
 .wrap[data-view="ENG"] .hl:not(.hl-ENG){background:none!important;box-shadow:none!important}.wrap[data-view="ENG"] .card[data-mold]:not([data-mold="ENG"]){opacity:.35}
 .wrap[data-view="MR"] .hl:not(.hl-MR){background:none!important;box-shadow:none!important}.wrap[data-view="MR"] .card[data-mold]:not([data-mold="MR"]){opacity:.35}
 .wrap[data-view="STY"] .hl:not(.hl-STY){background:none!important;box-shadow:none!important}.wrap[data-view="STY"] .card[data-mold]:not([data-mold="STY"]){opacity:.35}
 .wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
-.wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}</style></head><body>
+.wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}
+.wrap[data-view="FIG"] .hl:not(.hl-FIG){background:none!important;box-shadow:none!important}.wrap[data-view="FIG"] .card[data-mold]:not([data-mold="FIG"]){opacity:.35}</style></head><body>
 <header><a class="back" href="../index.html">← 데모 목록</a>
  <h1>FA0221 <span class="sub">2025 · AI가 쓴 논문 (FARS)</span></h1>
  <div class="sub">논문 원문 위에 몰드(AI 지문 패턴)의 증거를 색으로 표시했습니다.
  <b>진하게 밑줄 = AI스러운 패턴의 증거</b> · <b>옅은 하이라이트 = 사람다운 패턴의 증거</b>.
  마우스를 올리면 왜 잡혔는지 설명이 뜹니다. 모든 하이라이트는 이 논문의 실제 LaTeX 원문 조각이며 조작이 없습니다.</div>
 </header>
-<nav class="papernav"><span class="navlab">논문 바로가기 — 파랑=사람, 빨강=AI:</span><a class="nav" href="../index.html">Overview</a><a class="nav hu" href="./Word2Vec.html">Word2Vec</a><a class="nav hu" href="./Attention.html">Attention</a><a class="nav hu" href="./BERT.html">BERT</a><a class="nav hu" href="./FLAN.html">FLAN</a><a class="nav hu" href="./DeepSeek-R1.html">DeepSeek-R1</a><a class="nav ai" href="./FA0001.html">FA0001</a><a class="nav ai" href="./FA0022.html">FA0022</a><a class="nav ai" href="./FA0044.html">FA0044</a><a class="nav ai" href="./FA0067.html">FA0067</a><a class="nav ai" href="./FA0106.html">FA0106</a><a class="nav ai" href="./FA0145.html">FA0145</a><a class="nav ai" href="./FA0187.html">FA0187</a><a class="nav ai cur" href="./FA0221.html">FA0221</a><a class="nav ai" href="./FA0297.html">FA0297</a><a class="nav ai" href="./FA0421.html">FA0421</a></nav>
+<nav class="papernav"><span class="navlab">논문 바로가기 — 파랑=사람, 빨강=AI:</span><a class="nav" href="../index.html">Overview</a><a class="nav hu" href="./Word2Vec.html">Word2Vec</a><a class="nav hu" href="./Attention.html">Attention</a><a class="nav hu" href="./BERT.html">BERT</a><a class="nav hu" href="./FLAN.html">FLAN</a><a class="nav hu" href="./DeepSeek-R1.html">DeepSeek-R1</a><a class="nav ai" href="./FA0001.html">FA0001</a><a class="nav ai" href="./FA0022.html">FA0022</a><a class="nav ai" href="./FA0044.html">FA0044</a><a class="nav ai" href="./FA0067.html">FA0067</a><a class="nav ai" href="./FA0106.html">FA0106</a><a class="nav ai" href="./FA0145.html">FA0145</a><a class="nav ai" href="./FA0187.html">FA0187</a><a class="nav ai cur" href="./FA0221.html">FA0221</a><a class="nav ai" href="./FA0297.html">FA0297</a><a class="nav ai" href="./FA0421.html">FA0421</a><a class="nav lang" href="./FA0221_en.html">English</a></nav>
 <div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
  <div class="chead"><b>한눈 요약 — 이 논문은 어느 쪽인가</b></div>
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
  <div class="fb">종합(5개 몰드 평균): <span class="vbadge ai">AI쪽</span>
   &nbsp;위치 1.07 (0=사람 논문 중앙값, 1=AI 논문 중앙값)</div>
- <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">참조망 — 섹션을 서로 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">거시 반복 — 같은 말을 또 하는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">수치 근거 — 숫자를 선행연구에 붙이는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">비교 배치 — 선행연구끼리 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">문체 — LLM 특유 어휘</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">평가 규모 — 모델×데이터셋</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">문제 차용 — 문제를 선행 1편에서 빌렸는가</span><span class="vbadge hu">사람쪽</span></div>
+ <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">참조망 — 섹션을 서로 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">거시 반복 — 같은 말을 또 하는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">수치 근거 — 숫자를 선행연구에 붙이는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">비교 배치 — 선행연구끼리 엮는가</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">문체 — LLM 특유 어휘</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">평가 규모 — 모델×데이터셋</span><span class="vbadge ai">AI쪽</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">문제 차용 — 문제를 선행 1편에서 빌렸는가</span><span class="vbadge hu">사람쪽</span></div><div class="vrow"><span class="sw" style="background:#008300"></span><span class="vname">그림 — 다이어그램이 색으로 의미를 말하는가</span><span class="vbadge hu">사람쪽</span></div>
  <div class="ct">축마다 보는 게 다릅니다 — 아래 칩으로 몰드를 하나씩 켜서 본문에서 확인하세요.</div></div><div class="chips"><span class="chiplab">하이라이트 필터</span><button class="chip active" data-v="ALL">전체</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button></div><div class="card" data-mold="CRN">
  <div class="chead"><span class="sw" style="background:#3987e5"></span><b>참조망 — 섹션을 서로 엮는가</b>
    <span class="abbr" style="border-color:#3987e5;color:#3987e5">CRN</span></div>
  <div class="ct">Cross-Reference_Network</div>
+ 
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#3987e5"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
  <div class="fb">다른 섹션을 가리키는 참조 비율 0.0 (다른 섹션 0 / 같은 섹션 5 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.</div>
  <div class="ct">하이라이트 5개 · AI 증거 5 / 사람 증거 0</div></div><div class="card" data-mold="MR">
  <div class="chead"><span class="sw" style="background:#9085e9"></span><b>거시 반복 — 같은 말을 또 하는가</b>
    <span class="abbr" style="border-color:#9085e9;color:#9085e9">MR</span></div>
  <div class="ct">Macro_Redundancy</div>
+ 
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#9085e9"></div><div class="ai">AI</div></div><span class="posv">1.19</span></div>
  <div class="fb">섹션 간 표현 겹침 0.0637 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.</div>
  <div class="ct">하이라이트 4개 · AI 증거 4 / 사람 증거 0</div></div><div class="card" data-mold="ENG">
  <div class="chead"><span class="sw" style="background:#c98500"></span><b>수치 근거 — 숫자를 선행연구에 붙이는가</b>
    <span class="abbr" style="border-color:#c98500;color:#c98500">ENG</span></div>
  <div class="ct">External_Number_Grounding</div>
+ 
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#c98500"></div><div class="ai">AI</div></div><span class="posv">1.56</span></div>
  <div class="fb">소수점 수치 84개 중 1개만 인용 옆에 붙음 (비율 0.0119). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.</div>
  <div class="ct">하이라이트 84개 · AI 증거 83 / 사람 증거 1</div></div><div class="card" data-mold="CP">
  <div class="chead"><span class="sw" style="background:#199e70"></span><b>비교 배치 — 선행연구끼리 엮는가</b>
    <span class="abbr" style="border-color:#199e70;color:#199e70">CP</span></div>
  <div class="ct">Comparative_Positioning</div>
+ 
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#199e70"></div><div class="ai">AI</div></div><span class="posv">1.15</span></div>
  <div class="fb">선행연구끼리 엮인 밀도 0.1333 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).</div>
  <div class="ct">하이라이트 15개 · AI 증거 13 / 사람 증거 2</div></div><div class="card" data-mold="STY">
  <div class="chead"><span class="sw" style="background:#d55181"></span><b>문체 — LLM 특유 어휘</b>
    <span class="abbr" style="border-color:#d55181;color:#d55181">STY</span></div>
  <div class="ct">Stylistic (excess vocab)</div>
+ 
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:94%;background:#d55181"></div><div class="ai">AI</div></div><span class="posv">0.94</span></div>
  <div class="fb">LLM 과잉 어휘 밀도 222.119 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.</div>
  <div class="ct">하이라이트 106개 · AI 증거 106 / 사람 증거 0</div></div><div class="card" data-mold="ESA">
  <div class="chead"><span class="sw" style="background:#d95926"></span><b>평가 규모 — 모델×데이터셋</b>
    <span class="abbr" style="border-color:#d95926;color:#d95926">ESA</span></div>
  <div class="ct">Evaluation_Surface_Area</div>
+ 
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#d95926"></div><div class="ai">AI</div></div><span class="posv">1.07</span></div>
  <div class="fb">평가 규모 = 모델 1개 × 데이터셋 2개 = 2칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.</div>
  <div class="ct">하이라이트 0개 · AI 증거 0 / 사람 증거 0</div></div><div class="card" data-mold="PB">
  <div class="chead"><span class="sw" style="background:#e66767"></span><b>문제 차용 — 문제를 선행 1편에서 빌렸는가</b>
    <span class="abbr" style="border-color:#e66767;color:#e66767">PB</span></div>
  <div class="ct">Problem_Borrowing</div>
+ 
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#e66767"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
  <div class="fb">스스로 발견한 문제 (사람다움). 특정 선행연구에 기대지 않음. — “Online LLM-based log parsers using self-generated in-context learning are vulnerable to persistent poisoning attacks because their demonstration pools”</div>
- <div class="ct">하이라이트 0개 · AI 증거 0 / 사람 증거 0</div></div></div>
-<main><section class="sheet"><pre>
+ <div class="ct">하이라이트 0개 · AI 증거 0 / 사람 증거 0</div></div><div class="card" data-mold="FIG">
+ <div class="chead"><span class="sw" style="background:#008300"></span><b>그림 — 다이어그램이 색으로 의미를 말하는가</b>
+   <span class="abbr" style="border-color:#008300;color:#008300">FIG</span></div>
+ <div class="ct">Visualization (figure mold)</div>
+ <a href="figs/FA0221.jpg" target="_blank"><img class="figthumb" src="figs/FA0221.jpg" alt="method diagram"></a>
+ <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:0%;background:#008300"></div><div class="ai">AI</div></div><span class="posv">0.00</span></div>
+ <div class="fb">방법 다이어그램 있음 (사람 논문의 ~80%가 그림; AI 논문은 44%).</div>
+ <div class="ct">figure 단위 측정 (본문 하이라이트 없음)</div></div><div class="card"><div class="chead"><span class="sw" style="background:#9ca3af"></span>
+ <b>Argument_Graph (Qwen2.5-32B)</b></div><div class="fb">A1 depth=10 (HU~15.7/AI~12.7) ·
+ A2 cites=1 (HU~3.9/AI~2.4) · A3 result-nodes=0 ·
+ A5 method=2 · A6 degree=28 · A7 addresses=2</div>
+ <div class="ct">graph fingerprint, no spans (LLM extraction)</div></div></div>
+<main><section class="sheet figsheet">
+ <h2>메인 피규어 — 방법 다이어그램
+  <span class="vbadge hu" style="float:right">FIG: 사람쪽</span></h2>
+ <div class="figwrap"><img src="figs/FA0221.jpg" alt="method diagram">
+  <span class="figtag" style="background:#008300">FIG</span></div>
+ <div class="figcap">방법 다이어그램 있음 (사람 논문의 ~80%가 그림; AI 논문은 44%).</div></section><section class="sheet"><pre>
 
  
 Online LLM-<span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;based&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">based</span> log parsers achieve state-of-the-art accuracy by <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;using&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">using</span> self-generated in-context learning (SG-ICL), where the system continuously accumulates its own parsing outputs as demonstrations for future queries. <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;However&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">However</span>, <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;this&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">this</span> online learning mechanism creates a security vulnerability: the monotonically growing demonstration pool can be permanently corrupted by adversarial log injection.<span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Introduction&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> We present the first demo-pool poisoning attack on online LLM log parsers.</span> By injecting only 60 <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;crafted&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">crafted</span> log entries (3\% of a 2000-log stream) <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;during&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">during</span> an early window, our over-generalization attack causes severe parsing degradation that persists 900+ logs after injection ends. On BGL, the attack reduces template accuracy by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">40.33</span> percentage points; on Thunderbird, by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">13.33</span> percentage points. Ablation studies reveal that trie poisoning---where over-generalized templates silently absorb future logs---dominates over ICL contamination as the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;primary&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">primary</span> damage mechanism. Our <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;findings&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">findings</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;highlight&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">highlight</span> the <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;need&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">need</span> for security-aware design in online learning systems with persistent state.
@@ -314,7 +348,7 @@ To construct poisoned log entries, we employ an over-generalization strategy. Gi
 <script>
 (function(){
   var WRAP = document.currentScript.closest('.wrap');
-  var META = {"CRN": {"kr": "참조망 — 섹션을 서로 엮는가", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "다른 섹션을 가리키는 참조 비율 0.0 (다른 섹션 0 / 같은 섹션 5 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.", "verdict": "AI쪽", "pos": 1.0}, "MR": {"kr": "거시 반복 — 같은 말을 또 하는가", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "섹션 간 표현 겹침 0.0637 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.", "verdict": "AI쪽", "pos": 1.19}, "ENG": {"kr": "수치 근거 — 숫자를 선행연구에 붙이는가", "full": "External_Number_Grounding", "color": "#c98500", "fb": "소수점 수치 84개 중 1개만 인용 옆에 붙음 (비율 0.0119). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.", "verdict": "AI쪽", "pos": 1.56}, "CP": {"kr": "비교 배치 — 선행연구끼리 엮는가", "full": "Comparative_Positioning", "color": "#199e70", "fb": "선행연구끼리 엮인 밀도 0.1333 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).", "verdict": "AI쪽", "pos": 1.15}, "STY": {"kr": "문체 — LLM 특유 어휘", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM 과잉 어휘 밀도 222.119 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.", "verdict": "AI쪽", "pos": 0.94}, "ESA": {"kr": "평가 규모 — 모델×데이터셋", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "평가 규모 = 모델 1개 × 데이터셋 2개 = 2칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.", "verdict": "AI쪽", "pos": 1.07}, "PB": {"kr": "문제 차용 — 문제를 선행 1편에서 빌렸는가", "full": "Problem_Borrowing", "color": "#e66767", "fb": "스스로 발견한 문제 (사람다움). 특정 선행연구에 기대지 않음. — “Online LLM-based log parsers using self-generated in-context learning are vulnerable to persistent poisoning attacks because their demonstration pools”", "verdict": "사람쪽", "pos": 0.0}};
+  var META = {"CRN": {"kr": "참조망 — 섹션을 서로 엮는가", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "다른 섹션을 가리키는 참조 비율 0.0 (다른 섹션 0 / 같은 섹션 5 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.", "verdict": "AI쪽", "pos": 1.0}, "MR": {"kr": "거시 반복 — 같은 말을 또 하는가", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "섹션 간 표현 겹침 0.0637 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.", "verdict": "AI쪽", "pos": 1.19}, "ENG": {"kr": "수치 근거 — 숫자를 선행연구에 붙이는가", "full": "External_Number_Grounding", "color": "#c98500", "fb": "소수점 수치 84개 중 1개만 인용 옆에 붙음 (비율 0.0119). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.", "verdict": "AI쪽", "pos": 1.56}, "CP": {"kr": "비교 배치 — 선행연구끼리 엮는가", "full": "Comparative_Positioning", "color": "#199e70", "fb": "선행연구끼리 엮인 밀도 0.1333 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).", "verdict": "AI쪽", "pos": 1.15}, "STY": {"kr": "문체 — LLM 특유 어휘", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM 과잉 어휘 밀도 222.119 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.", "verdict": "AI쪽", "pos": 0.94}, "ESA": {"kr": "평가 규모 — 모델×데이터셋", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "평가 규모 = 모델 1개 × 데이터셋 2개 = 2칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.", "verdict": "AI쪽", "pos": 1.07}, "PB": {"kr": "문제 차용 — 문제를 선행 1편에서 빌렸는가", "full": "Problem_Borrowing", "color": "#e66767", "fb": "스스로 발견한 문제 (사람다움). 특정 선행연구에 기대지 않음. — “Online LLM-based log parsers using self-generated in-context learning are vulnerable to persistent poisoning attacks because their demonstration pools”", "verdict": "사람쪽", "pos": 0.0}, "FIG": {"kr": "그림 — 다이어그램이 색으로 의미를 말하는가", "full": "Visualization (figure mold)", "color": "#008300", "fb": "방법 다이어그램 있음 (사람 논문의 ~80%가 그림; AI 논문은 44%).", "verdict": "사람쪽", "pos": 0.0}};
   // --- chip filter (scoped to this paper's wrap) ---
   WRAP.addEventListener('click', function(e){
     var c = e.target.closest ? e.target.closest('.chip') : null;
