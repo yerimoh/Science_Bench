@@ -53,6 +53,12 @@ td a{color:inherit}
 .polechip.hu{background:#3987e526;color:#8fbcf5}
 .polechip.ai{background:#e6676726;color:#ff9d9d}
 .polenote{font-size:11px;color:#8a887d}
+.famlab{font-size:10.5px;font-weight:700;border-left:2px solid;padding:2px 2px 2px 8px;margin-left:8px;white-space:nowrap}
+.famlab:first-of-type{margin-left:0}
+.fambadge{font-size:10.5px;font-weight:700;border-radius:9px;padding:2px 10px;text-decoration:none;white-space:nowrap}
+.famsec{margin:26px 0 10px;padding:12px 16px;border-radius:12px;border:1px solid #2c2c28;background:#171816}
+.famsec h2{margin:0 0 4px;font-size:16px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.famsec .famq{font-size:12.5px;color:#c3c2b7;line-height:1.55;max-width:1050px}
 .mstrip{position:relative;height:26px;background:linear-gradient(90deg,#20262e,#2e2020);border-radius:6px;margin:10px 0 2px}
 .mstrip .md{position:absolute;top:7px;width:12px;height:12px;border-radius:50%;border:2px solid #111210;cursor:pointer}
 .mstrip .lab{position:absolute;font-size:9px;color:#8a887d;top:100%;margin-top:2px}
@@ -151,6 +157,8 @@ html[data-theme="light"] .polechip.hu{background:#e8f0fb;color:#2b6cc4}
 html[data-theme="light"] .polechip.ai{background:#fdecec;color:#c23a3a}
 html[data-theme="light"] .polenote{color:#77756b}
 html[data-theme="light"] .obs{color:#4a4a42;background:#f4f4f0;border-color:#e0e0da}
+html[data-theme="light"] .famsec{background:#faf9f7;border-color:#e3e3dd}
+html[data-theme="light"] .famsec .famq{color:#4a4a42}
 #sbThemeToggle{position:fixed;bottom:16px;right:16px;z-index:200;background:#242522;color:#e8e6df;
  border:1px solid #4a4a44;border-radius:20px;padding:7px 13px;font-size:12.5px;font-family:inherit;
  cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.4);display:flex;align-items:center;gap:6px}
@@ -166,12 +174,16 @@ b.addEventListener('click',function(){var n=cur()==='light'?'dark':'light';
 if(n==='light')document.documentElement.setAttribute('data-theme','light');
 else document.documentElement.removeAttribute('data-theme');
 try{localStorage.setItem('sb-theme',n);}catch(e){}paint();});})();</script>
-<header><h1><span class="sw" style="background:#9085e9"></span>Macro_Redundancy <span class="badge g">그래프 뷰</span>
+<header><h1><span class="sw" style="background:#9085e9"></span>Macro_Redundancy
+ <a class="fambadge" href="index.html#fam-STR"
+  style="background:#3987e526;color:#3987e5">Structural Mold · 구조 몰드 — 거시 구조</a>
+ <span class="badge g">그래프 뷰</span>
  <span class="sub">거시 반복 — 같은 말을 또 하는가</span></h1>
- <div class="sub">한 몰드를 15편 전체에 걸쳐 봅니다 — 판정표, 실제 원문 예제, 그래프.</div>
+ <div class="sub">한 몰드를 15편 전체에 걸쳐 봅니다 — 판정표, 실제 원문 예제, 그래프.
+ <br>논문의 <b>뼈대</b>가 사람처럼 엮여 있는가 — 섹션을 넘나드는 참조망, 섹션 간 반복, 논증의 흐름. 섹션을 하나씩 따로 생성하는 자기회귀 방식이 가장 먼저 드러나는 층입니다.</div>
 </header>
 <nav class="papernav"><span class="navlab">논문 바로가기 — 파랑=사람, 빨강=AI:</span><a class="nav" href="../index.html">Overview</a><a class="nav cur" href="index.html">몰드별 보기</a><a class="nav hu" href="../pages/Word2Vec.html">Word2Vec</a><a class="nav hu" href="../pages/Attention.html">Attention</a><a class="nav hu" href="../pages/BERT.html">BERT</a><a class="nav hu" href="../pages/FLAN.html">FLAN</a><a class="nav hu" href="../pages/DeepSeek-R1.html">DeepSeek-R1</a><a class="nav ai" href="../pages/FA0001.html">FA0001</a><a class="nav ai" href="../pages/FA0022.html">FA0022</a><a class="nav ai" href="../pages/FA0044.html">FA0044</a><a class="nav ai" href="../pages/FA0067.html">FA0067</a><a class="nav ai" href="../pages/FA0106.html">FA0106</a><a class="nav ai" href="../pages/FA0145.html">FA0145</a><a class="nav ai" href="../pages/FA0187.html">FA0187</a><a class="nav ai" href="../pages/FA0221.html">FA0221</a><a class="nav ai" href="../pages/FA0297.html">FA0297</a><a class="nav ai" href="../pages/FA0421.html">FA0421</a></nav>
-<nav class="papernav"><span class="navlab">몰드(AI 지문 패턴):</span><a class="nav" href="CRN.html" style="border-color:#3987e566"><span class="sw" style="background:#3987e5;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>CRN</a><a class="nav cur" href="MR.html"><span class="sw" style="background:#9085e9;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>MR</a><a class="nav" href="CP.html" style="border-color:#199e7066"><span class="sw" style="background:#199e70;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>CP</a><a class="nav" href="ARG.html" style="border-color:#8a93a666"><span class="sw" style="background:#8a93a6;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>ARG</a><a class="nav" href="ENG.html" style="border-color:#c9850066"><span class="sw" style="background:#c98500;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>ENG</a><a class="nav" href="ESA.html" style="border-color:#d9592666"><span class="sw" style="background:#d95926;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>ESA</a><a class="nav" href="PB.html" style="border-color:#e6676766"><span class="sw" style="background:#e66767;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>PB</a><a class="nav" href="STY.html" style="border-color:#d5518166"><span class="sw" style="background:#d55181;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>STY</a><a class="nav" href="FIG.html" style="border-color:#00830066"><span class="sw" style="background:#008300;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>FIG</a><a class="nav lang" href="MR_en.html">English</a></nav>
+<nav class="papernav"><span class="navlab">몰드(AI 지문 패턴), 패밀리별:</span><span class="famlab" style="color:#3987e5;border-color:#3987e555"><a href="index.html#fam-STR" style="color:inherit;text-decoration:none">Structural Mold</a></span><a class="nav" href="CRN.html" style="border-color:#3987e566"><span class="sw" style="background:#3987e5;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>CRN</a><a class="nav cur" href="MR.html"><span class="sw" style="background:#9085e9;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>MR</a><a class="nav" href="ARG.html" style="border-color:#8a93a666"><span class="sw" style="background:#8a93a6;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>ARG</a><span class="famlab" style="color:#199e70;border-color:#199e7055"><a href="index.html#fam-CON" style="color:inherit;text-decoration:none">Content Mold</a></span><a class="nav" href="CP.html" style="border-color:#199e7066"><span class="sw" style="background:#199e70;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>CP</a><a class="nav" href="ESA.html" style="border-color:#d9592666"><span class="sw" style="background:#d95926;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>ESA</a><a class="nav" href="PB.html" style="border-color:#e6676766"><span class="sw" style="background:#e66767;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>PB</a><span class="famlab" style="color:#c98500;border-color:#c9850055"><a href="index.html#fam-XOUT" style="color:inherit;text-decoration:none">Cross-output Mold</a></span><a class="nav" href="ENG.html" style="border-color:#c9850066"><span class="sw" style="background:#c98500;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>ENG</a><a class="nav" href="FIG.html" style="border-color:#00830066"><span class="sw" style="background:#008300;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>FIG</a><span class="famlab" style="color:#d55181;border-color:#d5518155"><a href="index.html#fam-STYF" style="color:inherit;text-decoration:none">Stylistic Mold</a></span><a class="nav" href="STY.html" style="border-color:#d5518166"><span class="sw" style="background:#d55181;width:9px;height:9px;display:inline-block;border-radius:2px;margin-right:5px"></span>STY</a><a class="nav lang" href="MR_en.html">English</a></nav>
 <div class="wrap">
 <div class="card">
  <div class="fb"><b>무엇을 재나</b> — 서로 다른 섹션에서 <b>거의 같은 문장(주장)이 반복</b>되는 정도 (섹션 간 4-gram 겹침).</div>
