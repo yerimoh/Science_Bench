@@ -40,6 +40,15 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Ro
 .papernav .nav.cur{background:#3987e5;color:#fff;border-color:#3987e5}
 .papernav .nav:hover{border-color:#e8e6df}
 .papernav .nav.lang{margin-left:auto;border-color:#e8e6df66;font-weight:700}
+.papernav .nav.molds{border-color:#9085e988;font-weight:700}
+.figpal{display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:11px;color:#c3c2b7}
+.figpal .psw{display:inline-block;height:15px;border-radius:4px;border:1px solid #ffffff2e;min-width:13px;cursor:help}
+.figpal.onimg{position:absolute;bottom:9px;left:9px;background:#111210d9;padding:5px 9px;border-radius:7px;color:#e8e6df;max-width:85%}
+.figchk{font-size:11.5px;color:#c3c2b7;background:#1e1e1c;border:1px solid #2c2c28;border-radius:8px;
+ padding:7px 11px;margin-top:8px;display:flex;gap:16px;flex-wrap:wrap;align-items:center;line-height:1.5}
+.drawrate{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;color:#8a887d;flex-wrap:wrap}
+.drawrate .dr-track{position:relative;width:86px;height:8px;background:#242522;border-radius:4px;overflow:hidden;display:inline-block}
+.drawrate .dr-fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
 .moldtip{position:fixed;z-index:99;max-width:370px;background:#23241f;border:1px solid #4a4a44;
  border-radius:10px;padding:4px 12px 8px;box-shadow:0 8px 28px #000a;font-size:12px;line-height:1.5;
  color:#e8e6df;display:none;pointer-events:none}
@@ -92,7 +101,6 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Ro
 .wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
 .wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}
 .wrap[data-view="FIG"] .hl:not(.hl-FIG){background:none!important;box-shadow:none!important}.wrap[data-view="FIG"] .card[data-mold]:not([data-mold="FIG"]){opacity:.35}</style><script>(function(){try{if(localStorage.getItem('sb-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
-
 <style id="sb-theme-light">
 html[data-theme="light"]{color-scheme:light}
 html[data-theme="light"] body{background:#ffffff;color:#1a1a17}
@@ -116,7 +124,7 @@ html[data-theme="light"] .papernav .nav,html[data-theme="light"] .tab{background
 html[data-theme="light"] .papernav .nav:hover,html[data-theme="light"] .tab:hover{border-color:#9a9a90}
 html[data-theme="light"] .papernav .nav.lang{border-color:#cfcfc8}
 html[data-theme="light"] .papernav .nav.cur,html[data-theme="light"] .tab.active{background:#3987e5;color:#ffffff;border-color:#3987e5}
-html[data-theme="light"] .moldtip{background:#ffffff;border-color:#cfcfc8;color:#1a1a17;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+html[data-theme="light"] .moldtip,html[data-theme="light"] .gtip{background:#ffffff;border-color:#cfcfc8;color:#1a1a17;box-shadow:0 8px 28px rgba(0,0,0,.18)}
 html[data-theme="light"] .moldtip .tsec{border-bottom-color:#ececE6}
 html[data-theme="light"] .moldtip .twhy{color:#000000}
 html[data-theme="light"] .moldtip .tscore{color:#4a4a42}
@@ -143,14 +151,34 @@ html[data-theme="light"] .polelab,html[data-theme="light"] .tick{fill:#77756b}
 html[data-theme="light"] .axis{fill:#4a4a42}
 html[data-theme="light"] .pt.hu,html[data-theme="light"] .pt.ai{stroke:#ffffff}
 html[data-theme="light"] .ptlab{fill:#1a1a17}
-html[data-theme="light"] .tab.active{background:#3987e5;color:#ffffff;border-color:#3987e5}
+html[data-theme="light"] .gwrap{background:#ffffff;border-color:#e3e3dd}
+html[data-theme="light"] .glab{fill:#3c3b34}
+html[data-theme="light"] .gring{stroke:#b9b8af}
+html[data-theme="light"] .exitem{background:#faf9f7;border-color:#e3e3dd}
+html[data-theme="light"] .exctx{color:#4a4a42}
+html[data-theme="light"] .exwhy{color:#77756b}
+html[data-theme="light"] .argnode{background:#faf9f7;border-color:#dcdcd5;color:#1a1a17}
+html[data-theme="light"] .argnode .ntext{color:#4a4a42}
+html[data-theme="light"] .argconn{color:#77756b}
+html[data-theme="light"] .argconn .cline{background:#c9c8bf}
+html[data-theme="light"] .mstrip{background:linear-gradient(90deg,#e6edf5,#f3e6e6)}
+html[data-theme="light"] .polechip.hu{background:#e8f0fb;color:#2b6cc4}
+html[data-theme="light"] .polechip.ai{background:#fdecec;color:#c23a3a}
+html[data-theme="light"] .polenote{color:#77756b}
+html[data-theme="light"] .obs{color:#4a4a42;background:#f4f4f0;border-color:#e0e0da}
+html[data-theme="light"] .famsec{background:#faf9f7;border-color:#e3e3dd}
+html[data-theme="light"] .famsec .famq{color:#4a4a42}
+html[data-theme="light"] .figchk{background:#f4f4f0;border-color:#e0e0da;color:#4a4a42}
+html[data-theme="light"] .figpal{color:#4a4a42}
+html[data-theme="light"] .figpal .psw{border-color:#00000022}
+html[data-theme="light"] .drawrate .dr-track{background:#ecece6}
+html[data-theme="light"] .drawrate{color:#4a4a42}
 #sbThemeToggle{position:fixed;bottom:16px;right:16px;z-index:200;background:#242522;color:#e8e6df;
  border:1px solid #4a4a44;border-radius:20px;padding:7px 13px;font-size:12.5px;font-family:inherit;
  cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.4);display:flex;align-items:center;gap:6px}
 #sbThemeToggle:hover{border-color:#8a887d}
 html[data-theme="light"] #sbThemeToggle{background:#ffffff;color:#1a1a17;border-color:#cfcfc8;box-shadow:0 3px 12px rgba(0,0,0,.15)}
-</style>
-</head><body>
+</style></head><body>
 <button id="sbThemeToggle" type="button" aria-label="Toggle light/dark theme"></button>
 <script>(function(){var b=document.getElementById('sbThemeToggle');
 function cur(){return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark';}
@@ -160,14 +188,13 @@ b.addEventListener('click',function(){var n=cur()==='light'?'dark':'light';
 if(n==='light')document.documentElement.setAttribute('data-theme','light');
 else document.documentElement.removeAttribute('data-theme');
 try{localStorage.setItem('sb-theme',n);}catch(e){}paint();});})();</script>
-
 <header><a class="back" href="../index.html">← 데모 목록</a>
  <h1>FA0145 <span class="sub">2025 · AI가 쓴 논문 (FARS)</span></h1>
  <div class="sub">논문 원문 위에 몰드(AI 지문 패턴)의 증거를 색으로 표시했습니다.
  <b>진하게 밑줄 = AI스러운 패턴의 증거</b> · <b>옅은 하이라이트 = 사람다운 패턴의 증거</b>.
  마우스를 올리면 왜 잡혔는지 설명이 뜹니다. 모든 하이라이트는 이 논문의 실제 LaTeX 원문 조각이며 조작이 없습니다.</div>
 </header>
-<nav class="papernav"><span class="navlab">논문 바로가기 — 파랑=사람, 빨강=AI:</span><a class="nav" href="../index.html">Overview</a><a class="nav" style="border-color:#9085e988;font-weight:700" href="../molds/index.html">몰드별 보기 ▦</a><a class="nav hu" href="./Word2Vec.html">Word2Vec</a><a class="nav hu" href="./Attention.html">Attention</a><a class="nav hu" href="./BERT.html">BERT</a><a class="nav hu" href="./FLAN.html">FLAN</a><a class="nav hu" href="./DeepSeek-R1.html">DeepSeek-R1</a><a class="nav ai" href="./FA0001.html">FA0001</a><a class="nav ai" href="./FA0022.html">FA0022</a><a class="nav ai" href="./FA0044.html">FA0044</a><a class="nav ai" href="./FA0067.html">FA0067</a><a class="nav ai" href="./FA0106.html">FA0106</a><a class="nav ai cur" href="./FA0145.html">FA0145</a><a class="nav ai" href="./FA0187.html">FA0187</a><a class="nav ai" href="./FA0221.html">FA0221</a><a class="nav ai" href="./FA0297.html">FA0297</a><a class="nav ai" href="./FA0421.html">FA0421</a><a class="nav lang" href="./FA0145_en.html">English</a></nav>
+<nav class="papernav"><span class="navlab">논문 바로가기 — 파랑=사람, 빨강=AI:</span><a class="nav" href="../index.html">Overview</a><a class="nav molds" href="../molds/index.html">몰드별 보기 ▦</a><a class="nav hu" href="./Word2Vec.html">Word2Vec</a><a class="nav hu" href="./Attention.html">Attention</a><a class="nav hu" href="./BERT.html">BERT</a><a class="nav hu" href="./FLAN.html">FLAN</a><a class="nav hu" href="./DeepSeek-R1.html">DeepSeek-R1</a><a class="nav ai" href="./FA0001.html">FA0001</a><a class="nav ai" href="./FA0022.html">FA0022</a><a class="nav ai" href="./FA0044.html">FA0044</a><a class="nav ai" href="./FA0067.html">FA0067</a><a class="nav ai" href="./FA0106.html">FA0106</a><a class="nav ai cur" href="./FA0145.html">FA0145</a><a class="nav ai" href="./FA0187.html">FA0187</a><a class="nav ai" href="./FA0221.html">FA0221</a><a class="nav ai" href="./FA0297.html">FA0297</a><a class="nav ai" href="./FA0421.html">FA0421</a><a class="nav lang" href="./FA0145_en.html">English</a></nav>
 <div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
  <div class="chead"><b>한눈 요약 — 이 논문은 어느 쪽인가</b></div>
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:100%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">1.00</span></div>
@@ -238,7 +265,9 @@ try{localStorage.setItem('sb-theme',n);}catch(e){}paint();});})();</script>
 <main><section class="sheet figsheet none">
  <h2>메인 피규어 — 방법 다이어그램
   <span class="vbadge ai" style="float:right">FIG: AI쪽</span></h2>
- <div class="fignone">이 논문에는 방법 다이어그램이 없습니다 — AI 논문의 56%가 그림을 그리지 않음 (사람 논문 ~80%가 그림). 부재 자체가 AI형 신호.</div></section><section class="sheet"><pre>
+ <div class="fignone">이 논문에는 방법 다이어그램이 없습니다 — AI 논문의 56%가 그림을 그리지 않음 (사람 논문 ~80%가 그림). 부재 자체가 AI형 신호.</div>
+ <div class="figchk"><span style="color:#e66767;font-weight:700">✘ 다이어그램 없음 — AI스러움의 증거</span>
+  <span class="drawrate">방법 다이어그램 그리는 비율 — <span>사람</span><span class="dr-track"><span class="dr-fill" style="width:80%;background:#3987e5"></span></span>~80%&nbsp;<span>AI</span><span class="dr-track"><span class="dr-fill" style="width:44%;background:#e66767"></span></span>44%</span></div></section><section class="sheet"><pre>
 
  
 <span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]">Multi-agent LLM systems increasingly rely on LLM judges to select winners among candidate solutions. KV cache reuse can accelerate </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;these&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">these</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> judges but </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;introduces&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">introduces</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> position bias that degrades consistency---existing methods achieve only 61--66\% Judge Consistency Rate (JCR) compared to dense prefill. We propose Disagreement-Gated Judge KV Reuse (DG-JKR), a training-free method that uses disagreement </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;between&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">between</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> two structurally different KV reuse methods (Naive Reuse and KVCOMM) as a safety signal. When </span><span class="hl hl-MR hl-STY pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;both&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]" style="background:repeating-linear-gradient(45deg,#9085e940,#9085e940 6px,#d5518140 6px,#d5518140 12px)">both</span><span class="hl hl-MR pol-trigger" data-tip="[[&quot;MR&quot;, &quot;trigger&quot;, &quot;&#x27;Preamble / Abstract&#x27; ↔ &#x27;Conclusion&#x27; 섹션 간 같은 주장 반복 (새 정보 없음)&quot;]]"> methods agree on a winner (83\% of cases), DG-JKR accepts the result; when they disagree, it falls back to dense prefill.</span> On <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 dataset: HumanEval — 모델×데이터셋 조합이 평가 규모&quot;]]">HumanEval</span> with <span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 model: Llama-3.2-3B-Instruct — 모델×데이터셋 조합이 평가 규모&quot;]]">Llama-</span><span class="hl hl-ENG hl-ESA pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;], [&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 model: Llama-3.2-3B-Instruct — 모델×데이터셋 조합이 평가 규모&quot;]]" style="background:repeating-linear-gradient(45deg,#c9850040,#c9850040 6px,#d9592640 6px,#d9592640 12px)">3.2</span><span class="hl hl-ESA pol-counter" data-tip="[[&quot;ESA&quot;, &quot;counter&quot;, &quot;평가에 쓴 model: Llama-3.2-3B-Instruct — 모델×데이터셋 조합이 평가 규모&quot;]]">-3B-Instruct</span>, DG-JKR achieves <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">74.38</span>\% JCR, improving over Naive Reuse by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">8.13</span> percentage points and significantly outperforming random gating by <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">5.63</span> percentage points ($p &lt; <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.05</span>$). The mechanism generalizes <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM 과잉 어휘 &#x27;across&#x27; — LLM 등장 후 급증한 단어 (Kobak 리스트)&quot;]]">across</span> candidate generation regimes and provides stable functional improvements (<span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">80.00</span>\% $\pm$ <span class="hl hl-ENG pol-trigger" data-tip="[[&quot;ENG&quot;, &quot;trigger&quot;, &quot;근거 없는 수치 — ±35자 안에 인용 없음&quot;]]">0.62</span>\% JCR-F).
