@@ -108,12 +108,10 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Ro
 .wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
 .wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}
 .wrap[data-view="FIG"] .hl:not(.hl-FIG){background:none!important;box-shadow:none!important}.wrap[data-view="FIG"] .card[data-mold]:not([data-mold="FIG"]){opacity:.35}
-.wrap[data-view="PGM"] .hl{background:none!important;box-shadow:none!important}
+.wrap[data-view="PGM"] .hl:not(.hl-PGM){background:none!important;box-shadow:none!important}
+.wrap[data-view="PGM"] .hl.pgm-trigger{background:#0ea5b755!important;box-shadow:inset 0 -2px 0 #0ea5b7!important}
+.wrap[data-view="PGM"] .hl.pgm-counter{background:#0ea5b71c!important;box-shadow:inset 0 -1px 0 #0ea5b788!important}
 .wrap[data-view="PGM"] .card[data-mold]:not([data-mold="PGM"]){opacity:.35}
-.wrap[data-view="PGM"] main .sheet:not(.pgmsheet){display:none}
-.pgmsheet{display:none}
-.wrap[data-view="PGM"] .pgmsheet{display:block}
-.pgmsheet img{width:100%;border-radius:8px;border:1px solid #2c2c28;background:#fff}
 
 .hero{max-width:1000px;margin:18px auto;padding:0 20px}
 .hero .chart{background:#171816;border:1px solid #2c2c28;border-radius:12px;padding:14px}
