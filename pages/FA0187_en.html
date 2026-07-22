@@ -9,7 +9,14 @@ header h1{margin:2px 0 4px;font-size:18px}
 header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
 .back{color:#3987e5;font-size:12px;text-decoration:none}
 .wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
+.wrap.haspgm{grid-template-columns:330px 1fr 350px}
 .side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
+.pgmside{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-left:1px solid #2c2c28}
+.pgmside .figthumb{background:#fff;cursor:zoom-in}
+@media (max-width:1150px){
+ .wrap.haspgm{grid-template-columns:330px 1fr}
+ .pgmside{grid-column:1/-1;position:static;max-height:none;border-left:none;border-top:1px solid #2c2c28}
+}
 .card{background:#1e1e1c;border:1px solid #2c2c28;border-radius:10px;padding:11px;margin-bottom:10px}
 .chead{display:flex;align-items:center;gap:7px;font-size:12.5px;flex-wrap:wrap}
 .sw{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
@@ -107,6 +114,7 @@ html[data-theme="light"] body{background:#ffffff;color:#1a1a17}
 html[data-theme="light"] header{background:#f6f6f4;border-bottom-color:#e0e0da}
 html[data-theme="light"] header .sub{color:#4a4a42}
 html[data-theme="light"] .side{border-right-color:#e0e0da}
+html[data-theme="light"] .pgmside{border-left-color:#e0e0da;border-top-color:#e0e0da}
 html[data-theme="light"] .card{background:#faf9f7;border-color:#e3e3dd}
 html[data-theme="light"] .card.summary{background:#eef4ea;border-color:#cdd8c6}
 html[data-theme="light"] .pos.none{color:#77756b}
@@ -195,7 +203,7 @@ try{localStorage.setItem('sb-theme',n);}catch(e){}paint();});})();</script>
  Hover any highlight for the reason it fired. Every highlight is a real slice of this paper's LaTeX source — nothing is fabricated.</div>
 </header>
 <nav class="papernav"><span class="navlab">Papers — blue=human, red=AI:</span><a class="nav" href="../index_en.html">Overview</a><a class="nav molds" href="../molds/index_en.html">By mold ▦</a><a class="nav hu" href="./Word2Vec_en.html">Word2Vec</a><a class="nav hu" href="./Attention_en.html">Attention</a><a class="nav hu" href="./BERT_en.html">BERT</a><a class="nav hu" href="./FLAN_en.html">FLAN</a><a class="nav hu" href="./DeepSeek-R1_en.html">DeepSeek-R1</a><a class="nav ai" href="./FA0001_en.html">FA0001</a><a class="nav ai" href="./FA0022_en.html">FA0022</a><a class="nav ai" href="./FA0044_en.html">FA0044</a><a class="nav ai" href="./FA0067_en.html">FA0067</a><a class="nav ai" href="./FA0106_en.html">FA0106</a><a class="nav ai" href="./FA0145_en.html">FA0145</a><a class="nav ai cur" href="./FA0187_en.html">FA0187</a><a class="nav ai" href="./FA0221_en.html">FA0221</a><a class="nav ai" href="./FA0297_en.html">FA0297</a><a class="nav ai" href="./FA0421_en.html">FA0421</a><a class="nav lang" href="./FA0187.html">한국어</a></nav>
-<div class="wrap" data-view="ALL"><div class="side"><div class="card summary">
+<div class="wrap haspgm" data-view="ALL"><div class="side"><div class="card summary">
  <div class="chead"><b>At a glance — which side is this paper on?</b></div>
  <div class="pos"><div class="track"><div class="hu">HU</div><div class="fill" style="left:98%;background:#e8e6df"></div><div class="ai">AI</div></div><span class="posv">0.98</span></div>
  <div class="fb">Overall (mean of 5 molds): <span class="vbadge ai">AI-side</span>
@@ -261,19 +269,7 @@ try{localStorage.setItem('sb-theme',n);}catch(e){}paint();});})();</script>
  <b>Argument_Graph (Qwen2.5-32B)</b></div><div class="fb">A1 depth=10 (HU~15.7/AI~12.7) ·
  A2 cites=0 (HU~3.9/AI~2.4) · A3 result-nodes=0 ·
  A5 method=2 · A6 degree=24 · A7 addresses=0</div>
- <div class="ct">graph fingerprint, no spans (LLM extraction)</div></div><div class="card" data-mold="PGM" style="border-style:dashed">
- <div class="chead"><b>Pangram — external AI-text detector</b>
-  <span class="abbr" style="border-color:#8a887d;color:#8a887d">PGM</span></div>
- <div class="ct">how a commercial detector sees the same paper — shown side-by-side with the molds</div>
- <div style="display:flex;height:10px;border-radius:5px;overflow:hidden;margin:8px 0 4px;background:#24252233"><span style="width:73.8%;background:#e66767"></span><span style="width:6.8%;background:#e6a23c"></span><span style="width:19.5%;background:#3fa66a"></span></div>
- <div class="fb">verdict: <span class="vbadge ai">Primarily AI-generated</span>&nbsp;
-  <span style="color:#e66767">AI 73.8%</span> ·
-  AI-assisted 6.8% ·
-  <span style="color:#3fa66a">Human 19.5%</span></div>
- <div class="fb" style="font-style:italic">“We believe that this document is a mix of AI-generated, AI-assisted, and human-written content”</div>
- <div class="ct"><a href="figs/pangram_FA0187.jpg" target="_blank" style="color:#3987e5">view the original Pangram report ↗</a>
-  · input: LaTeX source · Pangram v3.3.2 · 2026-07-22</div>
- <div class="ct">Pangram asks <b>who wrote it</b> (provenance); molds ask <b>which research flaws refuse to wash out</b> (substance) — the two axes measure different things. External commercial result; false positives are possible.</div></div></div>
+ <div class="ct">graph fingerprint, no spans (LLM extraction)</div></div></div>
 <main><section class="sheet figsheet none">
  <h2>Main figure — method diagram
   <span class="vbadge ai" style="float:right">FIG: AI-side</span></h2>
@@ -462,6 +458,20 @@ LLM deployments expose multiple privacy attack surfaces.<span class="hl hl-CP po
 \paragraph{Private LLM Inference.}
 Recent work <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;addresses&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">addresses</span> privacy in LLM inference through <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;various&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">various</span> mechanisms.<span class="hl hl-CP pol-trigger" data-tip="[[&quot;CP&quot;, &quot;trigger&quot;, &quot;isolated citation sentence — one prior work listed alone (AI-style listing)&quot;]]"> Split-and-denoise~\citep{Mai2023SplitandDenoisePL} applies local differential privacy to intermediate activations in split inference settings. Cascade~\citep{Thomas2025CascadeTP} proposes token sharding across multiple servers to prevent any single party from observing complete sequences. Concept-aware mechanisms~\citep{Tsai2026ConceptAwarePM} defend against embedding inversion by adding semantically-informed noise.</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> Surveys on private transformer inference~\citep{Li2024ASO} and LLM privacy~\citep{Miranda2024PreservingPI} provide </span><span class="hl hl-CP hl-STY pol-trigger" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;], [&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;comprehensive&#x27; — usage spiked after LLMs (Kobak list)&quot;]]" style="background:repeating-linear-gradient(45deg,#199e7040,#199e7040 6px,#d5518140 6px,#d5518140 12px)">comprehensive</span><span class="hl hl-CP pol-counter" data-tip="[[&quot;CP&quot;, &quot;counter&quot;, &quot;co-citation sentence — relates 2 prior works to each other (human-like synthesis)&quot;]]"> overviews of the threat landscape.</span> Our work differs by <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;focusing&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">focusing</span> <span class="hl hl-STY pol-trigger" data-tip="[[&quot;STY&quot;, &quot;trigger&quot;, &quot;LLM excess word &#x27;specifically&#x27; — usage spiked after LLMs (Kobak list)&quot;]]">specifically</span> on monitoring systems that log eigenspectrum statistics rather than protecting inference itself.
 </pre></section></main>
+<div class="pgmside"><div class="card" data-mold="PGM" style="border-style:dashed">
+ <div class="chead"><b>The other eye — Pangram</b>
+  <span class="abbr" style="border-color:#8a887d;color:#8a887d">PGM</span></div>
+ <div class="ct">Left: the molds (ours). Right: the same paper through an external commercial AI-text detector.</div>
+ <div style="display:flex;height:10px;border-radius:5px;overflow:hidden;margin:8px 0 4px;background:#24252233"><span style="width:73.8%;background:#e66767"></span><span style="width:6.8%;background:#e6a23c"></span><span style="width:19.5%;background:#3fa66a"></span></div>
+ <div class="fb">verdict: <span class="vbadge ai">Primarily AI-generated</span>&nbsp;
+  <span style="color:#e66767">AI 73.8%</span> ·
+  AI-assisted 6.8% ·
+  <span style="color:#3fa66a">Human 19.5%</span></div>
+ <div class="fb" style="font-style:italic">“We believe that this document is a mix of AI-generated, AI-assisted, and human-written content”</div>
+ <a href="figs/pangram_FA0187.jpg" target="_blank"><img class="figthumb" src="figs/pangram_FA0187.jpg" alt="Pangram AI detection report"></a>
+ <div class="ct">↑ original Pangram report (click to enlarge)
+  · input: LaTeX source · Pangram v3.3.2 · 2026-07-22</div>
+ <div class="ct">Pangram asks <b>who wrote it</b> (provenance); molds ask <b>which research flaws refuse to wash out</b> (substance) — the two axes measure different things. External commercial result; false positives are possible.</div></div></div>
 <script>
 (function(){
   var WRAP = document.currentScript.closest('.wrap');
