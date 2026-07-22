@@ -22,3 +22,12 @@ build_combined.py}` in the artifact-ai2science repo.
 Measurements audited in `Evaluation/famous_paper_demo/verify/AUDIT.md` (2026-07-14, v2).
 Every highlighted example is a real slice of the paper's LaTeX source (span.text ==
 source[start:end]) — nothing fabricated.
+
+**Pangram side-by-side** (added 2026-07-22): every paper page carries a card with the
+same paper's result from Pangram v3.3.2, an external commercial AI-text detector, and
+the index table shows its AI% next to the mold index (calib). The two axes measure
+different things — Pangram asks *who wrote it* (provenance); molds ask *which research
+flaws refuse to wash out* (substance). Each card links the original report
+(`pages/figs/pangram_*.jpg`, exported from the Pangram dashboard on 2026-07-22; inputs
+were the resolved LaTeX sources, except FLAN and DeepSeek-R1 which used the arXiv PDFs).
+Aggregates live in `Evaluation/famous_paper_demo/pangram/pangram_scores.json`.
