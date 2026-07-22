@@ -11,7 +11,9 @@ header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
 .wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
 .wrap.haspgm{grid-template-columns:330px 1fr 350px}
 .side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
-.pgmside{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-left:1px solid #2c2c28}
+.pgmside{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-left:1px solid #2c2c28;cursor:pointer}
+.side{cursor:pointer}
+.wrap[data-view="PGM"] .pgmside .card{border-color:#0ea5b7}
 .pgmside .figthumb{background:#fff;cursor:zoom-in}
 @media (max-width:1150px){
  .wrap.haspgm{grid-template-columns:330px 1fr}
@@ -488,7 +490,7 @@ Recent work </span><span class="hl hl-STY hl-PGM pol-trigger pgm-trigger" data-t
   AI 보조 6.8% ·
   <span style="color:#3fa66a">Human 19.5%</span></div>
  <div class="fb" style="font-style:italic">“We believe that this document is a mix of AI-generated, AI-assisted, and human-written content”</div>
- <div class="fb">칩/아래 버튼을 누르면 Pangram이 <b>AI 저작으로 판정한 구간 12개</b>가 본문에 하이라이트됩니다 (청록 진하게 = AI 판정 구간, 옅게 = 사람 판정 구간).</div>
+ <div class="fb"><b>이 패널을 클릭</b>하면 Pangram이 <b>AI 저작으로 판정한 구간 12개</b>만 본문에 하이라이트됩니다 (청록 진하게 = AI 판정, 옅게 = 사람 판정). <b>왼쪽 패널 클릭</b> = 몰드 하이라이트로 복귀.</div>
  <button class="chip" data-v="PGM" style="margin:8px 0 2px;border-style:dashed;width:100%;justify-content:center">
   <span class="sw" style="background:#0ea5b7"></span>본문에 Pangram 판정 구간 표시</button>
  <a href="figs/pangram_FA0187.jpg" target="_blank"><img class="figthumb" src="figs/pangram_FA0187.jpg" alt="Pangram AI detection report"></a>
@@ -500,11 +502,26 @@ Recent work </span><span class="hl hl-STY hl-PGM pol-trigger pgm-trigger" data-t
   var WRAP = document.currentScript.closest('.wrap');
   var META = {"CRN": {"kr": "참조망 — 섹션을 서로 엮는가", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "다른 섹션을 가리키는 참조 비율 0.0 (다른 섹션 0 / 같은 섹션 4 / 깨짐 0). 사람은 논문 전체를 참조로 엮고(중앙값 ~0.47), AI 논문은 65%가 정확히 0.", "verdict": "AI쪽", "pos": 1.0}, "MR": {"kr": "거시 반복 — 같은 말을 또 하는가", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "섹션 간 표현 겹침 0.0389 (AI 평균 ~0.057 vs 사람 ~0.021). 하이라이트 = 다른 섹션에서 거의 그대로 반복된 주장 문장.", "verdict": "중간", "pos": 0.59}, "ENG": {"kr": "수치 근거 — 숫자를 선행연구에 붙이는가", "full": "External_Number_Grounding", "color": "#c98500", "fb": "소수점 수치 72개 중 2개만 인용 옆에 붙음 (비율 0.0278). 사람은 숫자를 선행연구 수치에 붙여 말하고, AI 숫자는 근거 없이 떠 있음.", "verdict": "AI쪽", "pos": 4.98}, "CP": {"kr": "비교 배치 — 선행연구끼리 엮는가", "full": "Comparative_Positioning", "color": "#199e70", "fb": "선행연구끼리 엮인 밀도 0.3636 (AI 중앙값 0.36 vs 사람 1.88). 옅은 초록 = 여러 선행을 한 문장에서 비교(사람다움), 진한 초록 = 1편씩 나열(AI형).", "verdict": "AI쪽", "pos": 1.0}, "STY": {"kr": "문체 — LLM 특유 어휘", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM 과잉 어휘 밀도 260.87 (1만 단어당; LLM 이전 사람 논문 ~70 vs AI 논문 ~232). 'delve/comprehensive/notably'처럼 LLM 등장 후 급증한 단어들.", "verdict": "AI쪽", "pos": 1.18}, "ESA": {"kr": "평가 규모 — 모델×데이터셋", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "평가 규모 = 모델 1개 × 데이터셋 1개 = 1칸 (AI 평균 3.1 vs 사람 18.4). AI 논문은 아주 좁게만 검증하는 경향.", "verdict": "AI쪽", "pos": 1.14}, "PB": {"kr": "문제 차용 — 문제를 선행 1편에서 빌렸는가", "full": "Problem_Borrowing", "color": "#e66767", "fb": "여러 선행의 갭을 종합. 빌린 출처: Morris2023TextER, nikolaou2025languagemodelsinjectiveinvertible, Dong2025DepthGA — “Large language models use monitoring systems that analyze internal representations (like eigenspectra of hidden state covariance matrices) for halluci”", "verdict": "사람쪽", "pos": 0.0}, "FIG": {"kr": "그림 — 다이어그램이 색으로 의미를 말하는가", "full": "Visualization (figure mold)", "color": "#008300", "fb": "method diagram 없음. AI 논문은 44%만 방법 다이어그램을 그림 (ICLR 사람 논문 ~80%) — 부재 자체가 AI형 신호.", "verdict": "AI쪽", "pos": 1.0}, "PGM": {"kr": "Pangram — 외부 AI-텍스트 탐지기", "full": "Pangram v3.3.2 (commercial AI-text detector)", "color": "#0ea5b7", "fb": "We believe that this document is a mix of AI-generated, AI-assisted, and human-written content", "verdict": "AI 생성 우세", "pos": null}};
   // --- chip filter (scoped to this paper's wrap) ---
+  function setView(v){
+    WRAP.setAttribute('data-view', v);
+    WRAP.querySelectorAll('.chip').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-v') === v);
+    });
+  }
   WRAP.addEventListener('click', function(e){
     var c = e.target.closest ? e.target.closest('.chip') : null;
     if(!c) return;
-    WRAP.setAttribute('data-view', c.getAttribute('data-v'));
-    WRAP.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('active', b===c);});
+    setView(c.getAttribute('data-v'));
+  });
+  // left panel = molds only in the text, right panel = Pangram only
+  var sideEl = WRAP.querySelector('.side'), pgmEl = WRAP.querySelector('.pgmside');
+  if (sideEl) sideEl.addEventListener('click', function(e){
+    if (e.target.closest('.chip') || e.target.closest('a')) return;
+    setView('ALL');
+  });
+  if (pgmEl) pgmEl.addEventListener('click', function(e){
+    if (e.target.closest('.chip') || e.target.closest('a')) return;
+    setView('PGM');
   });
   // --- rich tooltip: hover shows, click pins ---
   var tip = document.createElement('div');

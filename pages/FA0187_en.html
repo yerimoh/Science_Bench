@@ -11,7 +11,9 @@ header .sub{color:#c3c2b7;font-size:12.5px;max-width:1100px}
 .wrap{display:grid;grid-template-columns:330px 1fr;gap:0;align-items:start}
 .wrap.haspgm{grid-template-columns:330px 1fr 350px}
 .side{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-right:1px solid #2c2c28}
-.pgmside{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-left:1px solid #2c2c28}
+.pgmside{padding:14px;position:sticky;top:86px;max-height:calc(100vh - 86px);overflow:auto;border-left:1px solid #2c2c28;cursor:pointer}
+.side{cursor:pointer}
+.wrap[data-view="PGM"] .pgmside .card{border-color:#0ea5b7}
 .pgmside .figthumb{background:#fff;cursor:zoom-in}
 @media (max-width:1150px){
  .wrap.haspgm{grid-template-columns:330px 1fr}
@@ -488,7 +490,7 @@ Recent work </span><span class="hl hl-STY hl-PGM pol-trigger pgm-trigger" data-t
   AI-assisted 6.8% ·
   <span style="color:#3fa66a">Human 19.5%</span></div>
  <div class="fb" style="font-style:italic">“We believe that this document is a mix of AI-generated, AI-assisted, and human-written content”</div>
- <div class="fb">Press the chip / the button below to highlight the <b>12 spans Pangram called AI-written</b> in the text (solid teal = AI verdict, faint = human verdict).</div>
+ <div class="fb"><b>Click this panel</b> to highlight only the <b>12 spans Pangram called AI-written</b> in the text (solid teal = AI verdict, faint = human). <b>Click the left panel</b> to go back to the mold highlights.</div>
  <button class="chip" data-v="PGM" style="margin:8px 0 2px;border-style:dashed;width:100%;justify-content:center">
   <span class="sw" style="background:#0ea5b7"></span>show Pangram’s verdict spans in the text</button>
  <a href="figs/pangram_FA0187.jpg" target="_blank"><img class="figthumb" src="figs/pangram_FA0187.jpg" alt="Pangram AI detection report"></a>
@@ -500,11 +502,26 @@ Recent work </span><span class="hl hl-STY hl-PGM pol-trigger pgm-trigger" data-t
   var WRAP = document.currentScript.closest('.wrap');
   var META = {"CRN": {"kr": "Reference mesh — does it link its sections?", "full": "Cross-Reference_Network", "color": "#3987e5", "fb": "share of references pointing to another section: 0.0 (cross 0 / same 4 / dangling 0). Humans weave the whole paper (median ~0.47); 65% of AI papers sit at exactly 0.", "verdict": "AI-side", "pos": 1.0}, "MR": {"kr": "Macro redundancy — does it repeat itself?", "full": "Macro_Redundancy", "color": "#9085e9", "fb": "cross-section wording overlap 0.0389 (AI mean ~0.057 vs human ~0.021). Highlights = claim sentences repeated almost verbatim in another section.", "verdict": "middle", "pos": 0.59}, "ENG": {"kr": "Number grounding — are numbers tied to prior work?", "full": "External_Number_Grounding", "color": "#c98500", "fb": "only 2 of 72 decimal numbers sit next to a citation (rate 0.0278). Humans anchor numbers to prior-work numbers; AI numbers float free.", "verdict": "AI-side", "pos": 4.98}, "CP": {"kr": "Comparative positioning — are prior works related to each other?", "full": "Comparative_Positioning", "color": "#199e70", "fb": "work-to-work edge density 0.3636 (AI median 0.36 vs human 1.88). Faint green = several prior works compared in one sentence (human-like); solid green = listed one at a time (AI-typical).", "verdict": "AI-side", "pos": 1.0}, "STY": {"kr": "Style — LLM-typical vocabulary", "full": "Stylistic (excess vocab)", "color": "#d55181", "fb": "LLM excess-vocabulary density 260.87 (per 10k words; pre-LLM human papers ~70 vs AI papers ~232). Words like 'delve/comprehensive/notably' that spiked after LLMs.", "verdict": "AI-side", "pos": 1.18}, "ESA": {"kr": "Evaluation surface — models × datasets", "full": "Evaluation_Surface_Area", "color": "#d95926", "fb": "evaluation surface = 1 models × 1 datasets = 1 cells (AI mean 3.1 vs human 18.4). AI papers validate on a very narrow surface.", "verdict": "AI-side", "pos": 1.14}, "PB": {"kr": "Problem borrowing — is the problem taken from one prior paper?", "full": "Problem_Borrowing", "color": "#e66767", "fb": "gaps synthesized from several prior works. borrowed from: Morris2023TextER, nikolaou2025languagemodelsinjectiveinvertible, Dong2025DepthGA — “Large language models use monitoring systems that analyze internal representations (like eigenspectra of hidden state covariance matrices) for halluci”", "verdict": "human-side", "pos": 0.0}, "FIG": {"kr": "Figure — does the diagram use color to mean something?", "full": "Visualization (figure mold)", "color": "#008300", "fb": "no method diagram. Only 44% of AI papers draw one (vs ~80% of human ICLR papers) — the absence itself is an AI-typical signal.", "verdict": "AI-side", "pos": 1.0}, "PGM": {"kr": "Pangram — external AI-text detector", "full": "Pangram v3.3.2 (commercial AI-text detector)", "color": "#0ea5b7", "fb": "We believe that this document is a mix of AI-generated, AI-assisted, and human-written content", "verdict": "Primarily AI-generated", "pos": null}};
   // --- chip filter (scoped to this paper's wrap) ---
+  function setView(v){
+    WRAP.setAttribute('data-view', v);
+    WRAP.querySelectorAll('.chip').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-v') === v);
+    });
+  }
   WRAP.addEventListener('click', function(e){
     var c = e.target.closest ? e.target.closest('.chip') : null;
     if(!c) return;
-    WRAP.setAttribute('data-view', c.getAttribute('data-v'));
-    WRAP.querySelectorAll('.chip').forEach(function(b){b.classList.toggle('active', b===c);});
+    setView(c.getAttribute('data-v'));
+  });
+  // left panel = molds only in the text, right panel = Pangram only
+  var sideEl = WRAP.querySelector('.side'), pgmEl = WRAP.querySelector('.pgmside');
+  if (sideEl) sideEl.addEventListener('click', function(e){
+    if (e.target.closest('.chip') || e.target.closest('a')) return;
+    setView('ALL');
+  });
+  if (pgmEl) pgmEl.addEventListener('click', function(e){
+    if (e.target.closest('.chip') || e.target.closest('a')) return;
+    setView('PGM');
   });
   // --- rich tooltip: hover shows, click pins ---
   var tip = document.createElement('div');
