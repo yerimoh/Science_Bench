@@ -107,7 +107,14 @@ pre{white-space:pre-wrap;word-break:break-word;font-family:Georgia,'Times New Ro
 .wrap[data-view="STY"] .hl:not(.hl-STY){background:none!important;box-shadow:none!important}.wrap[data-view="STY"] .card[data-mold]:not([data-mold="STY"]){opacity:.35}
 .wrap[data-view="ESA"] .hl:not(.hl-ESA){background:none!important;box-shadow:none!important}.wrap[data-view="ESA"] .card[data-mold]:not([data-mold="ESA"]){opacity:.35}
 .wrap[data-view="PB"] .hl:not(.hl-PB){background:none!important;box-shadow:none!important}.wrap[data-view="PB"] .card[data-mold]:not([data-mold="PB"]){opacity:.35}
-.wrap[data-view="FIG"] .hl:not(.hl-FIG){background:none!important;box-shadow:none!important}.wrap[data-view="FIG"] .card[data-mold]:not([data-mold="FIG"]){opacity:.35}</style><script>(function(){try{if(localStorage.getItem('sb-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
+.wrap[data-view="FIG"] .hl:not(.hl-FIG){background:none!important;box-shadow:none!important}.wrap[data-view="FIG"] .card[data-mold]:not([data-mold="FIG"]){opacity:.35}
+.wrap[data-view="PGM"] .hl{background:none!important;box-shadow:none!important}
+.wrap[data-view="PGM"] .card[data-mold]:not([data-mold="PGM"]){opacity:.35}
+.wrap[data-view="PGM"] main .sheet:not(.pgmsheet){display:none}
+.pgmsheet{display:none}
+.wrap[data-view="PGM"] .pgmsheet{display:block}
+.pgmsheet img{width:100%;border-radius:8px;border:1px solid #2c2c28;background:#fff}
+</style><script>(function(){try{if(localStorage.getItem('sb-theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
 <style id="sb-theme-light">
 html[data-theme="light"]{color-scheme:light}
 html[data-theme="light"] body{background:#ffffff;color:#1a1a17}
@@ -209,7 +216,7 @@ try{localStorage.setItem('sb-theme',n);}catch(e){}paint();});})();</script>
  <div class="fb">Overall (mean of 5 molds): <span class="vbadge hu">human-side</span>
   &nbsp;position -0.28 (0=human-paper median, 1=AI-paper median)</div>
  <div class="vrow"><span class="sw" style="background:#3987e5"></span><span class="vname">Reference mesh — does it link its sections?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#9085e9"></span><span class="vname">Macro redundancy — does it repeat itself?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#c98500"></span><span class="vname">Number grounding — are numbers tied to prior work?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#199e70"></span><span class="vname">Comparative positioning — are prior works related to each other?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#d55181"></span><span class="vname">Style — LLM-typical vocabulary</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#d95926"></span><span class="vname">Evaluation surface — models × datasets</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#e66767"></span><span class="vname">Problem borrowing — is the problem taken from one prior paper?</span><span class="vbadge hu">human-side</span></div><div class="vrow"><span class="sw" style="background:#008300"></span><span class="vname">Figure — does the diagram use color to mean something?</span><span class="vbadge hu">human-side</span></div>
- <div class="ct">Each axis sees something different — use the chips below to view one mold at a time in the text.</div></div><div class="chips"><span class="chiplab">Highlight filter</span><button class="chip active" data-v="ALL">All</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button></div><div class="card" data-mold="CRN">
+ <div class="ct">Each axis sees something different — use the chips below to view one mold at a time in the text.</div></div><div class="chips"><span class="chiplab">Highlight filter</span><button class="chip active" data-v="ALL">All</button><button class="chip" data-v="CRN"><span class="sw" style="background:#3987e5"></span>CRN</button><button class="chip" data-v="MR"><span class="sw" style="background:#9085e9"></span>MR</button><button class="chip" data-v="ENG"><span class="sw" style="background:#c98500"></span>ENG</button><button class="chip" data-v="CP"><span class="sw" style="background:#199e70"></span>CP</button><button class="chip" data-v="STY"><span class="sw" style="background:#d55181"></span>STY</button><button class="chip" data-v="ESA"><span class="sw" style="background:#d95926"></span>ESA</button><button class="chip" data-v="PB"><span class="sw" style="background:#e66767"></span>PB</button><button class="chip" data-v="PGM" style="border-style:dashed"><span class="sw" style="background:#8a887d"></span>Pangram</button></div><div class="card" data-mold="CRN">
  <div class="chead"><span class="sw" style="background:#3987e5"></span><b>Reference mesh — does it link its sections?</b>
    <span class="abbr" style="border-color:#3987e5;color:#3987e5">CRN</span></div>
  <div class="ct">Cross-Reference_Network</div>
@@ -270,7 +277,12 @@ try{localStorage.setItem('sb-theme',n);}catch(e){}paint();});})();</script>
  A2 cites=0 (HU~3.9/AI~2.4) · A3 result-nodes=3 ·
  A5 method=4 · A6 degree=28 · A7 addresses=0</div>
  <div class="ct">graph fingerprint, no spans (LLM extraction)</div></div></div>
-<main><section class="sheet figsheet">
+<main><section class="sheet pgmsheet">
+ <h2>Pangram AI Detection Report — FLAN
+  <span class="vbadge hu" style="float:right">Human-written</span></h2>
+ <a href="figs/pangram_FLAN.jpg" target="_blank"><img src="figs/pangram_FLAN.jpg" alt="Pangram report, page 1"></a>
+ <div class="figcap">Page 1 of the original Pangram dashboard report — click to open full-size in a new tab. Press the “All” chip on the left to return to the mold-highlighted text.</div>
+</section><section class="sheet figsheet">
  <h2>Main figure — method diagram
   <span class="vbadge hu" style="float:right">FIG: human-side</span></h2>
  <div class="figwrap"><img src="figs/FLAN.jpg" alt="method diagram">
@@ -1959,8 +1971,10 @@ Example input and output for translation. This example is from WMT'16 English--G
   AI-assisted 0% ·
   <span style="color:#3fa66a">Human 100%</span></div>
  <div class="fb" style="font-style:italic">“We believe that this document is fully human-written”</div>
+ <button class="chip" data-v="PGM" style="margin:8px 0 2px;border-style:dashed;width:100%;justify-content:center">
+  ⤢ show the Pangram report in the main column</button>
  <a href="figs/pangram_FLAN.jpg" target="_blank"><img class="figthumb" src="figs/pangram_FLAN.jpg" alt="Pangram AI detection report"></a>
- <div class="ct">↑ original Pangram report (click to enlarge)
+ <div class="ct">↑ original report (click = new tab)
   · input: arXiv PDF · Pangram v3.3.2 · 2026-07-22</div>
  <div class="ct">Pangram asks <b>who wrote it</b> (provenance); molds ask <b>which research flaws refuse to wash out</b> (substance) — the two axes measure different things. External commercial result; false positives are possible.</div></div></div>
 <script>
